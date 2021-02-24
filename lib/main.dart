@@ -1,4 +1,6 @@
+import 'package:book_ganga/config/book_ganga.dart';
 import 'package:flutter/material.dart';
+import 'screens/screens.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,24 +15,17 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'BookGanga',
-      theme: ThemeData(fontFamily: 'Nunito'),
-      home: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          centerTitle: true,
-          title: Text(
-            "Book Ganga",
-            style: TextStyle(fontSize: 24.0),
-          ),
-          backgroundColor: Colors.black,
-        ),
-        body: HomePage(),
+      theme: ThemeData(
+        fontFamily: 'Nunito',
+        scaffoldBackgroundColor: BookGanga.scaffold,
       ),
+      home: NavScreen(),
     );
   }
 }
 
 class HomePage extends StatelessWidget {
+  //* Function to greet the user
   Widget _buildGreeting(String fname, String greeting) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 2.0),
@@ -54,16 +49,18 @@ class HomePage extends StatelessWidget {
     );
   }
 
+  //* Function to make the title
   Widget _buildTitleWidget(String title) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 2.0),
-      child: Text(
-        title,
-        style: TextStyle(
-          fontSize: 25.0,
-          color: Colors.black,
-          fontWeight: FontWeight.w700,
-        ),
+      child: Row(
+        children: [
+          Text(
+            title,
+            style: BookGanga.kHeadingStyle,
+          ),
+          Icon(Icons.chevron_right_sharp, color: Colors.black),
+        ],
       ),
     );
   }
@@ -75,8 +72,6 @@ class HomePage extends StatelessWidget {
   ];
 
   final trendingBlogList = [
-    TrendingBlogTile(),
-    TrendingBlogTile(),
     TrendingBlogTile(),
     TrendingBlogTile(),
   ];
@@ -97,17 +92,13 @@ class HomePage extends StatelessWidget {
               _buildTitleWidget('Featured'),
 
               //*Divider
-              Divider(
-                color: Colors.grey.shade500,
-              ),
+              BookGanga.kDivider,
 
               //*DAILY DIGEST
               ...featuredBlogList,
 
               //* Divider
-              Divider(
-                color: Colors.grey.shade500,
-              ),
+              BookGanga.kDivider,
 
               //*Tune your recommendations Widget
               // RecommendationTile(
@@ -115,13 +106,15 @@ class HomePage extends StatelessWidget {
               // ),
               _buildTitleWidget('Trending'),
               //* Divider
-              Divider(
-                color: Colors.grey.shade500,
-              ),
+              BookGanga.kDivider,
 
               ...trendingBlogList,
 
+              _buildTitleWidget('Continue Reading'),
+              //* Divider
+              BookGanga.kDivider,
 
+              ...trendingBlogList,
             ],
           ),
         ),
