@@ -7,11 +7,12 @@ class BookGanga {
     fontWeight: FontWeight.w700,
   );
 
-  static Widget kDivider = Divider(
-    color: Colors.grey.shade500,
-  );
+  static const Color scaffoldGrey = Color(0xFFF0F2F5);
+  static const Color scaffold = Colors.white;
 
-  static const Color scaffold = Color(0xFFF0F2F5);
+  static const Color kAccentColor = Color(0xFF26A69A);
+
+  static const Color GoodAccentColor = Color(0xff4abae3);
 
   static const Color selectionColor = Colors.black;
 }

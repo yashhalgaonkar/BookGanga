@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../config/book_ganga.dart';
+import '../../config/book_ganga.dart';
 
 class CustomTabBar extends StatelessWidget {
   final List<IconData> icons;
