@@ -1,8 +1,10 @@
+import 'package:book_ganga/config/book_ganga.dart';
+import 'package:book_ganga/models/blog_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import '../../config/book_ganga.dart';
 import '../widgets/widgets.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../../data/data.dart';
-import '../../models/models.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -15,7 +17,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void dispose() {
-    // TODO: implement dispose
     super.dispose();
 
     _trackingScrollController.dispose();
@@ -23,90 +24,103 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: CustomScrollView(
-        controller: _trackingScrollController,
-        slivers: [
-          //*APP BAR
-          CustomAppBar(),
+      body: SafeArea(
+        child: CustomScrollView(
+          controller: _trackingScrollController,
+          slivers: [
+            //*APP BAR
+            SliverPadding(
+              padding: const EdgeInsets.only(top: 4.0),
+              sliver: CustomAppBar(),
+            ),
 
-          //* Featured Section
+            //* Featured Section
 
-          SliverToBoxAdapter(
-            child: CreateSection(
-              title: 'Featured',
-              blogList: featuredBlogList,
+            // SliverPadding(
+            //   padding: const EdgeInsets.fromLTRB(16.0, 10.0, 16.0, 10.0),
+            //   sliver: SliverToBoxAdapter(
+            //     child: GreetingWidget(
+            //       fname: 'Yash',
+            //       greeting: 'Good Evening!',
+            //     ),
+            //   ),
+            // ),
+
+            SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) {
+                  //final Blog blog = blogs[index];
+                  return BlogContainer();
+                },
+                childCount: 5,
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class MainGridTile extends StatelessWidget {
+  final int index;
+  const MainGridTile({Key key, this.index}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+    final double itemHeight = (size.height - kToolbarHeight - 24) / 2 - 50;
+    final double itemWidth = size.width / 2;
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        color: BookGanga.kGrey,
+      ),
+      child: Stack(
+        children: [
+          //*new widget - to give image circular edges
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Image.asset(
+              'assets/images/dp2.png',
+              height: itemHeight - 75.0,
+              width: double.infinity,
+              fit: BoxFit.cover,
             ),
           ),
 
-          SliverToBoxAdapter(
-            child: CreateSection(
-              title: 'Trending',
-              blogList: featuredBlogList,
+          //* gradient to the story image
+          Container(
+            height: itemHeight - 75.0,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              gradient: BookGanga.storyGradient,
+              borderRadius: BorderRadius.circular(10.0),
             ),
           ),
 
-          SliverToBoxAdapter(
-            child: CreateSection(
-              title: 'Recommendations',
-              blogList: featuredBlogList,
+          Positioned(
+            bottom: 55.0,
+            //top: 8.0,
+            left: 8.0,
+            right: 8.0,
+            child: Text(
+              "A VIT boy hacks GitHub",
+              style: const TextStyle(
+                fontSize: 16.0,
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+              ),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
-          ),
+          )
         ],
       ),
     );
   }
 }
 
-// //*NOT USING
-// class SliverDivider extends StatelessWidget {
-//   const SliverDivider({
-//     Key key,
-//   }) : super(key: key);
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return SliverPadding(
-//       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-//       sliver: SliverToBoxAdapter(
-//         child: const Divider(
-//           height: 1.0,
-//         ),
-//       ),
-//     );
-//   }
-// }
-
-// //*Not using
-// class GreetingWidget extends StatelessWidget {
-//   final String fname;
-//   final String greeting;
-
-//   GreetingWidget({
-//     this.fname,
-//     this.greeting,
-//   });
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//       padding: const EdgeInsets.only(bottom: 2.0),
-//       child: Column(
-//         crossAxisAlignment: CrossAxisAlignment.start,
-//         children: [
-//           Text(
-//             'Hi $fname',
-//             style: TextStyle(fontSize: 18.0),
-//           ),
-//           Text(
-//             "$greeting",
-//             style: TextStyle(
-//               fontSize: 25.0,
-//               color: Colors.black,
-//               fontWeight: FontWeight.w700,
-//             ),
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }

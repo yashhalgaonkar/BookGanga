@@ -17,14 +17,12 @@ class _MyAppState extends State<MyApp> {
       title: 'BookGanga',
       theme: ThemeData(
         fontFamily: 'Nunito',
-        scaffoldBackgroundColor: BookGanga.scaffold,
+        scaffoldBackgroundColor: BookGanga.scaffoldGrey,
       ),
       home: NavScreen(),
     );
   }
 }
-
-
 
 class RecommendationTile extends StatelessWidget {
   final Function onTap;
@@ -84,4 +82,3 @@ class RecommendationTile extends StatelessWidget {
     );
   }
 }
-

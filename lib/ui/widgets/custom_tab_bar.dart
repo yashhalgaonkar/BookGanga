@@ -23,13 +23,13 @@ class CustomTabBar extends StatelessWidget {
         border: isBottomIndicator
             ? Border(
                 bottom: BorderSide(
-                  color: BookGanga.selectionColor,
+                  color: BookGanga.kDarkBlack,
                   width: 3.0,
                 ),
               )
             : Border(
                 top: BorderSide(
-                  color: BookGanga.selectionColor,
+                  color: BookGanga.kDarkBlack,
                   width: 3.0,
                 ),
               ),
@@ -42,7 +42,7 @@ class CustomTabBar extends StatelessWidget {
                 icon: Icon(
                   e,
                   color: selectedIndex == i
-                      ? BookGanga.selectionColor
+                      ? BookGanga.kDarkBlack
                       : Colors.black45,
                   size: 30.0,
                 ),
