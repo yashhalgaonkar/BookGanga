@@ -26,7 +26,7 @@ class ProfileAvatar extends StatelessWidget {
           radius: radius,
           backgroundColor: BookGanga.kNiceAccentColor,
           child: CircleAvatar(
-            radius: hasBorder ? radius - 3 : radius,
+            radius: hasBorder ? radius - 2 : radius,
             backgroundColor: Colors.grey.shade200,
             backgroundImage: CachedNetworkImageProvider(imageUrl),
           ),

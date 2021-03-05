@@ -8,7 +8,7 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 class BlogContainer extends StatefulWidget {
   final Blog blog;
 
-  BlogContainer({this.blog});
+  BlogContainer({@required this.blog});
 
   @override
   _BlogContainerState createState() => _BlogContainerState();
