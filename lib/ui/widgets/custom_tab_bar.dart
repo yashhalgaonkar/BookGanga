@@ -20,20 +20,12 @@ class CustomTabBar extends StatelessWidget {
       onTap: onTap,
       indicatorPadding: EdgeInsets.zero,
       indicator: BoxDecoration(
-        border: isBottomIndicator
-            ? Border(
-                bottom: BorderSide(
-                  color: BookGanga.kDarkBlack,
-                  width: 3.0,
-                ),
-              )
-            : Border(
-                top: BorderSide(
-                  color: BookGanga.kDarkBlack,
-                  width: 3.0,
-                ),
-              ),
-      ),
+          border: Border(
+        top: BorderSide(
+          color: BookGanga.kNiceAccentColor,
+          width: 3.0,
+        ),
+      )),
       tabs: icons
           .asMap()
           .map((i, e) => MapEntry(
@@ -42,9 +34,9 @@ class CustomTabBar extends StatelessWidget {
                 icon: Icon(
                   e,
                   color: selectedIndex == i
-                      ? BookGanga.kDarkBlack
-                      : Colors.black45,
-                  size: 30.0,
+                      ? BookGanga.kNiceAccentColor
+                      : BookGanga.kBlack,
+                  size: 25.0,
                 ),
               )))
           .values

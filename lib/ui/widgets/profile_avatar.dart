@@ -6,12 +6,15 @@ class ProfileAvatar extends StatelessWidget {
   final String imageUrl;
   final bool isActive;
   final bool hasBorder;
+  final double radius;
 
   const ProfileAvatar(
       {Key key,
       @required this.imageUrl,
       this.isActive = false,
-      this.hasBorder = false})
+      this.hasBorder = false,
+      this.radius = 20.0 // default radius
+      })
       : super(key: key);
 
   @override
@@ -20,10 +23,10 @@ class ProfileAvatar extends StatelessWidget {
       children: [
         //for the blue border
         CircleAvatar(
-          radius: 20.0,
+          radius: radius,
           backgroundColor: BookGanga.kNiceAccentColor,
           child: CircleAvatar(
-            radius: hasBorder ? 17.0 : 20.0,
+            radius: hasBorder ? radius - 3 : radius,
             backgroundColor: Colors.grey.shade200,
             backgroundImage: CachedNetworkImageProvider(imageUrl),
           ),

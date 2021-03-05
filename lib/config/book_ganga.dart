@@ -29,4 +29,10 @@ class BookGanga {
     end: Alignment.bottomCenter,
     colors: [Colors.transparent, Colors.black87],
   );
+
+  static const TextStyle kAppBarTitleStyle = const TextStyle(
+    color: BookGanga.kDarkBlack,
+    fontSize: 24.0,
+    fontFamily: 'Nunito',
+  );
 }

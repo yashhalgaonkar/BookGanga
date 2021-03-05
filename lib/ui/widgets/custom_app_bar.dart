@@ -1,5 +1,6 @@
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
@@ -9,24 +10,32 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverAppBar(
+      toolbarHeight: 50.0,
       floating: true,
-      forceElevated: true,
-      elevation: 4.0,
+      elevation: 10.0,
       centerTitle: true,
       leading: Icon(
         Icons.format_quote_sharp,
         color: BookGanga.kDarkBlack,
-        size: 30.0,
+        size: 24.0,
       ),
       backgroundColor: BookGanga.scaffold,
       title: Text(
         'Book Ganga',
         style: const TextStyle(
           color: BookGanga.kDarkBlack,
-          fontSize: 30.0,
-          fontWeight: FontWeight.bold,
+          fontSize: 24.0,
+          letterSpacing: 1.2,
+          fontFamily: 'Pacifico',
         ),
       ),
+      actions: [
+        IconButton(
+          icon: Icon(MdiIcons.facebookMessenger),
+          onPressed: () {},
+          color: BookGanga.kDarkBlack,
+        ),
+      ],
     );
   }
 }

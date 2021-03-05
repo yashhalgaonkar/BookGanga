@@ -1,11 +1,9 @@
 import 'package:book_ganga/config/book_ganga.dart';
-import 'package:book_ganga/data/data.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-
 
 class BlogContainer extends StatefulWidget {
   final Blog blog;
@@ -17,7 +15,7 @@ class BlogContainer extends StatefulWidget {
 }
 
 class _BlogContainerState extends State<BlogContainer> {
-  bool isSaved = true;
+  bool isSaved = false;
 
   @override
   Widget build(BuildContext context) {
@@ -33,16 +31,17 @@ class _BlogContainerState extends State<BlogContainer> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             //* Post header
-            _PostHeader(),
+            _PostHeader(blog: widget.blog),
 
             //* Post Image
-            _PostImage(),
+            _PostImage(blog: widget.blog),
 
             //* Description
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 2.0),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 2.0, vertical: 4.0),
               child: Text(
-                loren,
+                widget.blog.description,
                 style: const TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.w500,
@@ -60,6 +59,7 @@ class _BlogContainerState extends State<BlogContainer> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 2.0),
               child: _PostDetails(
+                blog: widget.blog,
                 isSaved: isSaved,
                 onSavedTap: () {
                   print('Saved Pressed');
@@ -83,10 +83,12 @@ class _PostDetails extends StatelessWidget {
   const _PostDetails(
       {Key key,
       this.isSaved = false,
+      this.blog,
       @required this.onSavedTap,
       @required this.onSendTap})
       : super(key: key);
 
+  final Blog blog;
   final bool isSaved;
   final Function onSavedTap;
   final Function onSendTap;
@@ -97,7 +99,7 @@ class _PostDetails extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            '457 Reads\n105 Shares',
+            '${blog.readCount} Reads\n${blog.shareCount} Shares',
             style: const TextStyle(
               color: Colors.black,
               fontWeight: FontWeight.bold,
@@ -110,7 +112,7 @@ class _PostDetails extends StatelessWidget {
                 InkWell(
                   onTap: onSendTap,
                   child: Icon(
-                    MdiIcons.sendCircleOutline,
+                    Icons.send,
                     size: 25.0,
                   ),
                 ),
@@ -132,8 +134,10 @@ class _PostDetails extends StatelessWidget {
 }
 
 class _PostImage extends StatelessWidget {
+  final Blog blog;
   const _PostImage({
     Key key,
+    this.blog,
   }) : super(key: key);
 
   @override
@@ -147,7 +151,7 @@ class _PostImage extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(12.0),
             child: CachedNetworkImage(
-              imageUrl: postUrl,
+              imageUrl: blog.titleImageUrl,
               fit: BoxFit.cover,
               height: 200.0,
               width: double.infinity,
@@ -168,7 +172,7 @@ class _PostImage extends StatelessWidget {
             child: Container(
               width: textBoxwidth,
               child: Text(
-                'Ikigia - A way of living',
+                blog.title,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0,
@@ -186,8 +190,10 @@ class _PostImage extends StatelessWidget {
 }
 
 class _PostHeader extends StatelessWidget {
+  final Blog blog;
   const _PostHeader({
     Key key,
+    this.blog,
   }) : super(key: key);
 
   @override
@@ -195,16 +201,14 @@ class _PostHeader extends StatelessWidget {
     return Row(
       children: [
         ProfileAvatar(
-          imageUrl: currentUser.imageURL,
+          imageUrl: blog.author.profileImageUrl,
           hasBorder: false,
-          isActive: true,
+          isActive: false,
         ),
         const SizedBox(width: 10.0),
         Text(
-          'yash.halgaonkar',
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+          blog.author.username,
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         Expanded(
           child: Align(
