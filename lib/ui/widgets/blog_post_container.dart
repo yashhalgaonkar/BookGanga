@@ -20,7 +20,7 @@ class _BlogContainerState extends State<BlogContainer> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
+      margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 3.0),
       elevation: 1.0,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
@@ -33,6 +33,8 @@ class _BlogContainerState extends State<BlogContainer> {
             //* Post header
             _PostHeader(blog: widget.blog),
 
+            const SizedBox(height: 5.0),
+
             //* Post Image
             _PostImage(blog: widget.blog),
 
@@ -43,17 +45,12 @@ class _BlogContainerState extends State<BlogContainer> {
               child: Text(
                 widget.blog.description,
                 style: const TextStyle(
-                  color: Colors.black,
+                  color: BookGanga.kDarkBlack,
                   fontWeight: FontWeight.w500,
                 ),
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
               ),
-            ),
-
-            const Divider(
-              height: 8.0,
-              color: Colors.black26,
             ),
 
             Padding(
@@ -99,10 +96,10 @@ class _PostDetails extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            '${blog.readCount} Reads\n${blog.shareCount} Shares',
+            '${blog.readCount} Likes\n${blog.shareCount} Shares',
             style: const TextStyle(
               color: Colors.black,
-              fontWeight: FontWeight.bold,
+              fontWeight: FontWeight.w600,
             ),
           ),
           Expanded(
@@ -114,6 +111,7 @@ class _PostDetails extends StatelessWidget {
                   child: Icon(
                     Icons.send,
                     size: 25.0,
+                    color: BookGanga.kBlack,
                   ),
                 ),
                 const SizedBox(width: 10.0),
@@ -121,6 +119,7 @@ class _PostDetails extends StatelessWidget {
                   onTap: onSavedTap,
                   child: Icon(
                     (isSaved) ? MdiIcons.bookmark : MdiIcons.bookmarkOutline,
+                    color: BookGanga.kBlack,
                     size: 25.0,
                   ),
                 ),
@@ -205,16 +204,20 @@ class _PostHeader extends StatelessWidget {
           hasBorder: false,
           isActive: false,
         ),
-        const SizedBox(width: 10.0),
+        const SizedBox(width: 15.0),
         Text(
           blog.author.username,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: BookGanga.kDarkBlack,
+          ),
         ),
         Expanded(
           child: Align(
             alignment: Alignment.centerRight,
             child: Icon(
               Icons.more_vert_rounded,
+              color: BookGanga.kBlack,
             ),
           ),
         ),

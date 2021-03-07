@@ -3,6 +3,7 @@ import 'package:book_ganga/data/data.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class UserProfileScreen extends StatefulWidget {
   final User user;
@@ -18,40 +19,59 @@ class _UserProfileScreenState extends State<UserProfileScreen>
     with SingleTickerProviderStateMixin {
   User get user => widget.user;
 
-  Widget _getTab(String label) {
-    return Tab(
-      child: Text(
-        label,
-        style: const TextStyle(
-          color: BookGanga.kDarkBlack,
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
+        elevation: 0.0,
+        actions: [
+          // Container(
+          //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          //   margin:
+          //       const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
+          //   alignment: Alignment.center,
+          //   decoration: BoxDecoration(
+          //     color: BookGanga.kNiceAccentColor,
+          //     borderRadius: BorderRadius.circular(10.0),
+          //   ),
+          //   child: Text(
+          //     'Follow',
+          //     style: const TextStyle(
+          //       fontWeight: FontWeight.w600,
+          //       color: Colors.white,
+          //     ),
+          //   ),
+          // ),
+
+          Container(
+            width: 85.0,
+            margin: const EdgeInsets.all(10.0),
+            child: TextButton(
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(BookGanga.kNiceAccentColor),
+              ),
+              onPressed: () {},
+              child: Text(
+                'Follow',
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white,
+                ),
+              ),
+            ),
+          ),
+          IconButton(
             icon: Icon(
-              Icons.keyboard_backspace,
+              MdiIcons.messageOutline,
               color: BookGanga.kDarkBlack,
             ),
             onPressed: () {
-              print('back pressed');
-            }),
-        actions: [
-          IconButton(
-              icon: Icon(
-                Icons.more_vert,
-                color: BookGanga.kDarkBlack,
-              ),
-              onPressed: () {
-                print('More button pressed');
-              })
+              print('More button pressed');
+            },
+          )
         ],
-        centerTitle: true,
+        centerTitle: false,
         title: Text(
           '${user.fname}\'s Profile',
           style: BookGanga.kAppBarTitleStyle.copyWith(
@@ -66,15 +86,12 @@ class _UserProfileScreenState extends State<UserProfileScreen>
         child: NestedScrollView(
           headerSliverBuilder: (context, _) {
             return [
-              SliverList(
-                delegate: SliverChildBuilderDelegate((_, index) {
-                  return _ProfileHeader(user: user);
-                }, childCount: 1),
-              )
+              SliverToBoxAdapter(child: _ProfileHeader(user: user)),
             ];
           },
           body: Column(
             children: [
+              //const SizedBox(height: 6.0),
               _TabBarContainer(),
               Expanded(
                   child: TabBarView(
@@ -92,48 +109,6 @@ class _UserProfileScreenState extends State<UserProfileScreen>
   }
 }
 
-class _UserAppBar extends StatelessWidget {
-  const _UserAppBar({
-    Key key,
-    @required this.user,
-  }) : super(key: key);
-
-  final User user;
-
-  @override
-  Widget build(BuildContext context) {
-    return AppBar(
-      leading: IconButton(
-          icon: Icon(
-            Icons.keyboard_backspace,
-            color: BookGanga.kDarkBlack,
-          ),
-          onPressed: () {
-            print('back pressed');
-          }),
-      actions: [
-        IconButton(
-            icon: Icon(
-              Icons.more_vert,
-              color: BookGanga.kDarkBlack,
-            ),
-            onPressed: () {
-              print('More button pressed');
-            })
-      ],
-      centerTitle: true,
-      title: Text(
-        '${user.fname}\'s Profile',
-        style: BookGanga.kAppBarTitleStyle.copyWith(
-          fontWeight: FontWeight.bold,
-          fontSize: 22.0,
-        ),
-      ),
-      backgroundColor: BookGanga.scaffold,
-    );
-  }
-}
-
 class _TabBarContainer extends StatelessWidget {
   const _TabBarContainer({Key key}) : super(key: key);
 
@@ -142,6 +117,7 @@ class _TabBarContainer extends StatelessWidget {
       child: Text(
         label,
         style: const TextStyle(
+          fontWeight: FontWeight.w600,
           color: BookGanga.kDarkBlack,
         ),
       ),
@@ -151,7 +127,7 @@ class _TabBarContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: 0.0, horizontal: 10.0),
+      margin: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 0.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
@@ -165,7 +141,7 @@ class _TabBarContainer extends StatelessWidget {
               tabs: [
                 _getTab('Blogs'),
                 _getTab('Reviews'),
-                _getTab('Share'),
+                _getTab('Shares'),
               ],
               onTap: (index) => print('Index $index tapped'),
             ),
@@ -187,53 +163,11 @@ class _TabBarContainer extends StatelessWidget {
   }
 }
 
-class _ShareListWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 100.0,
-      color: Colors.greenAccent,
-      alignment: Alignment.center,
-      child: Text('share list'),
-    );
-  }
-}
-
-class _ReviewsListWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 100.0,
-      color: Colors.redAccent,
-      alignment: Alignment.center,
-      child: Text('REview List  Wdiget'),
-    );
-  }
-}
-
-class _BlogListWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 100.0,
-      color: Colors.amberAccent,
-      alignment: Alignment.center,
-      child: ListView.builder(
-        itemBuilder: (context, index) => Text('Blog List  Wdiget'),
-        itemCount: 100,
-      ),
-    );
-  }
-}
-
 class _BooksButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //color: Colors.green.shade100,
-      height: 35.0,
-      //margin: const EdgeInsets.symmetric(vertical: 3.0),
-      //padding: const EdgeInsets.all(6.0),
+      height: 40.0,
       child: Row(
         children: [
           Expanded(
@@ -243,19 +177,13 @@ class _BooksButton extends StatelessWidget {
                 'Book Shelf',
                 style: const TextStyle(
                   fontWeight: FontWeight.w600,
+                  color: BookGanga.kDarkBlack,
                 ),
               ),
               //highlightColor: BookGanga.kNiceAccentColor,
               borderSide: BorderSide.none,
               //splashColor: BookGanga.kNiceAccentColor,
             ),
-          ),
-          Container(
-            child: const VerticalDivider(
-              width: 4.0,
-              color: Colors.black26,
-            ),
-            width: 10.0,
           ),
           Expanded(
             child: OutlineButton(
@@ -264,66 +192,13 @@ class _BooksButton extends StatelessWidget {
                 'Read List',
                 style: const TextStyle(
                   fontWeight: FontWeight.w600,
+                  color: BookGanga.kDarkBlack,
                 ),
               ),
               //highlightColor: BookGanga.kNiceAccentColor,
               borderSide: BorderSide.none,
               //splashColor: BookGanga.kNiceAccentColor,
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _StatsWidget extends StatelessWidget {
-  final User user;
-
-  _StatsWidget({
-    this.user,
-  });
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      //padding: const EdgeInsets.all(6.0),
-      margin: const EdgeInsets.symmetric(vertical: 6.0),
-      height: 40.0,
-      child: Row(
-        children: [
-          _StatsWidgetTile(
-            label: 'Followers',
-            count: '${user.numFollowers}',
-            onClick: () {},
-          ),
-          const VerticalDivider(
-            width: 4.0,
-            color: Colors.black26,
-          ),
-          _StatsWidgetTile(
-            label: 'Following',
-            count: '${user.numFollowing}',
-            onClick: () {},
-          ),
-          const VerticalDivider(
-            width: 4.0,
-            color: Colors.black26,
-          ),
-          _StatsWidgetTile(
-            label: 'Blogs',
-            count: '${user.numBlogs}',
-            onClick: () {
-              print('num blogs clicked');
-            },
-          ),
-          const VerticalDivider(
-            width: 4.0,
-            color: Colors.black26,
-          ),
-          _StatsWidgetTile(
-            label: 'Reviews',
-            count: '${user.numReviews}',
-            onClick: () {},
           ),
         ],
       ),
@@ -345,21 +220,18 @@ class _StatsWidgetTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: GestureDetector(
-        onTap: onClick,
+    return InkWell(
+      onTap: onClick,
+      child: Container(
+        padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Expanded(
-              child: Container(
-                alignment: Alignment.center,
-                child: Material(
-                  child: Text(
-                    count,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
+            Container(
+              alignment: Alignment.center,
+              child: Text(
+                count,
+                style: const TextStyle(
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
@@ -380,46 +252,118 @@ class _ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10.0),
+      margin: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 0.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 6.0, vertical: 10.0),
+        padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 2.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ProfileAvatar(
-              imageUrl: user.profileImageUrl,
-              radius: 45.0,
-              hasBorder: false,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                //*profile image
+                ProfileAvatar(
+                  imageUrl: user.profileImageUrl,
+                  radius: 40.0,
+                  hasBorder: false,
+                ),
+
+                //*Stats
+                Expanded(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      _StatsWidgetTile(
+                        label: 'Followers',
+                        count: '125',
+                        onClick: () {},
+                      ),
+                      _StatsWidgetTile(
+                        label: 'BLogs',
+                        count: '27',
+                        onClick: () {},
+                      ),
+                      _StatsWidgetTile(
+                        label: 'Reviews',
+                        count: '7',
+                        onClick: () {},
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
-            const SizedBox(height: 5.0),
+            const SizedBox(height: 8.0),
+
+            //* Usser name
             Text(
               '${user.fname} ${user.lname}',
               style: const TextStyle(
                 fontSize: 18.0,
                 fontWeight: FontWeight.w600,
+                color: BookGanga.kDarkBlack,
               ),
             ),
+
+            //* bio
             Text(
               user.bio,
               style: TextStyle(
                 fontSize: 14.0,
                 fontWeight: FontWeight.w500,
+                color: BookGanga.kDarkBlack,
               ),
-              textAlign: TextAlign.center,
+              textAlign: TextAlign.left,
               maxLines: 2,
             ),
-            const Divider(
-              height: 6.0,
-            ),
-            _StatsWidget(user: user),
-            const Divider(height: 6.0),
+
             _BooksButton(),
           ],
         ),
+      ),
+    );
+  }
+}
+
+//* The list that are to be displayed in tab view
+//* Shares Tab
+class _ShareListWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 100.0,
+      color: Colors.greenAccent,
+      alignment: Alignment.center,
+      child: Text('share list'),
+    );
+  }
+}
+
+//* Reviews Tab
+class _ReviewsListWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 100.0,
+      color: Colors.redAccent,
+      alignment: Alignment.center,
+      child: Text('REview List  Wdiget'),
+    );
+  }
+}
+
+//* Blogs Tab
+class _BlogListWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: ListView.builder(
+        itemBuilder: (context, index) => BlogContainer(blog: blogs[index]),
+        itemCount: 10,
       ),
     );
   }

@@ -23,11 +23,11 @@ class CustomAppBar extends StatelessWidget {
       title: Text(
         'Book Ganga',
         style: const TextStyle(
-          color: BookGanga.kDarkBlack,
-          fontSize: 24.0,
-          letterSpacing: 1.2,
-          fontFamily: 'Pacifico',
-        ),
+            color: BookGanga.kDarkBlack,
+            fontSize: 24.0,
+            letterSpacing: -0.2,
+            fontFamily: 'Nunito',
+            fontWeight: FontWeight.w600),
       ),
       actions: [
         IconButton(

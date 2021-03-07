@@ -18,6 +18,13 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         fontFamily: 'Nunito',
         scaffoldBackgroundColor: BookGanga.scaffoldGrey,
+        textTheme: TextTheme(
+          headline1: const TextStyle(
+            color: BookGanga.kDarkBlack,
+            fontSize: 24.0,
+            fontFamily: 'Nunito',
+          ),
+        ),
       ),
       home: NavScreen(),
     );

@@ -1,10 +1,10 @@
-import 'package:book_ganga/config/book_ganga.dart';
+
 import 'package:book_ganga/ui/screens/screens.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
-import 'package:flashy_tab_bar/flashy_tab_bar.dart';
+
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
-import 'package:titled_navigation_bar/titled_navigation_bar.dart';
+
 import '../../data/data.dart';
 import 'home_screen.dart';
 

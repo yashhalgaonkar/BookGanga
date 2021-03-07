@@ -30,8 +30,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   cached_network_image: ^2.5.0
   material_design_icons_flutter: 4.0.5855
-  flashy_tab_bar: ^0.0.3
-  titled_navigation_bar: ^4.1.0
+  spring_button: ^1.0.14
 
 
 
