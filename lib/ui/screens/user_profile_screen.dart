@@ -25,39 +25,23 @@ class _UserProfileScreenState extends State<UserProfileScreen>
       appBar: AppBar(
         elevation: 0.0,
         actions: [
-          // Container(
-          //   padding: const EdgeInsets.symmetric(horizontal: 25.0),
-          //   margin:
-          //       const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
-          //   alignment: Alignment.center,
-          //   decoration: BoxDecoration(
-          //     color: BookGanga.kNiceAccentColor,
-          //     borderRadius: BorderRadius.circular(10.0),
-          //   ),
-          //   child: Text(
-          //     'Follow',
-          //     style: const TextStyle(
-          //       fontWeight: FontWeight.w600,
-          //       color: Colors.white,
-          //     ),
-          //   ),
-          // ),
-
           Container(
             width: 85.0,
             margin: const EdgeInsets.all(10.0),
             child: TextButton(
               style: ButtonStyle(
                 backgroundColor:
-                    MaterialStateProperty.all(BookGanga.kNiceAccentColor),
+                    MaterialStateProperty.all(BookGanga.kAccentColor),
               ),
-              onPressed: () {},
+              onPressed: () {
+                print('Follow clicked');
+              },
               child: Text(
                 'Follow',
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: Colors.white,
-                ),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Colors.white),
               ),
             ),
           ),
@@ -74,10 +58,7 @@ class _UserProfileScreenState extends State<UserProfileScreen>
         centerTitle: false,
         title: Text(
           '${user.fname}\'s Profile',
-          style: BookGanga.kAppBarTitleStyle.copyWith(
-            fontWeight: FontWeight.bold,
-            fontSize: 22.0,
-          ),
+          style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 20.0),
         ),
         backgroundColor: BookGanga.scaffold,
       ),
@@ -94,13 +75,14 @@ class _UserProfileScreenState extends State<UserProfileScreen>
               //const SizedBox(height: 6.0),
               _TabBarContainer(),
               Expanded(
-                  child: TabBarView(
-                children: [
-                  _BlogListWidget(),
-                  _ReviewsListWidget(),
-                  _ShareListWidget(),
-                ],
-              ))
+                child: TabBarView(
+                  children: [
+                    _BlogListWidget(),
+                    _ReviewsListWidget(),
+                    _ShareListWidget(),
+                  ],
+                ),
+              )
             ],
           ),
         ),
@@ -112,14 +94,11 @@ class _UserProfileScreenState extends State<UserProfileScreen>
 class _TabBarContainer extends StatelessWidget {
   const _TabBarContainer({Key key}) : super(key: key);
 
-  Widget _getTab(String label) {
+  Widget _getTab(String label, BuildContext context) {
     return Tab(
       child: Text(
         label,
-        style: const TextStyle(
-          fontWeight: FontWeight.w600,
-          color: BookGanga.kDarkBlack,
-        ),
+        style: Theme.of(context).textTheme.bodyText1,
       ),
     );
   }
@@ -137,25 +116,14 @@ class _TabBarContainer extends StatelessWidget {
           children: [
             TabBar(
               isScrollable: false,
-              indicatorColor: BookGanga.kNiceAccentColor,
+              indicatorColor: BookGanga.kAccentColor,
               tabs: [
-                _getTab('Blogs'),
-                _getTab('Reviews'),
-                _getTab('Shares'),
+                _getTab('Blogs', context),
+                _getTab('Reviews', context),
+                _getTab('Shares', context),
               ],
               onTap: (index) => print('Index $index tapped'),
             ),
-            // Container(
-            //   color: Colors.amber,
-            //   child: TabBarView(
-            //     controller: tabController,
-            //     children: [
-            //       _BlogListWidget(),
-            //       _ReviewsListWidget(),
-            //       _ShareListWidget(),
-            //     ],
-            //   ),
-            // )
           ],
         ),
       ),
@@ -170,34 +138,62 @@ class _BooksButton extends StatelessWidget {
       height: 40.0,
       child: Row(
         children: [
+          // Expanded(
+          //   child: OutlineButton(
+          //     onPressed: () => print('Book Shelf Clicked'),
+          //     child: Text(
+          //       'Book Shelf',
+          //       style: Theme.of(context).textTheme.bodyText1,
+          //     ),
+          //     //highlightColor: BookGanga.kNiceAccentColor,
+          //     borderSide: BorderSide.none,
+          //     //splashColor: BookGanga.kNiceAccentColor,
+          //   ),
+          // ),
+          // Expanded(
+          //   child: OutlineButton(
+          //     onPressed: () => print('Read List clicked'),
+          //     child: Text(
+          //       'Read List',
+          //       style: Theme.of(context).textTheme.bodyText1,
+          //     ),
+          //     //highlightColor: BookGanga.kNiceAccentColor,
+          //     borderSide: BorderSide.none,
+          //     //splashColor: BookGanga.kNiceAccentColor,
+          //   ),
+          // ),
+
           Expanded(
-            child: OutlineButton(
-              onPressed: () => print('Book Shelf Clicked'),
-              child: Text(
-                'Book Shelf',
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: BookGanga.kDarkBlack,
-                ),
+            child: TextButton(
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(BookGanga.kAccentColor),
               ),
-              //highlightColor: BookGanga.kNiceAccentColor,
-              borderSide: BorderSide.none,
-              //splashColor: BookGanga.kNiceAccentColor,
+              onPressed: () {
+                print('Book Shelf clicked');
+              },
+              child: Text('Book Shelf',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(color: Colors.white)),
             ),
           ),
+          const SizedBox(width: 10.0),
           Expanded(
-            child: OutlineButton(
-              onPressed: () => print('Read List clicked'),
-              child: Text(
-                'Read List',
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  color: BookGanga.kDarkBlack,
-                ),
+            child: TextButton(
+              style: ButtonStyle(
+                backgroundColor:
+                    MaterialStateProperty.all(BookGanga.kAccentColor),
               ),
-              //highlightColor: BookGanga.kNiceAccentColor,
-              borderSide: BorderSide.none,
-              //splashColor: BookGanga.kNiceAccentColor,
+              onPressed: () {
+                print('Read Shelf clicked');
+              },
+              child: Text('Read List',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(color: Colors.white)),
             ),
           ),
         ],
@@ -257,7 +253,7 @@ class _ProfileHeader extends StatelessWidget {
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: Container(
-        padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 2.0),
+        padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 6.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -320,6 +316,8 @@ class _ProfileHeader extends StatelessWidget {
               textAlign: TextAlign.left,
               maxLines: 2,
             ),
+
+            const SizedBox(height: 6.0),
 
             _BooksButton(),
           ],

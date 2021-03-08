@@ -19,12 +19,23 @@ class _MyAppState extends State<MyApp> {
         fontFamily: 'Nunito',
         scaffoldBackgroundColor: BookGanga.scaffoldGrey,
         textTheme: TextTheme(
-          headline1: const TextStyle(
+          bodyText1: const TextStyle(
             color: BookGanga.kDarkBlack,
-            fontSize: 24.0,
-            fontFamily: 'Nunito',
+            fontWeight: FontWeight.bold,
+          ),
+          bodyText2: const TextStyle(
+            fontWeight: FontWeight.w500,
+            color: BookGanga.kDarkBlack,
+          ),
+          button: const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
+        iconTheme: IconThemeData(color: BookGanga.kDarkBlack, size: 25.0),
+        accentColor: BookGanga.kAccentColor,
+        brightness: Brightness.light,
+        bottomAppBarColor: Colors.white,
       ),
       home: NavScreen(),
     );

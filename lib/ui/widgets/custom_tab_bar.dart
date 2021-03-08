@@ -22,7 +22,7 @@ class CustomTabBar extends StatelessWidget {
       indicator: BoxDecoration(
           border: Border(
         top: BorderSide(
-          color: BookGanga.kNiceAccentColor,
+          color: BookGanga.kAccentColor,
           width: 3.0,
         ),
       )),
@@ -34,7 +34,7 @@ class CustomTabBar extends StatelessWidget {
                 icon: Icon(
                   e,
                   color: selectedIndex == i
-                      ? BookGanga.kNiceAccentColor
+                      ? BookGanga.kAccentColor
                       : BookGanga.kBlack,
                   size: 25.0,
                 ),

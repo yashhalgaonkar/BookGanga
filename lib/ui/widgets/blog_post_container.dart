@@ -44,10 +44,10 @@ class _BlogContainerState extends State<BlogContainer> {
                   const EdgeInsets.symmetric(horizontal: 2.0, vertical: 4.0),
               child: Text(
                 widget.blog.description,
-                style: const TextStyle(
-                  color: BookGanga.kDarkBlack,
-                  fontWeight: FontWeight.w500,
-                ),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText2
+                    .copyWith(fontSize: 16.0),
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -96,11 +96,8 @@ class _PostDetails extends StatelessWidget {
       child: Row(
         children: [
           Text(
-            '${blog.readCount} Likes\n${blog.shareCount} Shares',
-            style: const TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.w600,
-            ),
+            '${blog.readCount} Likes & ${blog.shareCount} Comments',
+            style: Theme.of(context).textTheme.bodyText1,
           ),
           Expanded(
             child: Row(
@@ -207,10 +204,7 @@ class _PostHeader extends StatelessWidget {
         const SizedBox(width: 15.0),
         Text(
           blog.author.username,
-          style: const TextStyle(
-            fontWeight: FontWeight.bold,
-            color: BookGanga.kDarkBlack,
-          ),
+          style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 16.0),
         ),
         Expanded(
           child: Align(

@@ -24,7 +24,7 @@ class ProfileAvatar extends StatelessWidget {
         //for the blue border
         CircleAvatar(
           radius: radius,
-          backgroundColor: BookGanga.kNiceAccentColor,
+          backgroundColor: BookGanga.kAccentColor,
           child: CircleAvatar(
             radius: hasBorder ? radius - 2 : radius,
             backgroundColor: Colors.grey.shade200,
