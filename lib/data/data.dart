@@ -13,7 +13,7 @@ final User currentUser = User(
   numReviews: 9,
 );
 
-final List<User> userList = [
+final List<User> users = [
   currentUser,
   User(
     username: 'aditya.giradkar57',
@@ -101,7 +101,7 @@ final List<Blog> blogs = [
       titleImageUrl:
           'https://images.unsplash.com/photo-1604346782646-13dac014c258?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8Ym84alFLVGFFMFl8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
   Blog(
-    author: userList[1], // aditya giradkar
+    author: users[1], // aditya giradkar
     title: 'A VIT boy hacks GitHub!',
     description:
         'Aditya hacks GitHub and becomes major contributor of all JS repos',
@@ -111,7 +111,7 @@ final List<Blog> blogs = [
         'https://images.unsplash.com/photo-1564865878688-9a244444042a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29kZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
   ),
   Blog(
-      author: userList[2], // shivam itankar
+      author: users[2], // shivam itankar
       title: 'Desinging the Future',
       description:
           'orem ipsum dolor sit amet, consectetur adipiscing elit. Proin lacus libero, placerat ut justo vitae, sagittis c',
@@ -120,7 +120,7 @@ final List<Blog> blogs = [
       titleImageUrl:
           'https://images.unsplash.com/photo-1614517409437-2e25e4f5dbed?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDEyfHJuU0tESHd3WVVrfHxlbnwwfHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
   Blog(
-      author: userList[3], // mansi jadhav
+      author: users[3], // mansi jadhav
       title: 'Happyness or Happiness??',
       description:
           'ur adipiscing elit. Proin lacus libero, placerat ut justo vitae, sagittis co',
@@ -129,7 +129,7 @@ final List<Blog> blogs = [
       titleImageUrl:
           'https://images.unsplash.com/photo-1614533708409-fdad0805a4fa?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDF8dG93SlpGc2twR2d8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60'),
   Blog(
-      author: userList[4], // sunita patil
+      author: users[4], // sunita patil
       title: 'Experiencing Long Distanace Relationship',
       description:
           'ur adipiscing elit. Proin lacus libero, placerat ut justo vitae, sagittis co',
@@ -138,7 +138,7 @@ final List<Blog> blogs = [
       titleImageUrl:
           'https://images.unsplash.com/photo-1549825987-0b01889f671f?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NXx8cm9tYW5jZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
   Blog(
-      author: userList[5], //sanket
+      author: users[5], //sanket
       title: 'Being Gay!',
       description:
           'Sanket Supekar shares how its like to be gay in modern sub urban India.',
@@ -147,7 +147,7 @@ final List<Blog> blogs = [
       titleImageUrl:
           'https://images.unsplash.com/photo-1567476783296-fff06012e17a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8Z2F5fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
   Blog(
-      author: userList[6], // mangesh
+      author: users[6], // mangesh
       title: '101 ways to impress girls.',
       description:
           'Mangesh Dhondre shares his sureshot ways to get a pussy whenever you want.',
@@ -156,7 +156,7 @@ final List<Blog> blogs = [
       titleImageUrl:
           'https://images.unsplash.com/photo-1600601622243-f32c30680b0b?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjJ8fHNleHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
   Blog(
-      author: userList[7], // akankasha
+      author: users[7], // akankasha
       title: 'A Masterclass on Leaving',
       description: 'Akankasha Kasar shares her experience on leaving.',
       readCount: 154,
@@ -164,7 +164,7 @@ final List<Blog> blogs = [
       titleImageUrl:
           'https://images.unsplash.com/photo-1551845811-1539fc1f4812?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8YnJlYWslMjB1cHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
   Blog(
-      author: userList[8], // hardik
+      author: users[8], // hardik
       title: 'Looking at the world from top',
       description: 'Hardik Bhatti shares his view of the world.',
       readCount: 154,
@@ -172,7 +172,7 @@ final List<Blog> blogs = [
       titleImageUrl:
           'https://images.unsplash.com/photo-1506946526854-9aad1ec915cb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NXx8ZG93bnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
   Blog(
-      author: userList[9], //harshal
+      author: users[9], //harshal
       title: 'Bootcamp on Moving On',
       description: 'Harshal Chavan shares his priceless guidance on moving on.',
       readCount: 154,
@@ -180,7 +180,7 @@ final List<Blog> blogs = [
       titleImageUrl:
           'https://images.unsplash.com/photo-1592771659608-5c03144b1f04?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mjd8fG1vdmUlMjBvbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
   Blog(
-    author: userList[10], // abhinay
+    author: users[10], // abhinay
     title: 'Spirituality and Me',
     description: loren,
     readCount: 154,
@@ -192,3 +192,28 @@ final List<Blog> blogs = [
 
 final String loren =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lacus libero, placerat ut justo vitae, sagittis convallis magna. Mauris eget quam quis justo finibus efficitur non quis tellus. Pellentesque viverra nulla dolor, id luctus tellus congue quis. Morbi aliquet eu arcu at volutpat. Quisque euismod dictum eleifend. Donec eu sagittis felis, sed viverra libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vestibulum nec ipsum non venenatis. Quisque interdum, ligula in dictum rhoncus, ipsum felis placerat est, in venenatis dui lorem ac eros.';
+
+final List<Book> books = [
+  Book(title: 'Think and Grow Rich', author: 'Nepolean Hill', coverUrl: 'https://images-na.ssl-images-amazon.com/images/I/71AdHA+qqwL.jpg'),
+  Book(title : 'Harry Potter and the Order Of Pheonix', author: 'J K Rowling', coverUrl:'https://i.guim.co.uk/img/media/a445392b08f934fb517dcae17a7c1f58cd1885c3/0_0_1660_2493/master/1660.jpg?width=700&quality=85&auto=format&fit=max&s=f3043efa7373598a6c69ba1eae3fae4e' ),
+  Book(
+      title: 'The 7 Habits of Highly Effective People',
+      author: 'Stephen R Covey',
+      coverUrl: ''),
+  Book(title: 'Crime and Punishment', author: '', coverUrl: ''),
+  Book(title: 'Elon Musk', author: 'Ashley Vance', coverUrl: ''),
+  Book(title: 'Shoe Dog', author: 'Phil Knight', coverUrl: ''),
+  Book(title: 'Deep Work', author: 'Cal Newport', coverUrl: ''),
+  Book(title: 'Inner Engineering', author: 'Sadhguru', coverUrl: ''),
+  Book(
+      title: 'The Power of our Subconcious Mind',
+      author: 'Joseph Murphy',
+      coverUrl: ''),
+  Book(title: 'Steve Jobs', author: 'Issac Walterson', coverUrl: ''),
+  Book(title: 'Albert Einstine', author: 'Issac Walterson', coverUrl: ''),
+  Book(title: 'Adiyogi', author: 'Sadhguru', coverUrl: ''),
+  Book(title: 'Zero to One', author: '', coverUrl: ''),
+  Book(title: 'Think Like a Monk', author: 'Jay Shetty', coverUrl: ''),
+  Book(title: 'The Infinite Game', author: 'Simon Sinek', coverUrl: ''),
+  Book(title: 'The Stranger', author: 'Albert Camus', coverUrl: ''),
+];

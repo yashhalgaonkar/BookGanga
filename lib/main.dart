@@ -17,7 +17,7 @@ class _MyAppState extends State<MyApp> {
       title: 'BookGanga',
       theme: ThemeData(
         fontFamily: 'Nunito',
-        scaffoldBackgroundColor: BookGanga.scaffoldGrey,
+        scaffoldBackgroundColor: BookGanga.scaffold,
         textTheme: TextTheme(
           bodyText1: const TextStyle(
             color: BookGanga.kDarkBlack,

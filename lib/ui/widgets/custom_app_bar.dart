@@ -11,7 +11,8 @@ class CustomAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverAppBar(
       toolbarHeight: 50.0,
-      floating: true,
+      floating: false,
+      pinned: true,
       elevation: 10.0,
       centerTitle: true,
       leading: Icon(
@@ -30,6 +31,11 @@ class CustomAppBar extends StatelessWidget {
             fontWeight: FontWeight.w600),
       ),
       actions: [
+        IconButton(
+          icon: Icon(Icons.search),
+          onPressed: () {},
+          color: BookGanga.kDarkBlack,
+        ),
         IconButton(
           icon: Icon(MdiIcons.facebookMessenger),
           onPressed: () {},

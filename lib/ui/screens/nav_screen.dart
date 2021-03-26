@@ -1,4 +1,3 @@
-
 import 'package:book_ganga/ui/screens/screens.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +13,10 @@ class NavScreen extends StatefulWidget {
 class _NavScreenState extends State<NavScreen> {
   final List<Widget> _screens = [
     HomeScreen(),
+    DiscoverBooksScreen(),
     Scaffold(),
-    Scaffold(),
+    //Scaffold(),
+    //Scaffold(),
     ActivityScreen(),
     UserProfileScreen(user: currentUser),
   ];

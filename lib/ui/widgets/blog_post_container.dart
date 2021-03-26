@@ -20,12 +20,13 @@ class _BlogContainerState extends State<BlogContainer> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 3.0),
-      elevation: 1.0,
+      color: BookGanga.scaffold,
+      margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 4.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
       child: Container(
+        //color: Colors.red,
         padding: const EdgeInsets.all(6.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,19 +41,16 @@ class _BlogContainerState extends State<BlogContainer> {
 
             //* Description
             Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 2.0, vertical: 4.0),
+              padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 0.0),
               child: Text(
                 widget.blog.description,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText2
-                    .copyWith(fontSize: 16.0),
+                style: Theme.of(context).textTheme.bodyText2,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
 
+            //* Like and Comment count and the sharing and saving buttons
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 2.0),
               child: _PostDetails(
@@ -76,6 +74,9 @@ class _BlogContainerState extends State<BlogContainer> {
   }
 }
 
+/**
+ * This widget contains the Like and the Comment count and the share and save icons
+ */
 class _PostDetails extends StatelessWidget {
   const _PostDetails(
       {Key key,
@@ -93,10 +94,20 @@ class _PostDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 30.0,
+      //color: Colors.red,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          Icon(MdiIcons.heartOutline, size: 15.0),
           Text(
-            '${blog.readCount} Likes & ${blog.shareCount} Comments',
+            ' ${blog.readCount}',
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+          const SizedBox(width: 5.0),
+          Icon(MdiIcons.commentOutline, size: 15.0),
+          Text(
+            ' ${blog.shareCount}',
             style: Theme.of(context).textTheme.bodyText1,
           ),
           Expanded(
@@ -141,7 +152,7 @@ class _PostImage extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     final double textBoxwidth = size.width * 2 / 3;
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6.0),
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
       child: Stack(
         children: [
           ClipRRect(
@@ -185,6 +196,12 @@ class _PostImage extends StatelessWidget {
   }
 }
 
+/**
+ * This Widget contains  the TOP part of the COntainner
+ * It contains the Profile Picture
+ * then the username
+ * and an icons for more options
+ */
 class _PostHeader extends StatelessWidget {
   final Blog blog;
   const _PostHeader({
@@ -197,6 +214,7 @@ class _PostHeader extends StatelessWidget {
     return Row(
       children: [
         ProfileAvatar(
+          radius: 15.0,
           imageUrl: blog.author.profileImageUrl,
           hasBorder: false,
           isActive: false,
@@ -204,7 +222,7 @@ class _PostHeader extends StatelessWidget {
         const SizedBox(width: 15.0),
         Text(
           blog.author.username,
-          style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 16.0),
+          style: Theme.of(context).textTheme.bodyText1,
         ),
         Expanded(
           child: Align(

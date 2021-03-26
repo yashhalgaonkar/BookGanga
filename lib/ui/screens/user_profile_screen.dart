@@ -23,27 +23,12 @@ class _UserProfileScreenState extends State<UserProfileScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.0,
+        elevation: 2.0,
         actions: [
           Container(
             width: 85.0,
             margin: const EdgeInsets.all(10.0),
-            child: TextButton(
-              style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all(BookGanga.kAccentColor),
-              ),
-              onPressed: () {
-                print('Follow clicked');
-              },
-              child: Text(
-                'Follow',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .copyWith(color: Colors.white),
-              ),
-            ),
+            child: RoundedButton(),
           ),
           IconButton(
             icon: Icon(
@@ -79,7 +64,8 @@ class _UserProfileScreenState extends State<UserProfileScreen>
                   children: [
                     _BlogListWidget(),
                     _ReviewsListWidget(),
-                    _ShareListWidget(),
+                    _BlogListWidget(),
+                    //_ShareListWidget(),
                   ],
                 ),
               )
@@ -248,7 +234,7 @@ class _ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 0.0),
+      margin: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 6.0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
@@ -279,7 +265,7 @@ class _ProfileHeader extends StatelessWidget {
                         onClick: () {},
                       ),
                       _StatsWidgetTile(
-                        label: 'BLogs',
+                        label: 'Blogs',
                         count: '27',
                         onClick: () {},
                       ),
@@ -298,21 +284,13 @@ class _ProfileHeader extends StatelessWidget {
             //* Usser name
             Text(
               '${user.fname} ${user.lname}',
-              style: const TextStyle(
-                fontSize: 18.0,
-                fontWeight: FontWeight.w600,
-                color: BookGanga.kDarkBlack,
-              ),
+              style: Theme.of(context).textTheme.bodyText1,
             ),
 
             //* bio
             Text(
               user.bio,
-              style: TextStyle(
-                fontSize: 14.0,
-                fontWeight: FontWeight.w500,
-                color: BookGanga.kDarkBlack,
-              ),
+              style: Theme.of(context).textTheme.bodyText2,
               textAlign: TextAlign.left,
               maxLines: 2,
             ),
