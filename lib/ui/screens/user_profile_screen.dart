@@ -3,7 +3,6 @@ import 'package:book_ganga/data/data.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class UserProfileScreen extends StatefulWidget {
   final User user;
@@ -24,23 +23,23 @@ class _UserProfileScreenState extends State<UserProfileScreen>
     return Scaffold(
       appBar: AppBar(
         elevation: 2.0,
-        actions: [
-          Container(
-            width: 85.0,
-            margin: const EdgeInsets.all(10.0),
-            child: RoundedButton(),
-          ),
-          IconButton(
-            icon: Icon(
-              MdiIcons.messageOutline,
-              color: BookGanga.kDarkBlack,
-            ),
-            onPressed: () {
-              print('More button pressed');
-            },
-          )
-        ],
-        centerTitle: false,
+        // actions: [
+        //   Container(
+        //     width: 85.0,
+        //     margin: const EdgeInsets.all(10.0),
+        //     child: RoundedButton(),
+        //   ),
+        //   IconButton(
+        //     icon: Icon(
+        //       MdiIcons.messageOutline,
+        //       color: BookGanga.kDarkBlack,
+        //     ),
+        //     onPressed: () {
+        //       print('More button pressed');
+        //     },
+        //   )
+        // ],
+        centerTitle: true,
         title: Text(
           '${user.fname}\'s Profile',
           style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 20.0),
@@ -77,51 +76,70 @@ class _UserProfileScreenState extends State<UserProfileScreen>
   }
 }
 
+/**
+ * TabBarContainerr => Widget that controls the TABS.
+ * It shows the tabs (Blogs/Reviews,Shares) and number of post in each tab.
+ */
 class _TabBarContainer extends StatelessWidget {
   const _TabBarContainer({Key key}) : super(key: key);
 
   Widget _getTab(String label, BuildContext context) {
     return Tab(
-      child: Text(
-        label,
-        style: Theme.of(context).textTheme.bodyText1,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            label,
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+          const SizedBox(width: 10.0),
+          CircleAvatar(
+            radius: 10.0,
+            backgroundColor: BookGanga.kGrey,
+            child: Text(
+              '27',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  .copyWith(fontSize: 10.0),
+            ),
+          ),
+        ],
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 0.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 6.0),
-        child: Column(
-          children: [
-            TabBar(
-              isScrollable: false,
-              indicatorColor: BookGanga.kAccentColor,
-              tabs: [
-                _getTab('Blogs', context),
-                _getTab('Reviews', context),
-                _getTab('Shares', context),
-              ],
-              onTap: (index) => print('Index $index tapped'),
-            ),
-          ],
-        ),
+    return Container(
+      //margin: const EdgeInsets.symmetric(horizontal: 10.0),
+      padding: const EdgeInsets.fromLTRB(6.0, 2.0, 6.0, 0.0),
+      child: Column(
+        children: [
+          TabBar(
+            isScrollable: false,
+            indicatorColor: BookGanga.kAccentColor,
+            tabs: [
+              _getTab('Blogs', context),
+              _getTab('Reviews', context),
+              _getTab('Shares', context),
+            ],
+            onTap: (index) => print('Index $index tapped'),
+          ),
+        ],
       ),
     );
   }
 }
 
-class _BooksButton extends StatelessWidget {
+/**
+ * This widget shows two buttons - Follow and Message when
+ */
+class _FollowAndMessageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40.0,
+      height: 30.0,
       child: Row(
         children: [
           // Expanded(
@@ -152,13 +170,14 @@ class _BooksButton extends StatelessWidget {
           Expanded(
             child: TextButton(
               style: ButtonStyle(
+                alignment: Alignment.center,
                 backgroundColor:
                     MaterialStateProperty.all(BookGanga.kAccentColor),
               ),
               onPressed: () {
-                print('Book Shelf clicked');
+                print('Follow clicked');
               },
-              child: Text('Book Shelf',
+              child: Text('Follow',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1
@@ -173,9 +192,9 @@ class _BooksButton extends StatelessWidget {
                     MaterialStateProperty.all(BookGanga.kAccentColor),
               ),
               onPressed: () {
-                print('Read Shelf clicked');
+                print('Message clicked');
               },
-              child: Text('Read List',
+              child: Text('Message',
                   style: Theme.of(context)
                       .textTheme
                       .bodyText1
@@ -188,6 +207,9 @@ class _BooksButton extends StatelessWidget {
   }
 }
 
+/**
+ * Each tile shows a count
+ */
 class _StatsWidgetTile extends StatelessWidget {
   final String label;
   final String count;
@@ -233,73 +255,69 @@ class _ProfileHeader extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 6.0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
-      ),
-      child: Container(
-        padding: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 6.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                //*profile image
-                ProfileAvatar(
-                  imageUrl: user.profileImageUrl,
-                  radius: 40.0,
-                  hasBorder: false,
+    return Container(
+      padding: const EdgeInsets.all(6.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              //*profile image
+              ProfileAvatar(
+                imageUrl: user.profileImageUrl,
+                radius: 40.0,
+                hasBorder: false,
+              ),
+
+              const SizedBox(width: 10.0),
+
+              //*Stats
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    _StatsWidgetTile(
+                      label: 'Followers',
+                      count: '125',
+                      onClick: () {},
+                    ),
+                    _StatsWidgetTile(
+                      label: 'Book Shelf',
+                      count: '27',
+                      onClick: () {},
+                    ),
+                    _StatsWidgetTile(
+                      label: 'Wish List',
+                      count: '7',
+                      onClick: () {},
+                    ),
+                  ],
                 ),
+              )
+            ],
+          ),
+          const SizedBox(height: 8.0),
 
-                //*Stats
-                Expanded(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      _StatsWidgetTile(
-                        label: 'Followers',
-                        count: '125',
-                        onClick: () {},
-                      ),
-                      _StatsWidgetTile(
-                        label: 'Blogs',
-                        count: '27',
-                        onClick: () {},
-                      ),
-                      _StatsWidgetTile(
-                        label: 'Reviews',
-                        count: '7',
-                        onClick: () {},
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
-            const SizedBox(height: 8.0),
+          //* Usser name
+          Text(
+            '${user.fname} ${user.lname}',
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
 
-            //* Usser name
-            Text(
-              '${user.fname} ${user.lname}',
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
+          //* bio
+          Text(
+            user.bio,
+            style: Theme.of(context).textTheme.bodyText2,
+            textAlign: TextAlign.left,
+            maxLines: 2,
+          ),
 
-            //* bio
-            Text(
-              user.bio,
-              style: Theme.of(context).textTheme.bodyText2,
-              textAlign: TextAlign.left,
-              maxLines: 2,
-            ),
+          const SizedBox(height: 6.0),
 
-            const SizedBox(height: 6.0),
-
-            _BooksButton(),
-          ],
-        ),
+          _FollowAndMessageButton(),
+        ],
       ),
     );
   }
