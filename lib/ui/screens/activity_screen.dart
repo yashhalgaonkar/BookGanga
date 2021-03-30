@@ -28,27 +28,27 @@ class _ActivityScreenState extends State<ActivityScreen> {
       body: SafeArea(
         child: CustomScrollView(
           slivers: [
-            _FollowListwidget(),
-            LabelWidget(label: 'This Week'),
+            //_FollowerRequestWidget(),
+            //SliverToBoxAdapter(child: LabelWidget(label: 'This Week')),
             _NotificationTile(blog: blogs[0], user: currentUser),
             _NotificationTile(blog: blogs[1], user: users[1]),
             _NotificationTile(blog: blogs[2], user: users[2]),
             _NotificationTile(blog: blogs[3], user: users[3]),
             _NotificationTile(blog: blogs[4], user: users[4]),
             _NotificationTile(blog: blogs[5], user: users[5]),
-            LabelWidget(label: 'This Month'),
+            //SliverToBoxAdapter(child: LabelWidget(label: 'This Month')),
             _NotificationTile(blog: blogs[6], user: users[6]),
             _NotificationTile(blog: blogs[7], user: users[7]),
             _NotificationTile(blog: blogs[8], user: users[8]),
             _NotificationTile(blog: blogs[9], user: users[9]),
             _NotificationTile(blog: blogs[0], user: users[0]),
             _NotificationTile(blog: blogs[1], user: users[1]),
-            LabelWidget(label: 'Suggetions'),
-            _ProfileSuggetionwidget(user: users[0]),
-            _ProfileSuggetionwidget(user: users[1]),
-            _ProfileSuggetionwidget(user: users[2]),
-            _ProfileSuggetionwidget(user: users[3]),
-            _ProfileSuggetionwidget(user: users[4]),
+            //SliverToBoxAdapter(child: LabelWidget(label: 'Suggetions')),
+            _ProfileSuggetionWidget(user: users[0]),
+            _ProfileSuggetionWidget(user: users[1]),
+            _ProfileSuggetionWidget(user: users[2]),
+            _ProfileSuggetionWidget(user: users[3]),
+            _ProfileSuggetionWidget(user: users[4]),
           ],
         ),
       ),
@@ -56,41 +56,33 @@ class _ActivityScreenState extends State<ActivityScreen> {
   }
 }
 
-class _ProfileSuggetionwidget extends StatelessWidget {
+/// This widget will be used to suggest profiles to follow
+class _ProfileSuggetionWidget extends StatelessWidget {
   final User user;
 
-  const _ProfileSuggetionwidget({Key key, this.user}) : super(key: key);
+  const _ProfileSuggetionWidget({Key key, this.user}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
-      child: Card(
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
-        margin: const EdgeInsets.fromLTRB(10.0, 6.0, 10.0, 0.0),
-        child: ListTile(
-          leading: ProfileAvatar(
-            imageUrl: user.profileImageUrl,
+      child: ListTile(
+        leading: ProfileAvatar(
+          imageUrl: user.profileImageUrl,
+        ),
+        title: Text(
+          '${user.username}',
+          style: Theme.of(context).textTheme.bodyText1,
+        ),
+        trailing: TextButton(
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(BookGanga.kAccentColor),
           ),
-          title: Text(
-            '${user.username}',
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
-          trailing: TextButton(
-            style: ButtonStyle(
-              backgroundColor:
-                  MaterialStateProperty.all(BookGanga.kAccentColor),
-            ),
-            onPressed: () {
-              print('Follow clicked');
-            },
-            child: Text(
-              'Follow',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1
-                  .copyWith(color: Colors.white),
-            ),
+          onPressed: () {
+            print('Follow clicked');
+          },
+          child: Text(
+            'Follow',
+            style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.white),
           ),
         ),
       ),
@@ -98,7 +90,7 @@ class _ProfileSuggetionwidget extends StatelessWidget {
   }
 }
 
-class _FollowListwidget extends StatelessWidget {
+class _FollowerRequestWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
@@ -109,10 +101,7 @@ class _FollowListwidget extends StatelessWidget {
             backgroundColor: Colors.red,
             child: Text(
               '9+',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1
-                  .copyWith(color: Colors.white),
+              style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.white),
             ),
           ),
           title: Text('Follow Requests'),
@@ -137,7 +126,7 @@ class _NotificationTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Container(
-        padding: const EdgeInsets.all(6.0),
+        padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 10.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -148,15 +137,10 @@ class _NotificationTile extends StatelessWidget {
                     //Text('${user.username} has liked you blog - ${blog.title}'),
                     RichText(
               text: TextSpan(children: [
+                TextSpan(text: '${user.username} ', style: Theme.of(context).textTheme.bodyText1),
                 TextSpan(
-                    text: '${user.username} ',
-                    style: Theme.of(context).textTheme.bodyText1),
-                TextSpan(
-                    text: 'has liked your blog - ',
-                    style: Theme.of(context).textTheme.bodyText2),
-                TextSpan(
-                    text: '${blog.title}',
-                    style: Theme.of(context).textTheme.bodyText1),
+                    text: 'has liked your blog - ', style: Theme.of(context).textTheme.bodyText2),
+                TextSpan(text: '${blog.title}', style: Theme.of(context).textTheme.bodyText1),
               ]),
             )),
             const SizedBox(width: 15.0),

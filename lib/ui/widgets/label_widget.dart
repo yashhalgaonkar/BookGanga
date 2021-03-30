@@ -5,12 +5,14 @@ class LabelWidget extends StatelessWidget {
   final String label;
   final String sublabel;
   final Function onClick;
+  final bool centerLabel;
 
   const LabelWidget({
     Key key,
     this.label,
     this.sublabel = "",
     this.onClick,
+    this.centerLabel,
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -24,19 +26,14 @@ class LabelWidget extends StatelessWidget {
           children: [
             Text(
               label,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1
-                  .copyWith(fontSize: 18.0),
+              style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 18.0),
             ),
             InkWell(
               onTap: onClick,
               child: Text(
                 sublabel,
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .copyWith(color: BookGanga.kAccentColor),
+                style:
+                    Theme.of(context).textTheme.bodyText1.copyWith(color: BookGanga.kAccentColor),
               ),
             )
           ],

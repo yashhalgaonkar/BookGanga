@@ -1,6 +1,7 @@
 import 'package:book_ganga/data/data.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:flutter/material.dart';
+
 import '../widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -9,8 +10,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final TrackingScrollController _trackingScrollController =
-      TrackingScrollController();
+  final TrackingScrollController _trackingScrollController = TrackingScrollController();
 
   @override
   void dispose() {
@@ -36,7 +36,10 @@ class _HomeScreenState extends State<HomeScreen> {
               delegate: SliverChildBuilderDelegate(
                 (context, index) {
                   final Blog blog = blogs[index];
-                  return BlogContainer(blog: blog);
+                  if (index == 0)
+                    return BlogContainer(blog: blog, paddingTop: true);
+                  else
+                    return BlogContainer(blog: blog);
                 },
                 childCount: blogs.length,
               ),

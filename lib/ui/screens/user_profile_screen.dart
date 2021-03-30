@@ -14,8 +14,7 @@ class UserProfileScreen extends StatefulWidget {
   _UserProfileScreenState createState() => _UserProfileScreenState();
 }
 
-class _UserProfileScreenState extends State<UserProfileScreen>
-    with SingleTickerProviderStateMixin {
+class _UserProfileScreenState extends State<UserProfileScreen> with SingleTickerProviderStateMixin {
   User get user => widget.user;
 
   @override
@@ -23,22 +22,6 @@ class _UserProfileScreenState extends State<UserProfileScreen>
     return Scaffold(
       appBar: AppBar(
         elevation: 2.0,
-        // actions: [
-        //   Container(
-        //     width: 85.0,
-        //     margin: const EdgeInsets.all(10.0),
-        //     child: RoundedButton(),
-        //   ),
-        //   IconButton(
-        //     icon: Icon(
-        //       MdiIcons.messageOutline,
-        //       color: BookGanga.kDarkBlack,
-        //     ),
-        //     onPressed: () {
-        //       print('More button pressed');
-        //     },
-        //   )
-        // ],
         centerTitle: true,
         title: Text(
           '${user.fname}\'s Profile',
@@ -76,10 +59,7 @@ class _UserProfileScreenState extends State<UserProfileScreen>
   }
 }
 
-/**
- * TabBarContainerr => Widget that controls the TABS.
- * It shows the tabs (Blogs/Reviews,Shares) and number of post in each tab.
- */
+///widget for the tabs - Blog, Reviews, Shares
 class _TabBarContainer extends StatelessWidget {
   const _TabBarContainer({Key key}) : super(key: key);
 
@@ -98,10 +78,7 @@ class _TabBarContainer extends StatelessWidget {
             backgroundColor: BookGanga.kGrey,
             child: Text(
               '27',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1
-                  .copyWith(fontSize: 10.0),
+              style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 10.0),
             ),
           ),
         ],
@@ -132,9 +109,7 @@ class _TabBarContainer extends StatelessWidget {
   }
 }
 
-/**
- * This widget shows two buttons - Follow and Message when
- */
+/// Follow and message button on the profile
 class _FollowAndMessageButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -170,35 +145,29 @@ class _FollowAndMessageButton extends StatelessWidget {
           Expanded(
             child: TextButton(
               style: ButtonStyle(
+                padding: MaterialStateProperty.all(EdgeInsets.zero),
                 alignment: Alignment.center,
-                backgroundColor:
-                    MaterialStateProperty.all(BookGanga.kAccentColor),
+                backgroundColor: MaterialStateProperty.all(BookGanga.kAccentColor),
               ),
               onPressed: () {
                 print('Follow clicked');
               },
               child: Text('Follow',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1
-                      .copyWith(color: Colors.white)),
+                  style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.white)),
             ),
           ),
           const SizedBox(width: 10.0),
           Expanded(
             child: TextButton(
               style: ButtonStyle(
-                backgroundColor:
-                    MaterialStateProperty.all(BookGanga.kAccentColor),
+                padding: MaterialStateProperty.all(EdgeInsets.zero),
+                backgroundColor: MaterialStateProperty.all(BookGanga.kAccentColor),
               ),
               onPressed: () {
                 print('Message clicked');
               },
               child: Text('Message',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1
-                      .copyWith(color: Colors.white)),
+                  style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.white)),
             ),
           ),
         ],
@@ -207,9 +176,7 @@ class _FollowAndMessageButton extends StatelessWidget {
   }
 }
 
-/**
- * Each tile shows a count
- */
+/// Individual Tile in the stats
 class _StatsWidgetTile extends StatelessWidget {
   final String label;
   final String count;
@@ -247,6 +214,9 @@ class _StatsWidgetTile extends StatelessWidget {
   }
 }
 
+/// The main header of the profile screen
+/// with Profile image, Name, bio, stats
+/// and follow and like button
 class _ProfileHeader extends StatelessWidget {
   final User user;
 
@@ -256,7 +226,7 @@ class _ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(6.0),
+      padding: const EdgeInsets.all(10.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -323,8 +293,7 @@ class _ProfileHeader extends StatelessWidget {
   }
 }
 
-//* The list that are to be displayed in tab view
-//* Shares Tab
+/// TAB layout views to be displayed inside each tab
 class _ShareListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -337,7 +306,6 @@ class _ShareListWidget extends StatelessWidget {
   }
 }
 
-//* Reviews Tab
 class _ReviewsListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -350,13 +318,14 @@ class _ReviewsListWidget extends StatelessWidget {
   }
 }
 
-//* Blogs Tab
 class _BlogListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
       child: ListView.builder(
-        itemBuilder: (context, index) => BlogContainer(blog: blogs[index]),
+        itemBuilder: (context, index) => (index == 0)
+            ? BlogContainer(blog: blogs[index], paddingTop: true)
+            : BlogContainer(blog: blogs[index]),
         itemCount: 10,
       ),
     );
