@@ -1,6 +1,7 @@
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/data/data.dart';
 import 'package:book_ganga/models/models.dart';
+import 'package:book_ganga/ui/screens/follower_list.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -14,46 +15,136 @@ class UserProfileScreen extends StatefulWidget {
   _UserProfileScreenState createState() => _UserProfileScreenState();
 }
 
-class _UserProfileScreenState extends State<UserProfileScreen> with SingleTickerProviderStateMixin {
+class _UserProfileScreenState extends State<UserProfileScreen>
+    with SingleTickerProviderStateMixin {
   User get user => widget.user;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 2.0,
+        toolbarHeight: 50.0,
+        elevation: 0.0,
         centerTitle: true,
-        title: Text(
-          '${user.fname}\'s Profile',
-          style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 20.0),
-        ),
         backgroundColor: BookGanga.scaffold,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          color: Colors.black,
+          onPressed: () => print('Back arrow Pressed'),
+        ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.more_vert_sharp),
+            color: Colors.black,
+            onPressed: () => print('More Options Pressed'),
+          )
+        ],
       ),
-      body: DefaultTabController(
-        length: 3,
-        child: NestedScrollView(
-          headerSliverBuilder: (context, _) {
-            return [
-              SliverToBoxAdapter(child: _ProfileHeader(user: user)),
-            ];
-          },
-          body: Column(
-            children: [
-              //const SizedBox(height: 6.0),
-              _TabBarContainer(),
-              Expanded(
-                child: TabBarView(
-                  children: [
-                    _BlogListWidget(),
-                    _ReviewsListWidget(),
-                    _BlogListWidget(),
-                    //_ShareListWidget(),
-                  ],
-                ),
-              )
-            ],
+      body: SafeArea(
+        child: DefaultTabController(
+          length: 3,
+          child: NestedScrollView(
+            headerSliverBuilder: (context, _) {
+              return [
+                SliverToBoxAdapter(child: _ProfileHeader(user: user)),
+              ];
+            },
+            body: Column(
+              children: [
+                //const SizedBox(height: 6.0),
+                _TabBarContainer(),
+                Expanded(
+                  child: TabBarView(
+                    children: [
+                      _BlogListWidget(),
+                      _ReviewsListWidget(),
+                      _BlogListWidget(),
+                      //_ShareListWidget(),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// The main header of the profile screen
+/// with Profile image, Name, bio, stats
+/// and follow and like button
+class _ProfileHeader extends StatelessWidget {
+  final User user;
+
+  _ProfileHeader({
+    this.user,
+  });
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      //color: Colors.red,
+      padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ProfileAvatar(
+            imageUrl: user.profileImageUrl,
+            radius: 50.0,
+          ),
+          const SizedBox(height: 10.0),
+          //* Full Display name of the user
+          Text(
+            '${user.fname} ${user.lname}',
+            style:
+                Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 20.0),
+          ),
+          //const SizedBox(height: 10.0)
+          //* bio
+          Text(
+            user.bio,
+            style: Theme.of(context).textTheme.bodyText2,
+            textAlign: TextAlign.center,
+            maxLines: 2,
+          ),
+          const SizedBox(height: 10.0),
+
+          _StatsCorner(),
+
+          const SizedBox(height: 10.0),
+
+          _FollowAndMessageButton(),
+        ],
+      ),
+    );
+  }
+}
+
+/// This widget tells that stats of the user
+/// Number of follwers, number of books in bookshelf and wish list
+class _StatsCorner extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      //color: Colors.amber,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          _StatsWidgetTile(
+              label: 'Followers',
+              count: '986',
+              onClick: () => print('Followers Clicked')),
+          _StatsWidgetTile(
+              label: 'Book Shelf',
+              count: '78',
+              onClick: () => print('BookShelf Clicked')),
+          _StatsWidgetTile(
+              label: 'Wish List',
+              count: '17',
+              onClick: () => print('WishList Clicked')),
+        ],
       ),
     );
   }
@@ -78,7 +169,10 @@ class _TabBarContainer extends StatelessWidget {
             backgroundColor: BookGanga.kGrey,
             child: Text(
               '27',
-              style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 10.0),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  .copyWith(fontSize: 10.0),
             ),
           ),
         ],
@@ -117,59 +211,21 @@ class _FollowAndMessageButton extends StatelessWidget {
       height: 30.0,
       child: Row(
         children: [
-          // Expanded(
-          //   child: OutlineButton(
-          //     onPressed: () => print('Book Shelf Clicked'),
-          //     child: Text(
-          //       'Book Shelf',
-          //       style: Theme.of(context).textTheme.bodyText1,
-          //     ),
-          //     //highlightColor: BookGanga.kNiceAccentColor,
-          //     borderSide: BorderSide.none,
-          //     //splashColor: BookGanga.kNiceAccentColor,
-          //   ),
-          // ),
-          // Expanded(
-          //   child: OutlineButton(
-          //     onPressed: () => print('Read List clicked'),
-          //     child: Text(
-          //       'Read List',
-          //       style: Theme.of(context).textTheme.bodyText1,
-          //     ),
-          //     //highlightColor: BookGanga.kNiceAccentColor,
-          //     borderSide: BorderSide.none,
-          //     //splashColor: BookGanga.kNiceAccentColor,
-          //   ),
-          // ),
-
           Expanded(
-            child: TextButton(
-              style: ButtonStyle(
-                padding: MaterialStateProperty.all(EdgeInsets.zero),
-                alignment: Alignment.center,
-                backgroundColor: MaterialStateProperty.all(BookGanga.kAccentColor),
-              ),
-              onPressed: () {
-                print('Follow clicked');
-              },
-              child: Text('Follow',
-                  style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.white)),
-            ),
-          ),
+              child: MyTextButton(
+            label: 'Follow',
+            onClick: () {
+              print('Follow Clicked');
+            },
+          )),
           const SizedBox(width: 10.0),
           Expanded(
-            child: TextButton(
-              style: ButtonStyle(
-                padding: MaterialStateProperty.all(EdgeInsets.zero),
-                backgroundColor: MaterialStateProperty.all(BookGanga.kAccentColor),
-              ),
-              onPressed: () {
-                print('Message clicked');
-              },
-              child: Text('Message',
-                  style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.white)),
-            ),
-          ),
+              child: MyTextButton(
+            label: 'Message',
+            onClick: () {
+              print('MEssage Clicked');
+            },
+          )),
         ],
       ),
     );
@@ -194,100 +250,17 @@ class _StatsWidgetTile extends StatelessWidget {
     return InkWell(
       onTap: onClick,
       child: Container(
-        padding: const EdgeInsets.all(8.0),
+        //color: Colors.green,
+        //padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             Container(
               alignment: Alignment.center,
-              child: Text(
-                count,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
+              child: Text(count, style: Theme.of(context).textTheme.bodyText1),
             ),
             Text(label),
           ],
         ),
-      ),
-    );
-  }
-}
-
-/// The main header of the profile screen
-/// with Profile image, Name, bio, stats
-/// and follow and like button
-class _ProfileHeader extends StatelessWidget {
-  final User user;
-
-  _ProfileHeader({
-    this.user,
-  });
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(10.0),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              //*profile image
-              ProfileAvatar(
-                imageUrl: user.profileImageUrl,
-                radius: 40.0,
-                hasBorder: false,
-              ),
-
-              const SizedBox(width: 10.0),
-
-              //*Stats
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    _StatsWidgetTile(
-                      label: 'Followers',
-                      count: '125',
-                      onClick: () {},
-                    ),
-                    _StatsWidgetTile(
-                      label: 'Book Shelf',
-                      count: '27',
-                      onClick: () {},
-                    ),
-                    _StatsWidgetTile(
-                      label: 'Wish List',
-                      count: '7',
-                      onClick: () {},
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-          const SizedBox(height: 8.0),
-
-          //* Usser name
-          Text(
-            '${user.fname} ${user.lname}',
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
-
-          //* bio
-          Text(
-            user.bio,
-            style: Theme.of(context).textTheme.bodyText2,
-            textAlign: TextAlign.left,
-            maxLines: 2,
-          ),
-
-          const SizedBox(height: 6.0),
-
-          _FollowAndMessageButton(),
-        ],
       ),
     );
   }

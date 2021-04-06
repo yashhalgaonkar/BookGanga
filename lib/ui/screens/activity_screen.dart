@@ -29,21 +29,21 @@ class _ActivityScreenState extends State<ActivityScreen> {
         child: CustomScrollView(
           slivers: [
             //_FollowerRequestWidget(),
-            //SliverToBoxAdapter(child: LabelWidget(label: 'This Week')),
+            LabelWidget(label: 'This Week'),
             _NotificationTile(blog: blogs[0], user: currentUser),
             _NotificationTile(blog: blogs[1], user: users[1]),
             _NotificationTile(blog: blogs[2], user: users[2]),
             _NotificationTile(blog: blogs[3], user: users[3]),
             _NotificationTile(blog: blogs[4], user: users[4]),
             _NotificationTile(blog: blogs[5], user: users[5]),
-            //SliverToBoxAdapter(child: LabelWidget(label: 'This Month')),
+            LabelWidget(label: 'This Month'),
             _NotificationTile(blog: blogs[6], user: users[6]),
             _NotificationTile(blog: blogs[7], user: users[7]),
             _NotificationTile(blog: blogs[8], user: users[8]),
             _NotificationTile(blog: blogs[9], user: users[9]),
             _NotificationTile(blog: blogs[0], user: users[0]),
             _NotificationTile(blog: blogs[1], user: users[1]),
-            //SliverToBoxAdapter(child: LabelWidget(label: 'Suggetions')),
+            LabelWidget(label: 'Suggetions'),
             _ProfileSuggetionWidget(user: users[0]),
             _ProfileSuggetionWidget(user: users[1]),
             _ProfileSuggetionWidget(user: users[2]),
@@ -70,7 +70,7 @@ class _ProfileSuggetionWidget extends StatelessWidget {
           imageUrl: user.profileImageUrl,
         ),
         title: Text(
-          '${user.username}',
+          '${user.fname} ${user.lname}',
           style: Theme.of(context).textTheme.bodyText1,
         ),
         trailing: TextButton(
@@ -126,7 +126,7 @@ class _NotificationTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return SliverToBoxAdapter(
       child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 6.0, horizontal: 10.0),
+        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10.0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
