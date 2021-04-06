@@ -1,6 +1,7 @@
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/screens/blog_view_screen.dart';
+import 'package:book_ganga/ui/screens/user_profile_screen.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -20,65 +21,61 @@ class _BlogContainerState extends State<BlogContainer> {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (_) => BlogViewScreen(blog: widget.blog)));
-      },
-      child: Container(
-        //color: Colors.red,
+    return Container(
+      //color: Colors.red,
 
-        // no padding at the button
-        // equal padding at right and left
-        // conditional padding at top
-        padding: widget.paddingTop
-            ? const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0)
-            : const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            //* Post header
-            _PostHeader(blog: widget.blog),
+      // no padding at the button
+      // equal padding at right and left
+      // conditional padding at top
+      padding: widget.paddingTop
+          ? const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 0.0)
+          : const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          //* Post header
+          _PostHeader(blog: widget.blog),
 
-            //* Post Image
-            Hero(tag: widget.blog.titleImageUrl, child: PostImage(blog: widget.blog)),
+          //* Post Image
+          Hero(
+              tag: widget.blog.titleImageUrl,
+              child: PostImage(blog: widget.blog)),
 
-            //* Description
-            Padding(
-              padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 0.0),
-              child: Text(
-                widget.blog.description,
-                style: Theme.of(context).textTheme.bodyText2,
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
-              ),
+          //* Description
+          Padding(
+            padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 0.0),
+            child: Text(
+              widget.blog.description,
+              style: Theme.of(context).textTheme.bodyText2,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
             ),
+          ),
 
-            //* Like and Comment count and the sharing and saving buttons
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 2.0),
-              child: _PostDetails(
-                blog: widget.blog,
-                isSaved: isSaved,
-                onSavedTap: () {
-                  print('Saved Pressed');
-                  setState(() {
-                    isSaved = !isSaved;
-                  });
-                },
-                onSendTap: () {
-                  print('send tapped');
-                },
-              ),
+          //* Like and Comment count and the sharing and saving buttons
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 2.0),
+            child: _PostDetails(
+              blog: widget.blog,
+              isSaved: isSaved,
+              onSavedTap: () {
+                print('Saved Pressed');
+                setState(() {
+                  isSaved = !isSaved;
+                });
+              },
+              onSendTap: () {
+                print('send tapped');
+              },
             ),
+          ),
 
-            //* Divider
-            const Divider(
-              thickness: 1.0,
-              height: 20.0,
-            ),
-          ],
-        ),
+          //* Divider
+          const Divider(
+            thickness: 1.0,
+            height: 20.0,
+          ),
+        ],
       ),
     );
   }
@@ -160,29 +157,40 @@ class _PostHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        ProfileAvatar(
-          radius: 15.0,
-          imageUrl: blog.author.profileImageUrl,
-          hasBorder: false,
-          isActive: false,
-        ),
-        const SizedBox(width: 10.0),
-        Text(
-          blog.author.username,
-          style: Theme.of(context).textTheme.bodyText1,
-        ),
-        // Expanded(
-        //   child: Align(
-        //     alignment: Alignment.centerRight,
-        //     child: Icon(
-        //       Icons.more_vert_rounded,
-        //       color: BookGanga.kBlack,
-        //     ),
-        //   ),
-        // ),
-      ],
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => UserProfileScreen(user: blog.author),
+          ),
+        );
+      },
+      child: Row(
+        children: [
+          ProfileAvatar(
+            radius: 15.0,
+            imageUrl: blog.author.profileImageUrl,
+            hasBorder: false,
+            isActive: false,
+          ),
+          const SizedBox(width: 10.0),
+          Text(
+            //blog.author.username,
+            '${blog.author.fname} ${blog.author.lname}',
+            style: Theme.of(context).textTheme.bodyText1,
+          ),
+          // Expanded(
+          //   child: Align(
+          //     alignment: Alignment.centerRight,
+          //     child: Icon(
+          //       Icons.more_vert_rounded,
+          //       color: BookGanga.kBlack,
+          //     ),
+          //   ),
+          // ),
+        ],
+      ),
     );
   }
 }

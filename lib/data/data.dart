@@ -17,6 +17,7 @@ final List<User> users = [
   currentUser,
   User(
     username: 'aditya.giradkar57',
+    bio: 'I make Web Pages and I write peotry sometimes.',
     fname: 'Aditya',
     lname: 'Giradkar',
     profileImageUrl:
@@ -24,6 +25,7 @@ final List<User> users = [
   ),
   User(
     username: 'loren.ipsum.studio',
+    bio: 'I have a knack for beautiful things.',
     fname: 'Shivam',
     lname: 'Itankar',
     profileImageUrl:
@@ -32,6 +34,7 @@ final List<User> users = [
   User(
     username: 'mansi.jadhav',
     fname: 'Mansi',
+    bio: 'The greatest thing i do is I write comments and I dont break hearts!',
     lname: 'Jadhav',
     profileImageUrl:
         'https://media-exp1.licdn.com/dms/image/C5603AQFFx9eM8hYSww/profile-displayphoto-shrink_800_800/0/1614458904242?e=1620259200&v=beta&t=gTK3PBhHXJFiu5CoPgtvFdubbNUrr_Wm3SeoXkIUC2k',
@@ -39,6 +42,7 @@ final List<User> users = [
   User(
     username: 'patil.sunita',
     fname: 'Sunita',
+    bio: 'The greatest thing i do is I write comments and I dont break hearts!',
     lname: 'Patil',
     profileImageUrl:
         'https://media-exp1.licdn.com/dms/image/C5103AQEv6aU2JgFHBQ/profile-displayphoto-shrink_800_800/0/1574517762361?e=1620259200&v=beta&t=uGYtngOSYC0QMUlaDYDZKfWoPnJwtpt_U-f4srI5Pk0',
@@ -46,6 +50,7 @@ final List<User> users = [
   User(
     username: 'sanket.supekar17',
     fname: 'Sanket',
+    bio: 'The greatest thing i do is I write comments and I dont break hearts!',
     lname: 'Supekar',
     profileImageUrl:
         'https://images.unsplash.com/photo-1469460340997-2f854421e72f?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDQwfHRvd0paRnNrcEdnfHxlbnwwfHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
@@ -53,6 +58,7 @@ final List<User> users = [
   User(
     username: 'mangeshD74',
     fname: 'Mangesh',
+    bio: 'The greatest thing i do is I write comments and I dont break hearts!',
     lname: 'Dhondre',
     profileImageUrl:
         'https://images.unsplash.com/photo-1614492052748-7c182718eaa0?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDQyfHRvd0paRnNrcEdnfHxlbnwwfHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
@@ -67,12 +73,14 @@ final List<User> users = [
   User(
     username: 'bhatti99',
     fname: 'Hardik',
+    bio: 'The greatest thing i do is I write comments and I dont break hearts!',
     lname: 'Bhatii',
     profileImageUrl:
         'https://images.unsplash.com/photo-1614449203851-926c8509ebe2?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDIyfHRvd0paRnNrcEdnfHxlbnwwfHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
   ),
   User(
     username: 'aye_hc',
+    bio: 'The greatest thing i do is I write comments and I dont break hearts!',
     fname: 'Harshal',
     lname: 'Chavan',
     profileImageUrl:
@@ -80,6 +88,7 @@ final List<User> users = [
   ),
   User(
     username: 'abhinotion',
+    bio: 'The greatest thing i do is I write comments and I dont break hearts!',
     fname: 'Abhinay',
     lname: 'Talkhedkar',
     profileImageUrl:

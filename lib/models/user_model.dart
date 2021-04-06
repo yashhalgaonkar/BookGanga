@@ -1,3 +1,5 @@
+import 'package:flutter/cupertino.dart';
+
 class User {
   String fname;
   String lname;
@@ -10,9 +12,9 @@ class User {
   int numReviews;
 
   User(
-      {this.fname,
-      this.lname,
-      this.profileImageUrl,
+      {@required this.fname,
+       @required this.lname,
+      @required this.profileImageUrl,
       this.username,
       this.bio,
       this.numBlogs,

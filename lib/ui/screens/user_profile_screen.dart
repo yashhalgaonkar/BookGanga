@@ -1,7 +1,6 @@
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/data/data.dart';
 import 'package:book_ganga/models/models.dart';
-import 'package:book_ganga/ui/screens/follower_list.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +29,7 @@ class _UserProfileScreenState extends State<UserProfileScreen>
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           color: Colors.black,
-          onPressed: () => print('Back arrow Pressed'),
+          onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
@@ -56,10 +55,12 @@ class _UserProfileScreenState extends State<UserProfileScreen>
                 Expanded(
                   child: TabBarView(
                     children: [
-                      _BlogListWidget(),
+                      _BlogListWidget(
+                        user: user,
+                      ),
                       _ReviewsListWidget(),
-                      _BlogListWidget(),
-                      //_ShareListWidget(),
+                      //_BlogListWidget(),
+                      _ShareListWidget(),
                     ],
                   ),
                 )
@@ -104,7 +105,8 @@ class _ProfileHeader extends StatelessWidget {
           //const SizedBox(height: 10.0)
           //* bio
           Text(
-            user.bio,
+            'The greatest thing I do is I write awesome articles',
+            //user.bio,
             style: Theme.of(context).textTheme.bodyText2,
             textAlign: TextAlign.center,
             maxLines: 2,
@@ -168,7 +170,7 @@ class _TabBarContainer extends StatelessWidget {
             radius: 10.0,
             backgroundColor: BookGanga.kGrey,
             child: Text(
-              '27',
+              '7',
               style: Theme.of(context)
                   .textTheme
                   .bodyText1
@@ -272,9 +274,9 @@ class _ShareListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 100.0,
-      color: Colors.greenAccent,
+      //color: Colors.redAccent,
       alignment: Alignment.center,
-      child: Text('share list'),
+      child: Text('No Shares'),
     );
   }
 }
@@ -284,22 +286,30 @@ class _ReviewsListWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 100.0,
-      color: Colors.redAccent,
+      //color: Colors.redAccent,
       alignment: Alignment.center,
-      child: Text('REview List  Wdiget'),
+      child: Text('No Reviews'),
     );
   }
 }
 
 class _BlogListWidget extends StatelessWidget {
+  final User user;
+  _BlogListWidget({
+    this.user,
+  });
   @override
   Widget build(BuildContext context) {
+    final displayList = [];
+    blogs.forEach((element) {
+      if (element.author == user) displayList.add(element);
+    });
     return Container(
       child: ListView.builder(
         itemBuilder: (context, index) => (index == 0)
-            ? BlogContainer(blog: blogs[index], paddingTop: true)
-            : BlogContainer(blog: blogs[index]),
-        itemCount: 10,
+            ? BlogContainer(blog: displayList[index], paddingTop: true)
+            : BlogContainer(blog: displayList[index]),
+        itemCount: displayList.length,
       ),
     );
   }

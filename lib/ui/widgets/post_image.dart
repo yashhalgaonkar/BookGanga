@@ -7,10 +7,12 @@ class PostImage extends StatelessWidget {
   final Blog blog;
   final bool showGradient;
   final bool showTitle;
+  final double height;
   const PostImage({
     this.blog,
     this.showGradient = true,
     this.showTitle = true,
+    this.height = 130.0,
   });
 
   @override
@@ -26,13 +28,13 @@ class PostImage extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: blog.titleImageUrl,
               fit: BoxFit.cover,
-              height: 200.0,
+              height: height,
               width: double.infinity,
             ),
           ),
           showGradient
               ? Container(
-                  height: 200.0,
+                  height: height,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     // color: Colors.amber,
