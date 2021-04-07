@@ -1,5 +1,5 @@
 export 'nav_screen.dart';
-export 'home_screen.dart';
-export 'user_profile_screen.dart';
-export 'activity_screen.dart';
-export 'discover_books_screen.dart';
+export 'HomeScreen/home_screen.dart';
+export 'UserProfileScreen/user_profile_screen.dart';
+export 'ActivityScreen/activity_screen.dart';
+export 'DiscoverBooksScreen/discover_books_screen.dart';

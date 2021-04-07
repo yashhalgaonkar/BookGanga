@@ -3,7 +3,7 @@ import 'package:book_ganga/ui/widgets/post_image.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
-import '../../data/data.dart';
+import '../../../data/data.dart';
 
 class BlogViewScreen extends StatelessWidget {
   final Blog blog;

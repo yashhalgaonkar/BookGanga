@@ -1,8 +1,8 @@
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/data/data.dart';
 import 'package:book_ganga/models/models.dart';
-import 'package:book_ganga/ui/screens/blog_view_screen.dart';
-import 'package:book_ganga/ui/screens/user_profile_screen.dart';
+import 'package:book_ganga/ui/screens/HomeScreen/blog_view_screen.dart';
+import 'package:book_ganga/ui/screens/UserProfileScreen/user_profile_screen.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';

@@ -4,7 +4,7 @@ import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../../data/data.dart';
-import 'home_screen.dart';
+import 'HomeScreen/home_screen.dart';
 
 class NavScreen extends StatefulWidget {
   @override

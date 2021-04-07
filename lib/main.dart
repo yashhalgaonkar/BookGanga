@@ -1,3 +1,4 @@
+import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:flutter/material.dart';
 import 'ui/screens/screens.dart';
@@ -37,11 +38,27 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.light,
         bottomAppBarColor: Colors.white,
       ),
+      // home: AnimatedSplashScreen(
+      //   splash: Container(
+      //     height: double.maxFinite,
+      //     width: double.maxFinite,
+      //     child: Center(
+      //       child: Row(
+      //         children: [Icon(Icons.format_quote_sharp), Text('BookGanga')],
+      //       ),
+      //     ),
+      //   ),
+      //   nextScreen: NavScreen(),
+      //   splashTransition: SplashTransition.fadeTransition,
+      //   //pageTransitionType: PageTransitionType.scale,
+      // ),
+
       home: NavScreen(),
     );
   }
 }
 
+/*
 class RecommendationTile extends StatelessWidget {
   final Function onTap;
 
@@ -100,3 +117,4 @@ class RecommendationTile extends StatelessWidget {
     );
   }
 }
+*/

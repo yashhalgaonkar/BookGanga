@@ -1,6 +1,5 @@
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
