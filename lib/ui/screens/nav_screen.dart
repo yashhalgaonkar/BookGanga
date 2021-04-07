@@ -1,3 +1,4 @@
+import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/ui/screens/screens.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -24,8 +25,8 @@ class _NavScreenState extends State<NavScreen> {
   final List<IconData> icons = const [
     Icons.home,
     MdiIcons.bookOpenVariant,
-    MdiIcons.pencilOutline,
-    MdiIcons.bellOutline,
+    Icons.notes,
+    Icons.notifications,
     MdiIcons.accountCircleOutline,
   ];
 
@@ -40,16 +41,40 @@ class _NavScreenState extends State<NavScreen> {
           index: _selectedIndex,
           children: _screens,
         ),
-        bottomNavigationBar: CustomTabBar(
-          icons: icons,
-          selectedIndex: _selectedIndex,
-          onTap: (index) {
-            setState(
-              () {
-                _selectedIndex = index;
-              },
-            );
+        // bottomNavigationBar: CustomTabBar(
+        //   icons: icons,
+        //   selectedIndex: _selectedIndex,
+        //   onTap: (index) {
+        //     setState(
+        //       () {
+        //         _selectedIndex = index;
+        //       },
+        //     );
+        //   },
+        // ),
+
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          selectedItemColor: BookGanga.kAccentColor,
+          currentIndex: _selectedIndex,
+          onTap: (value) {
+            setState(() {
+              _selectedIndex = value;
+            });
           },
+          items: [
+            BottomNavigationBarItem(icon: Icon(icons[0]), label: "Home"),
+            BottomNavigationBarItem(icon: Icon(icons[1]), label: "Books"),
+            BottomNavigationBarItem(icon: Icon(icons[2]), label: "Write"),
+            BottomNavigationBarItem(icon: Icon(icons[3]), label: "Activity"),
+            BottomNavigationBarItem(
+              icon: CircleAvatar(
+                radius: 14,
+                backgroundImage: AssetImage("assets/images/dp.jpeg"),
+              ),
+              label: "Profile",
+            ),
+          ],
         ),
 
         //* No color customization

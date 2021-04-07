@@ -37,7 +37,7 @@ class CustomAppBar extends StatelessWidget {
           color: BookGanga.kDarkBlack,
         ),
         IconButton(
-          icon: Icon(MdiIcons.facebookMessenger),
+          icon: Icon(Icons.people),
           onPressed: () {},
           color: BookGanga.kDarkBlack,
         ),

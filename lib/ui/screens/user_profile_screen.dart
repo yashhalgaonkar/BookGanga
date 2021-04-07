@@ -29,7 +29,9 @@ class _UserProfileScreenState extends State<UserProfileScreen>
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           color: Colors.black,
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => (user == currentUser)
+              ? print('Back Pressed')
+              : Navigator.pop(context),
         ),
         actions: [
           IconButton(

@@ -1,4 +1,5 @@
 import 'package:book_ganga/config/book_ganga.dart';
+import 'package:book_ganga/data/data.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/screens/blog_view_screen.dart';
 import 'package:book_ganga/ui/screens/user_profile_screen.dart';
@@ -37,8 +38,15 @@ class _BlogContainerState extends State<BlogContainer> {
           _PostHeader(blog: widget.blog),
 
           //* Post Image
-          Hero(
-              tag: widget.blog.titleImageUrl,
+          GestureDetector(
+              onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => BlogViewScreen(
+                        blog: widget.blog,
+                      ),
+                    ),
+                  ),
               child: PostImage(blog: widget.blog)),
 
           //* Description

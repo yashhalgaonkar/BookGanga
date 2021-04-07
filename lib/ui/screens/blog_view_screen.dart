@@ -20,23 +20,31 @@ class BlogViewScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Hero(
-                    tag: '${blog.titleImageUrl}',
-                    child: PostImage(blog: blog, showGradient: false, showTitle: false)),
+                PostImage(
+                  blog: blog,
+                  showGradient: false,
+                  showTitle: false,
+                  height: 250.0,
+                ),
                 Text(
                   '${blog.title}',
-                  style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 25.0),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(fontSize: 25.0),
                 ),
                 Text('- ${blog.author.fname} ${blog.author.lname} ',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        .copyWith(color: Colors.white, backgroundColor: Colors.black)),
+                    style: Theme.of(context).textTheme.bodyText1.copyWith(
+                        color: Colors.white, backgroundColor: Colors.black)),
 
                 //* Blog Text
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10.0),
-                  child: Text(dummyBlogText),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 8.0, vertical: 10.0),
+                  child: Text(
+                    dummyBlogText,
+                    style: TextStyle(fontSize: 16.0),
+                  ),
                 ),
 
                 //* User Detail Tile
