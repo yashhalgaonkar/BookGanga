@@ -1,22 +1,40 @@
 import 'models.dart';
 
-class Blog {
-  final String title;
-  final String description;
-  final User author;
-  final String headerImageUrl;
-  final String timeToRead;
-  final int reads;
-  final int likes;
-  final List<String> tags;
-  //final String content;
 
-  const Blog({this.tags, 
-      this.title,
-      this.description,
-      this.author,
-      this.headerImageUrl,
-      this.timeToRead,
-      this.reads,
-      this.likes});
+class BlogToDisplay {
+  String blogId;
+  String title;
+  String authorName;
+  String userId;
+  String authorImageUrl;
+  String blogHeaderImageUrl;
+  String lastUpdated;
+  int numLikes;
+  int numComments;
+  String description;
+
+  BlogToDisplay({String blogId,
+  this.title,
+  this.authorName,
+  this.userId,
+  this.authorImageUrl,
+  this.blogHeaderImageUrl,
+  this.lastUpdated,
+  this.numLikes,
+  this.numComments,
+  this.description,});
+
+  factory BlogToDisplay.fromJson(Map<String, dynamic> item) {
+    return BlogToDisplay(
+      title: item['title'],
+      authorName: item['authorName'],
+      userId: item['userId'],
+      authorImageUrl: item['authorImageUrl'],
+      blogHeaderImageUrl: item['blogHeaderImageUrl'],
+      lastUpdated: item['lastUpdated'],
+      numLikes: item['numLikes'],
+      numComments: item['numComments'],
+      description: item['description']
+    );
+  }
 }

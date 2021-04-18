@@ -4,7 +4,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 class PostImage extends StatelessWidget {
-  final Blog blog;
+  final BlogToDisplay blog;
   final bool showGradient;
   final bool showTitle;
   final double height;
@@ -26,7 +26,7 @@ class PostImage extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(8.0),
             child: CachedNetworkImage(
-              imageUrl: blog.headerImageUrl,
+              imageUrl: blog.blogHeaderImageUrl,
               fit: BoxFit.cover,
               height: height,
               width: double.infinity,

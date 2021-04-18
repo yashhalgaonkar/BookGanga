@@ -1,7 +1,10 @@
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/core/injector.dart';
+import 'package:book_ganga/ui/screens/HomeScreen/cubit/home_screen_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+
 import 'ui/screens/screens.dart';
 
 void main() {
@@ -24,8 +27,7 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: BookGanga.scaffold,
         textTheme: TextTheme(
           //for normal texts
-          bodyText1: GoogleFonts.raleway(
-              color: BookGanga.kDarkBlack, fontWeight: FontWeight.w600),
+          bodyText1: GoogleFonts.raleway(color: BookGanga.kDarkBlack, fontWeight: FontWeight.w600),
           // for blog view screen
           bodyText2: GoogleFonts.merriweather(color: BookGanga.kDarkBlack),
         ),
@@ -34,7 +36,10 @@ class _MyAppState extends State<MyApp> {
         brightness: Brightness.light,
         bottomAppBarColor: Colors.white,
       ),
-      home: NavScreen(),
+      home: BlocProvider(
+        create: (context) => HomeScreenCubit(),
+        child: NavScreen(),
+      ),
     );
   }
 }

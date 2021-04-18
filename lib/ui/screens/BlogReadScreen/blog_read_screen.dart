@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../../../data/data.dart';
 
 class BlogViewScreen extends StatelessWidget {
-  final Blog blog;
+  final BlogToDisplay blog;
 
   BlogViewScreen({@required this.blog});
 
@@ -33,7 +33,7 @@ class BlogViewScreen extends StatelessWidget {
                       .bodyText1
                       .copyWith(fontSize: 25.0),
                 ),
-                Text('- ${blog.author.fname} ${blog.author.lname} ',
+                Text('- ${blog.authorName}',
                     style: Theme.of(context).textTheme.bodyText1.copyWith(
                         color: Colors.white, backgroundColor: Colors.black)),
 

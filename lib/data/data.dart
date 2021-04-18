@@ -99,8 +99,8 @@ final List<User> users = [
 final String postUrl =
     'https://images.unsplash.com/photo-1608176762644-c471e49d3227?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1934&q=80';
 
-final List<Blog> blogs = [
-  Blog(
+final List<BlogToDisplay> blogs = [
+  /*BlogToDisplay(
       author: currentUser, //yash halgaonkar
       title: 'Happyness or Happiness??',
       description:
@@ -109,7 +109,7 @@ final List<Blog> blogs = [
       likes: 25,
       headerImageUrl:
           'https://images.unsplash.com/photo-1604346782646-13dac014c258?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8Ym84alFLVGFFMFl8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
-  Blog(
+  BlogToDisplay(
     author: users[1], // aditya giradkar
     title: 'A VIT boy hacks GitHub!',
     description:
@@ -119,7 +119,7 @@ final List<Blog> blogs = [
     headerImageUrl:
         'https://images.unsplash.com/photo-1564865878688-9a244444042a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29kZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
   ),
-  Blog(
+  BlogToDisplay(
       author: users[2], // shivam itankar
       title: 'Desinging the Future',
       description:
@@ -128,7 +128,7 @@ final List<Blog> blogs = [
       likes: 25,
       headerImageUrl:
           'https://images.unsplash.com/photo-1614517409437-2e25e4f5dbed?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDEyfHJuU0tESHd3WVVrfHxlbnwwfHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
-  Blog(
+  BlogToDisplay(
       author: users[3], // mansi jadhav
       title: 'Happyness or Happiness??',
       description:
@@ -137,7 +137,7 @@ final List<Blog> blogs = [
       likes: 25,
       headerImageUrl:
           'https://images.unsplash.com/photo-1614533708409-fdad0805a4fa?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDF8dG93SlpGc2twR2d8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60'),
-  Blog(
+  BlogToDisplay(
       author: users[4], // sunita patil
       title: 'Experiencing Long Distanace Relationship',
       description:
@@ -146,7 +146,7 @@ final List<Blog> blogs = [
       likes: 25,
       headerImageUrl:
           'https://images.unsplash.com/photo-1549825987-0b01889f671f?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NXx8cm9tYW5jZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
-  Blog(
+  BlogToDisplay(
       author: users[5], //sanket
       title: 'Being Gay!',
       description:
@@ -155,7 +155,7 @@ final List<Blog> blogs = [
       likes: 25,
       headerImageUrl:
           'https://images.unsplash.com/photo-1567476783296-fff06012e17a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8Z2F5fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
-  Blog(
+  BlogToDisplay(
       author: users[6], // mangesh
       title: '101 ways to impress girls.',
       description:
@@ -164,7 +164,7 @@ final List<Blog> blogs = [
       likes: 25,
       headerImageUrl:
           'https://images.unsplash.com/photo-1600601622243-f32c30680b0b?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjJ8fHNleHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
-  Blog(
+  BlogToDisplay(
       author: users[7], // akankasha
       title: 'A Masterclass on Leaving',
       description: 'Akankasha Kasar shares her experience on leaving.',
@@ -172,7 +172,7 @@ final List<Blog> blogs = [
       likes: 25,
       headerImageUrl:
           'https://images.unsplash.com/photo-1551845811-1539fc1f4812?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8YnJlYWslMjB1cHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
-  Blog(
+  BlogToDisplay(
       author: users[8], // hardik
       title: 'Looking at the world from top',
       description: 'Hardik Bhatti shares his view of the world.',
@@ -180,7 +180,7 @@ final List<Blog> blogs = [
       likes: 25,
       headerImageUrl:
           'https://images.unsplash.com/photo-1506946526854-9aad1ec915cb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NXx8ZG93bnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
-  Blog(
+  BlogToDisplay(
       author: users[9], //harshal
       title: 'Bootcamp on Moving On',
       description: 'Harshal Chavan shares his priceless guidance on moving on.',
@@ -188,7 +188,7 @@ final List<Blog> blogs = [
       likes: 25,
       headerImageUrl:
           'https://images.unsplash.com/photo-1592771659608-5c03144b1f04?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mjd8fG1vdmUlMjBvbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
-  Blog(
+  BlogToDisplay(
     author: users[10], // abhinay
     title: 'Spirituality and Me',
     description: loren,
@@ -196,7 +196,7 @@ final List<Blog> blogs = [
     likes: 25,
     headerImageUrl:
         'https://images.unsplash.com/photo-1496008889433-9b938d8ac880?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NXx8c3Bpcml0dWFsfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-  ),
+  ),*/
 ];
 
 final String loren =

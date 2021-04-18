@@ -15,9 +15,8 @@ class _NavScreenState extends State<NavScreen> {
     HomeScreen(),
     DiscoverBooksScreen(),
     Scaffold(),
-    //Scaffold(),
-    //Scaffold(),
-    ActivityScreen(),
+    Scaffold(),
+    //ActivityScreen(),
     UserProfileScreen(user: currentUser),
   ];
 

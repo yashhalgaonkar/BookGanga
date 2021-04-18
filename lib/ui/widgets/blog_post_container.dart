@@ -6,10 +6,9 @@ import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-
 /// Widget that contains the details of blog in [HomeScreen] and [UserProfileScreen]
 class BlogContainer extends StatefulWidget {
-  final Blog blog;
+  final BlogToDisplay blog;
   final bool paddingTop;
 
   BlogContainer({@required this.blog, this.paddingTop = false});
@@ -100,7 +99,7 @@ class _PostDetails extends StatelessWidget {
       @required this.onSendTap})
       : super(key: key);
 
-  final Blog blog;
+  final BlogToDisplay blog;
   final bool isSaved;
   final Function onSavedTap;
   final Function onSendTap;
@@ -115,13 +114,13 @@ class _PostDetails extends StatelessWidget {
         children: [
           Icon(MdiIcons.heartOutline, size: 15.0),
           Text(
-            ' ${blog.reads}',
+            ' ${blog.numLikes}',
             style: Theme.of(context).textTheme.bodyText1,
           ),
           const SizedBox(width: 5.0),
           Icon(MdiIcons.commentOutline, size: 15.0),
           Text(
-            ' ${blog.likes}',
+            ' ${blog.numComments}',
             style: Theme.of(context).textTheme.bodyText1,
           ),
           Expanded(
@@ -158,7 +157,7 @@ class _PostDetails extends StatelessWidget {
 ///it contains profile avatar, username
 ///and icon for more options
 class _PostHeader extends StatelessWidget {
-  final Blog blog;
+  final BlogToDisplay blog;
   const _PostHeader({
     Key key,
     this.blog,
@@ -168,25 +167,25 @@ class _PostHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => UserProfileScreen(user: blog.author),
-          ),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (_) => UserProfileScreen(user: blog.author),
+        //   ),
+        // );
       },
       child: Row(
         children: [
           ProfileAvatar(
             radius: 15.0,
-            imageUrl: blog.author.profileImageUrl,
+            imageUrl: blog.authorImageUrl,
             hasBorder: false,
             isActive: false,
           ),
           const SizedBox(width: 10.0),
           Text(
             //blog.author.username,
-            '${blog.author.fname} ${blog.author.lname}',
+            '${blog.authorName}',
             style: Theme.of(context).textTheme.bodyText1,
           ),
           // Expanded(

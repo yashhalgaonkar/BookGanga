@@ -114,7 +114,7 @@ class _FollowerRequestWidget extends StatelessWidget {
 }
 
 class _NotificationTile extends StatelessWidget {
-  final Blog blog;
+  final BlogToDisplay blog;
   final User user;
 
   const _NotificationTile({
@@ -145,7 +145,7 @@ class _NotificationTile extends StatelessWidget {
             )),
             const SizedBox(width: 15.0),
             CachedNetworkImage(
-              imageUrl: blog.headerImageUrl,
+              imageUrl: blog.blogHeaderImageUrl,
               height: 50.0,
               width: 50.0,
               fit: BoxFit.cover,

@@ -306,16 +306,13 @@ class _BlogListWidget extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    final displayList = [];
-    blogs.forEach((element) {
-      if (element.author == user) displayList.add(element);
-    });
+    
     return Container(
       child: ListView.builder(
         itemBuilder: (context, index) => (index == 0)
-            ? BlogContainer(blog: displayList[index], paddingTop: true)
-            : BlogContainer(blog: displayList[index]),
-        itemCount: displayList.length,
+            ? BlogContainer(blog: blogs[index], paddingTop: true)
+            : BlogContainer(blog: blogs[index]),
+        itemCount: blogs.length,
       ),
     );
   }
