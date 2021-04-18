@@ -51,11 +51,10 @@ class PostImage extends StatelessWidget {
                     width: textBoxwidth,
                     child: Text(
                       blog.title,
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20.0,
-                        color: Colors.white,
-                      ),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          .copyWith(fontSize: 20.0, color: Colors.white),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),

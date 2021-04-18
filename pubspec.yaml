@@ -23,14 +23,15 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  bloc: ^7.0.0
   cached_network_image: ^2.5.0
   cupertino_icons: ^1.0.0
-  get_it: ^6.1.1
-  material_design_icons_flutter: 4.0.5855
-  json_serializable: ^4.1.0
-  http: ^0.13.1
-  bloc: ^7.0.0
   flutter_bloc: ^7.0.0
+  get_it: ^6.1.1
+  google_fonts: ^2.0.0
+  http: ^0.13.1
+  json_serializable: ^4.1.0
+  material_design_icons_flutter: 4.0.5855
 
 dev_dependencies:
   flutter_test:
@@ -61,19 +62,13 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Rubik
+    - family: Roboto
       fonts:
-        - asset: assets/fonts/Rubik-Regular.ttf
-    #       - asset: fonts/Schyler-Italic.ttf
-    #         style: italic
+        - asset: assets/fonts/Roboto-Regular.ttf
+    #       - asset: fonts/TrajanPro_Bold.ttf
+    #         weight: 700
     - family: Pacifico
       fonts:
         - asset: assets/fonts/Pacifico-Regular.ttf
-    - family: Nunito
-      fonts:
-        - asset: assets/fonts/NunitoSans-Regular.ttf
-  #       - asset: fonts/TrajanPro_Bold.ttf
-  #         weight: 700
-  #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

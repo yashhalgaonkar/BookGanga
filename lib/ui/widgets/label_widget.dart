@@ -1,6 +1,7 @@
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:flutter/material.dart';
 
+///Widget that is used to show a label in [Activity Screen]
 class LabelWidget extends StatelessWidget {
   final String label;
   final String sublabel;

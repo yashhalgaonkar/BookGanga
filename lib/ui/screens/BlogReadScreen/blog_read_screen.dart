@@ -47,8 +47,7 @@ class BlogViewScreen extends StatelessWidget {
                   ),
                 ),
 
-                //* User Detail Tile
-                UserDetailsWidget(user: blog.author),
+                
               ],
             ),
           ),

@@ -2,6 +2,8 @@ import 'package:book_ganga/config/book_ganga.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
+/// THis widget is used to show the profileAvater of the user everywhere
+/// in [HomeScreen] to [UserProfileScreen] and all other moinor screens
 class ProfileAvatar extends StatelessWidget {
   final String imageUrl;
   final bool isActive;

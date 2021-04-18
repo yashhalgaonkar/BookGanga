@@ -1,6 +1,5 @@
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/ui/screens/screens.dart';
-import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import '../../data/data.dart';
@@ -41,21 +40,10 @@ class _NavScreenState extends State<NavScreen> {
           index: _selectedIndex,
           children: _screens,
         ),
-        // bottomNavigationBar: CustomTabBar(
-        //   icons: icons,
-        //   selectedIndex: _selectedIndex,
-        //   onTap: (index) {
-        //     setState(
-        //       () {
-        //         _selectedIndex = index;
-        //       },
-        //     );
-        //   },
-        // ),
-
         bottomNavigationBar: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
+          type: BottomNavigationBarType.shifting,
           selectedItemColor: BookGanga.kAccentColor,
+          unselectedItemColor: Colors.black87,
           currentIndex: _selectedIndex,
           onTap: (value) {
             setState(() {
@@ -76,70 +64,6 @@ class _NavScreenState extends State<NavScreen> {
             ),
           ],
         ),
-
-        //* No color customization
-        // bottomNavigationBar: FlashyTabBar(
-        //   selectedIndex: _selectedIndex,
-        //   showElevation: true,
-        //   backgroundColor: BookGanga.scaffold,
-        //   onItemSelected: (index) => setState(() {
-        //     _selectedIndex = index;
-        //   }),
-        //   items: [
-        //     FlashyTabBarItem(
-        //       icon: Icon(icons[0]),
-        //       title: Text('Home'),
-        //     ),
-        //     FlashyTabBarItem(
-        //       icon: Icon(icons[1]),
-        //       title: Text('Books'),
-        //     ),
-        //     FlashyTabBarItem(
-        //       icon: Icon(icons[2]),
-        //       title: Text('Write'),
-        //     ),
-        //     FlashyTabBarItem(
-        //       icon: Icon(icons[3]),
-        //       title: Text('Activity'),
-        //     ),
-        //     FlashyTabBarItem(
-        //       icon: Icon(icons[4]),
-        //       title: Text('Profile'),
-        //     ),
-        //   ],
-        // ),
-
-        //* Not working
-        // bottomNavigationBar: TitledBottomNavigationBar(
-        //   currentIndex: _selectedIndex,
-        //   onTap: (index) => print(''),
-        //   reverse: false,
-        //   curve: Curves.easeIn,
-        //   items: [
-        //     TitledNavigationBarItem(
-        //       title: Text('Home'),
-        //       icon: icons[0],
-        //     ),
-        //     TitledNavigationBarItem(
-        //       title: Text('Books'),
-        //       icon: icons[1],
-        //     ),
-        //     TitledNavigationBarItem(
-        //       title: Text('Write'),
-        //       icon: icons[2],
-        //     ),
-        //     TitledNavigationBarItem(
-        //       title: Text('Activity'),
-        //       icon: icons[3],
-        //     ),
-        //     TitledNavigationBarItem(
-        //       title: Text('Profile'),
-        //       icon: icons[4],
-        //     ),
-        //   ],
-        //   activeColor: BookGanga.kNiceAccentColor,
-        //   inactiveColor: BookGanga.kDarkBlack,
-        // ),
       ),
     );
   }

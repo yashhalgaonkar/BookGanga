@@ -1,12 +1,13 @@
 import 'package:book_ganga/config/book_ganga.dart';
-import 'package:book_ganga/data/data.dart';
 import 'package:book_ganga/models/models.dart';
-import 'package:book_ganga/ui/screens/HomeScreen/blog_view_screen.dart';
+import 'package:book_ganga/ui/screens/BlogReadScreen/blog_read_screen.dart';
 import 'package:book_ganga/ui/screens/UserProfileScreen/user_profile_screen.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
+
+/// Widget that contains the details of blog in [HomeScreen] and [UserProfileScreen]
 class BlogContainer extends StatefulWidget {
   final Blog blog;
   final bool paddingTop;
@@ -54,7 +55,7 @@ class _BlogContainerState extends State<BlogContainer> {
             padding: const EdgeInsets.fromLTRB(2.0, 2.0, 2.0, 0.0),
             child: Text(
               widget.blog.description,
-              style: Theme.of(context).textTheme.bodyText2,
+              style: Theme.of(context).textTheme.bodyText1,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),

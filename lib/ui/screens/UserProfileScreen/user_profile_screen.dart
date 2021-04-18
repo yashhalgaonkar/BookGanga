@@ -109,7 +109,7 @@ class _ProfileHeader extends StatelessWidget {
           Text(
             'The greatest thing I do is I write awesome articles',
             //user.bio,
-            style: Theme.of(context).textTheme.bodyText2,
+            style: Theme.of(context).textTheme.bodyText1,
             textAlign: TextAlign.center,
             maxLines: 2,
           ),
@@ -133,6 +133,7 @@ class _StatsCorner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       //color: Colors.amber,
+      margin: const EdgeInsets.symmetric(vertical: 5.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -262,7 +263,10 @@ class _StatsWidgetTile extends StatelessWidget {
               alignment: Alignment.center,
               child: Text(count, style: Theme.of(context).textTheme.bodyText1),
             ),
-            Text(label),
+            Text(
+              label,
+              style: Theme.of(context).textTheme.bodyText1,
+            ),
           ],
         ),
       ),
