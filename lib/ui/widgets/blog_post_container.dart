@@ -114,13 +114,13 @@ class _PostDetails extends StatelessWidget {
         children: [
           Icon(MdiIcons.heartOutline, size: 15.0),
           Text(
-            ' ${blog.readCount}',
+            ' ${blog.reads}',
             style: Theme.of(context).textTheme.bodyText1,
           ),
           const SizedBox(width: 5.0),
           Icon(MdiIcons.commentOutline, size: 15.0),
           Text(
-            ' ${blog.shareCount}',
+            ' ${blog.likes}',
             style: Theme.of(context).textTheme.bodyText1,
           ),
           Expanded(

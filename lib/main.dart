@@ -1,9 +1,12 @@
-import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:book_ganga/config/book_ganga.dart';
+import 'package:book_ganga/core/injector.dart';
 import 'package:flutter/material.dart';
 import 'ui/screens/screens.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  initializeDependencies();
+  runApp(MyApp());
+}
 
 class MyApp extends StatefulWidget {
   @override

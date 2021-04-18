@@ -145,7 +145,7 @@ class _NotificationTile extends StatelessWidget {
             )),
             const SizedBox(width: 15.0),
             CachedNetworkImage(
-              imageUrl: blog.titleImageUrl,
+              imageUrl: blog.headerImageUrl,
               height: 50.0,
               width: 50.0,
               fit: BoxFit.cover,

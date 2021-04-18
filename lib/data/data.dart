@@ -105,18 +105,18 @@ final List<Blog> blogs = [
       title: 'Happyness or Happiness??',
       description:
           'Yash Halgaonkar, 19, got so frustrated with life and decides to be happy.',
-      readCount: 154,
-      shareCount: 25,
-      titleImageUrl:
+      reads: 154,
+      likes: 25,
+      headerImageUrl:
           'https://images.unsplash.com/photo-1604346782646-13dac014c258?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8Ym84alFLVGFFMFl8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
   Blog(
     author: users[1], // aditya giradkar
     title: 'A VIT boy hacks GitHub!',
     description:
         'Aditya hacks GitHub and becomes major contributor of all JS repos',
-    readCount: 547,
-    shareCount: 54,
-    titleImageUrl:
+    reads: 547,
+    likes: 54,
+    headerImageUrl:
         'https://images.unsplash.com/photo-1564865878688-9a244444042a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mnx8Y29kZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
   ),
   Blog(
@@ -124,77 +124,77 @@ final List<Blog> blogs = [
       title: 'Desinging the Future',
       description:
           'orem ipsum dolor sit amet, consectetur adipiscing elit. Proin lacus libero, placerat ut justo vitae, sagittis c',
-      readCount: 154,
-      shareCount: 25,
-      titleImageUrl:
+      reads: 154,
+      likes: 25,
+      headerImageUrl:
           'https://images.unsplash.com/photo-1614517409437-2e25e4f5dbed?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDEyfHJuU0tESHd3WVVrfHxlbnwwfHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
   Blog(
       author: users[3], // mansi jadhav
       title: 'Happyness or Happiness??',
       description:
           'ur adipiscing elit. Proin lacus libero, placerat ut justo vitae, sagittis co',
-      readCount: 154,
-      shareCount: 25,
-      titleImageUrl:
+      reads: 154,
+      likes: 25,
+      headerImageUrl:
           'https://images.unsplash.com/photo-1614533708409-fdad0805a4fa?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDF8dG93SlpGc2twR2d8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60'),
   Blog(
       author: users[4], // sunita patil
       title: 'Experiencing Long Distanace Relationship',
       description:
           'ur adipiscing elit. Proin lacus libero, placerat ut justo vitae, sagittis co',
-      readCount: 154,
-      shareCount: 25,
-      titleImageUrl:
+      reads: 154,
+      likes: 25,
+      headerImageUrl:
           'https://images.unsplash.com/photo-1549825987-0b01889f671f?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NXx8cm9tYW5jZXxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
   Blog(
       author: users[5], //sanket
       title: 'Being Gay!',
       description:
           'Sanket Supekar shares how its like to be gay in modern sub urban India.',
-      readCount: 154,
-      shareCount: 25,
-      titleImageUrl:
+      reads: 154,
+      likes: 25,
+      headerImageUrl:
           'https://images.unsplash.com/photo-1567476783296-fff06012e17a?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MXx8Z2F5fGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
   Blog(
       author: users[6], // mangesh
       title: '101 ways to impress girls.',
       description:
           'Mangesh Dhondre shares his sureshot ways to get a pussy whenever you want.',
-      readCount: 154,
-      shareCount: 25,
-      titleImageUrl:
+      reads: 154,
+      likes: 25,
+      headerImageUrl:
           'https://images.unsplash.com/photo-1600601622243-f32c30680b0b?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjJ8fHNleHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
   Blog(
       author: users[7], // akankasha
       title: 'A Masterclass on Leaving',
       description: 'Akankasha Kasar shares her experience on leaving.',
-      readCount: 154,
-      shareCount: 25,
-      titleImageUrl:
+      reads: 154,
+      likes: 25,
+      headerImageUrl:
           'https://images.unsplash.com/photo-1551845811-1539fc1f4812?ixid=MXwxMjA3fDB8MHxzZWFyY2h8M3x8YnJlYWslMjB1cHxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
   Blog(
       author: users[8], // hardik
       title: 'Looking at the world from top',
       description: 'Hardik Bhatti shares his view of the world.',
-      readCount: 154,
-      shareCount: 25,
-      titleImageUrl:
+      reads: 154,
+      likes: 25,
+      headerImageUrl:
           'https://images.unsplash.com/photo-1506946526854-9aad1ec915cb?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NXx8ZG93bnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
   Blog(
       author: users[9], //harshal
       title: 'Bootcamp on Moving On',
       description: 'Harshal Chavan shares his priceless guidance on moving on.',
-      readCount: 154,
-      shareCount: 25,
-      titleImageUrl:
+      reads: 154,
+      likes: 25,
+      headerImageUrl:
           'https://images.unsplash.com/photo-1592771659608-5c03144b1f04?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mjd8fG1vdmUlMjBvbnxlbnwwfHwwfA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60'),
   Blog(
     author: users[10], // abhinay
     title: 'Spirituality and Me',
     description: loren,
-    readCount: 154,
-    shareCount: 25,
-    titleImageUrl:
+    reads: 154,
+    likes: 25,
+    headerImageUrl:
         'https://images.unsplash.com/photo-1496008889433-9b938d8ac880?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NXx8c3Bpcml0dWFsfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
   ),
 ];

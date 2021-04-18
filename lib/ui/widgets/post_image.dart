@@ -26,7 +26,7 @@ class PostImage extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(8.0),
             child: CachedNetworkImage(
-              imageUrl: blog.titleImageUrl,
+              imageUrl: blog.headerImageUrl,
               fit: BoxFit.cover,
               height: height,
               width: double.infinity,
