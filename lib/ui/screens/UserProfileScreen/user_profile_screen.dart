@@ -1,11 +1,12 @@
 import 'package:book_ganga/config/book_ganga.dart';
-import 'package:book_ganga/data/data.dart';
 import 'package:book_ganga/models/models.dart';
+import 'package:book_ganga/ui/screens/UserProfileScreen/cubit/user_profile_screen_cubit.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserProfileScreen extends StatefulWidget {
-  final User user;
+  final UserToDisplay user;
 
   UserProfileScreen({
     @required this.user,
@@ -16,7 +17,15 @@ class UserProfileScreen extends StatefulWidget {
 
 class _UserProfileScreenState extends State<UserProfileScreen>
     with SingleTickerProviderStateMixin {
-  User get user => widget.user;
+  //UserToDisplay get user => widget.user;
+
+  UserProfileScreenCubit _userProfileScreenCubit;
+  @override
+  void initState() {
+    super.initState();
+    _userProfileScreenCubit = BlocProvider.of<UserProfileScreenCubit>(context);
+    _userProfileScreenCubit.getUser('dummy_user_id');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +38,9 @@ class _UserProfileScreenState extends State<UserProfileScreen>
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           color: Colors.black,
-          onPressed: () => (user == currentUser)
-              ? print('Back Pressed')
-              : Navigator.pop(context),
+          onPressed: () {
+            print('Back pressed');
+          },
         ),
         actions: [
           IconButton(
@@ -42,33 +51,58 @@ class _UserProfileScreenState extends State<UserProfileScreen>
         ],
       ),
       body: SafeArea(
-        child: DefaultTabController(
-          length: 3,
-          child: NestedScrollView(
-            headerSliverBuilder: (context, _) {
-              return [
-                SliverToBoxAdapter(child: _ProfileHeader(user: user)),
-              ];
-            },
-            body: Column(
-              children: [
-                //const SizedBox(height: 6.0),
-                _TabBarContainer(),
-                Expanded(
-                  child: TabBarView(
+        child: BlocConsumer<UserProfileScreenCubit, UserProfileScreenState>(
+          listener: (_, state) {
+            if (state is UserProfileScreenError)
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text('Error'),
+                action: SnackBarAction(
+                  label: 'Retry',
+                  onPressed: () =>
+                      _userProfileScreenCubit.getUser('dummy_user_id'),
+                ),
+              ));
+          },
+          // ignore: missing_return
+          builder: (_, state) {
+            if (state is UserProfileScreenLoading ||
+                state is UserProfileScreenInitial)
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            else if (state is UserProfileScreenLoaded)
+              return DefaultTabController(
+                length: 3,
+                child: NestedScrollView(
+                  headerSliverBuilder: (context, _) {
+                    return [
+                      SliverToBoxAdapter(
+                          child: _ProfileHeader(user: state.user)),
+                    ];
+                  },
+                  body: Column(
                     children: [
-                      _BlogListWidget(
-                        user: user,
-                      ),
-                      _ReviewsListWidget(),
-                      //_BlogListWidget(),
-                      _ShareListWidget(),
+                      //const SizedBox(height: 6.0),
+                      _TabBarContainer(user: state.user),
+                      Expanded(
+                        child: TabBarView(
+                          children: [
+                            _BlogListWidget(),
+                            _ReviewsListWidget(),
+                            //_BlogListWidget(),
+                            _ShareListWidget(),
+                          ],
+                        ),
+                      )
                     ],
                   ),
-                )
-              ],
-            ),
-          ),
+                ),
+              );
+            else if (state is UserProfileScreenError)
+              return Center(
+                child: Text(state.errorMessage),
+              );
+          },
         ),
       ),
     );
@@ -79,7 +113,7 @@ class _UserProfileScreenState extends State<UserProfileScreen>
 /// with Profile image, Name, bio, stats
 /// and follow and like button
 class _ProfileHeader extends StatelessWidget {
-  final User user;
+  final UserToDisplay user;
 
   _ProfileHeader({
     this.user,
@@ -107,7 +141,7 @@ class _ProfileHeader extends StatelessWidget {
           //const SizedBox(height: 10.0)
           //* bio
           Text(
-            'The greatest thing I do is I write awesome articles',
+            user.bio,
             //user.bio,
             style: Theme.of(context).textTheme.bodyText1,
             textAlign: TextAlign.center,
@@ -115,7 +149,9 @@ class _ProfileHeader extends StatelessWidget {
           ),
           const SizedBox(height: 10.0),
 
-          _StatsCorner(),
+          _StatsCorner(
+            user: user,
+          ),
 
           const SizedBox(height: 10.0),
 
@@ -129,6 +165,9 @@ class _ProfileHeader extends StatelessWidget {
 /// This widget tells that stats of the user
 /// Number of follwers, number of books in bookshelf and wish list
 class _StatsCorner extends StatelessWidget {
+  final UserToDisplay user;
+
+  _StatsCorner({@required this.user});
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -139,15 +178,15 @@ class _StatsCorner extends StatelessWidget {
         children: [
           _StatsWidgetTile(
               label: 'Followers',
-              count: '986',
+              count: '${user.numFollowers}',
               onClick: () => print('Followers Clicked')),
           _StatsWidgetTile(
               label: 'Book Shelf',
-              count: '78',
+              count: '${user.numBookShelf}',
               onClick: () => print('BookShelf Clicked')),
           _StatsWidgetTile(
               label: 'Wish List',
-              count: '17',
+              count: '${user.numWishList}',
               onClick: () => print('WishList Clicked')),
         ],
       ),
@@ -157,9 +196,10 @@ class _StatsCorner extends StatelessWidget {
 
 ///widget for the tabs - Blog, Reviews, Shares
 class _TabBarContainer extends StatelessWidget {
-  const _TabBarContainer({Key key}) : super(key: key);
+  final UserToDisplay user;
+  const _TabBarContainer({Key key, @required this.user}) : super(key: key);
 
-  Widget _getTab(String label, BuildContext context) {
+  Widget _getTab(String label, BuildContext context, int count) {
     return Tab(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -173,7 +213,7 @@ class _TabBarContainer extends StatelessWidget {
             radius: 10.0,
             backgroundColor: BookGanga.kGrey,
             child: Text(
-              '7',
+              '$count',
               style: Theme.of(context)
                   .textTheme
                   .bodyText1
@@ -196,9 +236,9 @@ class _TabBarContainer extends StatelessWidget {
             isScrollable: false,
             indicatorColor: BookGanga.kAccentColor,
             tabs: [
-              _getTab('Blogs', context),
-              _getTab('Reviews', context),
-              _getTab('Shares', context),
+              _getTab('Blogs', context, user.numBlogs),
+              _getTab('Reviews', context, user.numReviews),
+              _getTab('Shares', context, user.numShares),
             ],
             onTap: (index) => print('Index $index tapped'),
           ),
@@ -300,20 +340,8 @@ class _ReviewsListWidget extends StatelessWidget {
 }
 
 class _BlogListWidget extends StatelessWidget {
-  final User user;
-  _BlogListWidget({
-    this.user,
-  });
   @override
   Widget build(BuildContext context) {
-    
-    return Container(
-      child: ListView.builder(
-        itemBuilder: (context, index) => (index == 0)
-            ? BlogContainer(blog: blogs[index], paddingTop: true)
-            : BlogContainer(blog: blogs[index]),
-        itemCount: blogs.length,
-      ),
-    );
+    return Container();
   }
 }

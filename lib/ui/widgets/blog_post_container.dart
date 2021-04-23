@@ -4,7 +4,7 @@ import 'package:book_ganga/ui/screens/BlogReadScreen/blog_read_screen.dart';
 import 'package:book_ganga/ui/screens/UserProfileScreen/user_profile_screen.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 
 /// Widget that contains the details of blog in [HomeScreen] and [UserProfileScreen]
 class BlogContainer extends StatefulWidget {
@@ -112,13 +112,17 @@ class _PostDetails extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(MdiIcons.heartOutline, size: 15.0),
+          Icon(
+            EvaIcons.heart,
+            size: 15.0,
+            color: Colors.red,
+          ),
           Text(
             ' ${blog.numLikes}',
             style: Theme.of(context).textTheme.bodyText1,
           ),
           const SizedBox(width: 5.0),
-          Icon(MdiIcons.commentOutline, size: 15.0),
+          Icon(Icons.comment_outlined, size: 15.0),
           Text(
             ' ${blog.numComments}',
             style: Theme.of(context).textTheme.bodyText1,
@@ -139,7 +143,7 @@ class _PostDetails extends StatelessWidget {
                 InkWell(
                   onTap: onSavedTap,
                   child: Icon(
-                    (isSaved) ? MdiIcons.bookmark : MdiIcons.bookmarkOutline,
+                    (isSaved) ? EvaIcons.bookmark : EvaIcons.bookmarkOutline,
                     color: BookGanga.kBlack,
                     size: 25.0,
                   ),

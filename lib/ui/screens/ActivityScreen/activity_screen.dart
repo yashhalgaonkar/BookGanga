@@ -1,5 +1,4 @@
 import 'package:book_ganga/config/book_ganga.dart';
-import 'package:book_ganga/data/data.dart';
 import 'package:book_ganga/models/blog_model.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/widgets/profile_avatar.dart';
@@ -30,25 +29,25 @@ class _ActivityScreenState extends State<ActivityScreen> {
           slivers: [
             //_FollowerRequestWidget(),
             LabelWidget(label: 'This Week'),
-            _NotificationTile(blog: blogs[0], user: currentUser),
-            _NotificationTile(blog: blogs[1], user: users[1]),
-            _NotificationTile(blog: blogs[2], user: users[2]),
-            _NotificationTile(blog: blogs[3], user: users[3]),
-            _NotificationTile(blog: blogs[4], user: users[4]),
-            _NotificationTile(blog: blogs[5], user: users[5]),
-            LabelWidget(label: 'This Month'),
-            _NotificationTile(blog: blogs[6], user: users[6]),
-            _NotificationTile(blog: blogs[7], user: users[7]),
-            _NotificationTile(blog: blogs[8], user: users[8]),
-            _NotificationTile(blog: blogs[9], user: users[9]),
-            _NotificationTile(blog: blogs[0], user: users[0]),
-            _NotificationTile(blog: blogs[1], user: users[1]),
-            LabelWidget(label: 'Suggetions'),
-            _ProfileSuggetionWidget(user: users[0]),
-            _ProfileSuggetionWidget(user: users[1]),
-            _ProfileSuggetionWidget(user: users[2]),
-            _ProfileSuggetionWidget(user: users[3]),
-            _ProfileSuggetionWidget(user: users[4]),
+            // _NotificationTile(blog: blogs[0], user: currentUser),
+            // _NotificationTile(blog: blogs[1], user: users[1]),
+            // _NotificationTile(blog: blogs[2], user: users[2]),
+            // _NotificationTile(blog: blogs[3], user: users[3]),
+            // _NotificationTile(blog: blogs[4], user: users[4]),
+            // _NotificationTile(blog: blogs[5], user: users[5]),
+            // LabelWidget(label: 'This Month'),
+            // _NotificationTile(blog: blogs[6], user: users[6]),
+            // _NotificationTile(blog: blogs[7], user: users[7]),
+            // _NotificationTile(blog: blogs[8], user: users[8]),
+            // _NotificationTile(blog: blogs[9], user: users[9]),
+            // _NotificationTile(blog: blogs[0], user: users[0]),
+            // _NotificationTile(blog: blogs[1], user: users[1]),
+            // LabelWidget(label: 'Suggetions'),
+            // _ProfileSuggetionWidget(user: users[0]),
+            // _ProfileSuggetionWidget(user: users[1]),
+            // _ProfileSuggetionWidget(user: users[2]),
+            // _ProfileSuggetionWidget(user: users[3]),
+            // _ProfileSuggetionWidget(user: users[4]),
           ],
         ),
       ),
@@ -58,7 +57,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
 
 /// This widget will be used to suggest profiles to follow
 class _ProfileSuggetionWidget extends StatelessWidget {
-  final User user;
+  final UserToDisplay user;
 
   const _ProfileSuggetionWidget({Key key, this.user}) : super(key: key);
 
@@ -115,7 +114,7 @@ class _FollowerRequestWidget extends StatelessWidget {
 
 class _NotificationTile extends StatelessWidget {
   final BlogToDisplay blog;
-  final User user;
+  final UserToDisplay user;
 
   const _NotificationTile({
     Key key,

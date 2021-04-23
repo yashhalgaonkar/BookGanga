@@ -31,7 +31,9 @@ dependencies:
   get_it: ^6.1.1
   google_fonts: ^2.0.0
   http: ^0.13.1
-  material_design_icons_flutter: 4.0.5855
+  #material_design_icons_flutter: 4.0.5855
+  eva_icons_flutter: ^3.0.0
+  quick_log: 
 
 dev_dependencies:
   flutter_test:

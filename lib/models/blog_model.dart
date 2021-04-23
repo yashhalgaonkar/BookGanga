@@ -1,5 +1,3 @@
-import 'models.dart';
-
 
 class BlogToDisplay {
   String blogId;
@@ -31,7 +29,7 @@ class BlogToDisplay {
       userId: item['userId'],
       authorImageUrl: item['authorImageUrl'],
       blogHeaderImageUrl: item['blogHeaderImageUrl'],
-      lastUpdated: item['lastUpdated'],
+      //lastUpdated: item['lastUpdated'],
       numLikes: item['numLikes'],
       numComments: item['numComments'],
       description: item['description']

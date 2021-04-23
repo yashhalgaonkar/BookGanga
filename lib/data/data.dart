@@ -1,6 +1,6 @@
 import '../models/models.dart';
 
-final User currentUser = User(
+final UserToDisplay currentUser = UserToDisplay(
   fname: 'Yash',
   username: 'yash.halgaonkar',
   lname: 'Halgaonkar',
@@ -9,13 +9,12 @@ final User currentUser = User(
       'https://pbs.twimg.com/profile_images/1277925616243732480/oWxzZVXY_400x400.jpg',
   numBlogs: 17,
   numFollowers: 458,
-  numFollowing: 356,
   numReviews: 9,
 );
 
-final List<User> users = [
+final List<UserToDisplay> users = [
   currentUser,
-  User(
+  UserToDisplay(
     username: 'aditya.giradkar57',
     bio: 'I make Web Pages and I write peotry sometimes.',
     fname: 'Aditya',
@@ -23,7 +22,7 @@ final List<User> users = [
     profileImageUrl:
         'https://media-exp1.licdn.com/dms/image/C5103AQHa4d6-Y4f2xQ/profile-displayphoto-shrink_800_800/0/1564050324092?e=1620259200&v=beta&t=csDQ0SYOKn0wy-pNMYdgeuTZI2I-Ar2OVb-62KgpBNQ',
   ),
-  User(
+  UserToDisplay(
     username: 'loren.ipsum.studio',
     bio: 'I have a knack for beautiful things.',
     fname: 'Shivam',
@@ -31,7 +30,7 @@ final List<User> users = [
     profileImageUrl:
         'https://media-exp1.licdn.com/dms/image/C4D03AQH8V60F2J4g5w/profile-displayphoto-shrink_800_800/0/1614077548078?e=1620259200&v=beta&t=HHPdCyl22jNZ9AwB5LPzpaDDRjl1kall_lNNsy4V9Is',
   ),
-  User(
+  UserToDisplay(
     username: 'mansi.jadhav',
     fname: 'Mansi',
     bio: 'The greatest thing i do is I write comments and I dont break hearts!',
@@ -39,7 +38,7 @@ final List<User> users = [
     profileImageUrl:
         'https://media-exp1.licdn.com/dms/image/C5603AQFFx9eM8hYSww/profile-displayphoto-shrink_800_800/0/1614458904242?e=1620259200&v=beta&t=gTK3PBhHXJFiu5CoPgtvFdubbNUrr_Wm3SeoXkIUC2k',
   ),
-  User(
+  UserToDisplay(
     username: 'patil.sunita',
     fname: 'Sunita',
     bio: 'The greatest thing i do is I write comments and I dont break hearts!',
@@ -47,7 +46,7 @@ final List<User> users = [
     profileImageUrl:
         'https://media-exp1.licdn.com/dms/image/C5103AQEv6aU2JgFHBQ/profile-displayphoto-shrink_800_800/0/1574517762361?e=1620259200&v=beta&t=uGYtngOSYC0QMUlaDYDZKfWoPnJwtpt_U-f4srI5Pk0',
   ),
-  User(
+  UserToDisplay(
     username: 'sanket.supekar17',
     fname: 'Sanket',
     bio: 'The greatest thing i do is I write comments and I dont break hearts!',
@@ -55,7 +54,7 @@ final List<User> users = [
     profileImageUrl:
         'https://images.unsplash.com/photo-1469460340997-2f854421e72f?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDQwfHRvd0paRnNrcEdnfHxlbnwwfHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
   ),
-  User(
+  UserToDisplay(
     username: 'mangeshD74',
     fname: 'Mangesh',
     bio: 'The greatest thing i do is I write comments and I dont break hearts!',
@@ -63,14 +62,14 @@ final List<User> users = [
     profileImageUrl:
         'https://images.unsplash.com/photo-1614492052748-7c182718eaa0?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDQyfHRvd0paRnNrcEdnfHxlbnwwfHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
   ),
-  User(
+  UserToDisplay(
     username: 'akankasha15',
     fname: 'Akankasha',
     lname: 'Kasar',
     profileImageUrl:
         'https://media-exp1.licdn.com/dms/image/C4D03AQE7B6_15wOr2w/profile-displayphoto-shrink_800_800/0/1607142702827?e=1620259200&v=beta&t=deqTEu_TN5Lvh1YFUmU7AZx1B2uBfGhiLOu8EyLmnek',
   ),
-  User(
+  UserToDisplay(
     username: 'bhatti99',
     fname: 'Hardik',
     bio: 'The greatest thing i do is I write comments and I dont break hearts!',
@@ -78,7 +77,7 @@ final List<User> users = [
     profileImageUrl:
         'https://images.unsplash.com/photo-1614449203851-926c8509ebe2?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDIyfHRvd0paRnNrcEdnfHxlbnwwfHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
   ),
-  User(
+  UserToDisplay(
     username: 'aye_hc',
     bio: 'The greatest thing i do is I write comments and I dont break hearts!',
     fname: 'Harshal',
@@ -86,7 +85,7 @@ final List<User> users = [
     profileImageUrl:
         'https://images.unsplash.com/photo-1568648801431-a7be13ee3a03?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDMxfHRvd0paRnNrcEdnfHxlbnwwfHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
   ),
-  User(
+  UserToDisplay(
     username: 'abhinotion',
     bio: 'The greatest thing i do is I write comments and I dont break hearts!',
     fname: 'Abhinay',
@@ -99,8 +98,9 @@ final List<User> users = [
 final String postUrl =
     'https://images.unsplash.com/photo-1608176762644-c471e49d3227?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1934&q=80';
 
+/*
 final List<BlogToDisplay> blogs = [
-  /*BlogToDisplay(
+  BlogToDisplay(
       author: currentUser, //yash halgaonkar
       title: 'Happyness or Happiness??',
       description:
@@ -196,8 +196,7 @@ final List<BlogToDisplay> blogs = [
     likes: 25,
     headerImageUrl:
         'https://images.unsplash.com/photo-1496008889433-9b938d8ac880?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NXx8c3Bpcml0dWFsfGVufDB8fDB8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-  ),*/
-];
+  ),];*/
 
 final String loren =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lacus libero, placerat ut justo vitae, sagittis convallis magna. Mauris eget quam quis justo finibus efficitur non quis tellus. Pellentesque viverra nulla dolor, id luctus tellus congue quis. Morbi aliquet eu arcu at volutpat. Quisque euismod dictum eleifend. Donec eu sagittis felis, sed viverra libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vestibulum nec ipsum non venenatis. Quisque interdum, ligula in dictum rhoncus, ipsum felis placerat est, in venenatis dui lorem ac eros.';

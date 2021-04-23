@@ -10,7 +10,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
   final BlogRepository _blogRepository = GetIt.I<BlogRepository>();
   HomeScreenCubit() : super(HomeScreenLoading());
 
-  Future<List<BlogToDisplay>> getHomeScreenBlogs(String userId) async {
+  Future<void> getHomeScreenBlogs(String userId) async {
     try {
       emit(HomeScreenLoading());
       final apiresponse = await _blogRepository.getHomeScreenBlog(userId);

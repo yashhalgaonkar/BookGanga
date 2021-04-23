@@ -1,5 +1,4 @@
 import 'package:book_ganga/config/book_ganga.dart';
-import 'package:book_ganga/data/data.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/screens/HomeScreen/cubit/home_screen_cubit.dart';
 import 'package:flutter/material.dart';
@@ -13,9 +12,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  HomeScreenCubit _homeScreenCubit;
   @override
   void initState() {
     super.initState();
+    _homeScreenCubit = BlocProvider.of<HomeScreenCubit>(context);
+    _homeScreenCubit.getHomeScreenBlogs('dummy_user_id');
   }
 
   @override
@@ -25,8 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final homeCubit = BlocProvider.of<HomeScreenCubit>(context);
-    homeCubit.getHomeScreenBlogs('dummy_user_id');
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -60,9 +60,16 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: BlocConsumer<HomeScreenCubit, HomeScreenState>(
           listener: (context, state) {
-            // TODO: implement listener
             if (state is HomeScreenError)
-              print('an error has occured ${state.errorMessage}');
+              ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                content: Text('Error Occured'),
+                action: SnackBarAction(
+                  label: 'Retry',
+                  onPressed: () {
+                    _homeScreenCubit.getHomeScreenBlogs('dummy_user_id');
+                  },
+                ),
+              ));
           },
           builder: (context, state) {
             if (state is HomeScreenLoaded)
@@ -76,12 +83,23 @@ class _HomeScreenState extends State<HomeScreen> {
                   },
                   //separatorBuilder: (_, index) {},
                   itemCount: state.blogs.length);
-            else
-              // state is HomeScreenLoading
+            else if (state is HomeScreenLoading)
               return Center(child: CircularProgressIndicator());
+            else
+              return Center(
+                  child: Column(
+                children: [
+                  Icon(
+                    Icons.error_outline,
+                    color: Colors.red,
+                  ),
+                  Text('Error Occured.'),
+                ],
+              ));
           },
         ),
       ),
+
     );
   }
 }
