@@ -2,7 +2,7 @@ import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/config/color_constant.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/screens/UserProfileScreen/cubit/user_profile_screen_cubit.dart';
-import 'package:book_ganga/ui/widgets/custom_tab_indicator.dart';
+import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -230,7 +230,6 @@ class _TabBarContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width / 3;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 10.0),
@@ -245,29 +244,27 @@ class _TabBarContainer extends StatelessWidget {
               GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w700),
           unselectedLabelStyle:
               GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w600),
-          indicator: RoundedRectangleTabIndicator(
-              weight: 2, width: 30, color: kBlackColor),
+          indicator: MaterialIndicator(
+            color: BookGanga.kAccentColor,
+            tabPosition: TabPosition.bottom,
+            horizontalPadding: 45,
+            paintingStyle: PaintingStyle.fill,
+          ),
+          // indicator: DotIndicator(
+          //   color: BookGanga.kAccentColor,
+          //   radius: 3,
+          //   distanceFromCenter: 16,
+          //   paintingStyle: PaintingStyle.fill,
+          // ),
           tabs: [
             Tab(
-              child: Container(
-                color: Colors.red,
-                margin: EdgeInsets.only(right: 39),
-                child: Text('Blogs'),
-              ),
+              text: 'Blogs',
             ),
             Tab(
-              child: Container(
-                //width: width,
-                margin: EdgeInsets.only(right: 39),
-                child: Text('Reviews'),
-              ),
+              text: 'Reviews',
             ),
             Tab(
-              child: Container(
-                //width: width,
-                margin: EdgeInsets.only(right: 39),
-                child: Text('Shares'),
-              ),
+              text: 'Shares',
             ),
           ]),
     );

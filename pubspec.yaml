@@ -28,13 +28,14 @@ dependencies:
   cached_network_image: ^2.5.0
   cupertino_icons: ^1.0.0
   flutter_bloc: ^7.0.0
-  flutter_svg: ^0.22.0
   get_it: ^6.1.1
   google_fonts: ^2.0.0
   http: ^0.13.1
   line_icons: ^2.0.1
   ionicons: ^0.1.2
   quick_log: null
+  google_nav_bar: ^5.0.4
+  tab_indicator_styler: ^1.0.0
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +54,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/icons/
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

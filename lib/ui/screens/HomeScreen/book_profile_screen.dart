@@ -1,9 +1,10 @@
+import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/config/color_constant.dart';
 import 'package:book_ganga/models/popularbook_model.dart';
-import 'package:book_ganga/ui/widgets/custom_tab_indicator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 class BookProfileScreen extends StatelessWidget {
   final PopularBookModel popularBookModel;
@@ -56,8 +57,9 @@ class BookProfileScreen extends StatelessWidget {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(5),
                                 color: kWhiteColor),
-                            child: SvgPicture.asset(
-                                'assets/icons/icon_back_arrow.svg'),
+                                //TODO: REfactor
+                            // child: SvgPicture.asset(
+                            //     'assets/icons/icon_back_arrow.svg'),
                           ),
                         ),
                       ),
@@ -138,8 +140,13 @@ class BookProfileScreen extends StatelessWidget {
                             fontSize: 14, fontWeight: FontWeight.w700),
                         unselectedLabelStyle: GoogleFonts.openSans(
                             fontSize: 14, fontWeight: FontWeight.w600),
-                        indicator: RoundedRectangleTabIndicator(
-                            weight: 2, width: 30, color: kBlackColor),
+                        indicator: DotIndicator(
+                          color: BookGanga.kAccentColor,
+                          radius: 3,
+                          distanceFromCenter: 15,
+                          paintingStyle: PaintingStyle.fill,
+
+                        ),
                         tabs: [
                           Tab(
                             child: Container(

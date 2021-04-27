@@ -32,9 +32,7 @@ class _MyAppState extends State<MyApp> {
           // for blog view screen
           bodyText2: GoogleFonts.lato(color: BookGanga.kGrey),
         ),
-        iconTheme: IconThemeData(color: BookGanga.kDarkBlack, size: 25.0),
         accentColor: BookGanga.kAccentColor,
-        brightness: Brightness.light,
       ),
       home: MultiBlocProvider(
         providers: [

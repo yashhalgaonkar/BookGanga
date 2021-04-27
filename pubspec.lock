@@ -244,13 +244,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.2"
-  flutter_svg:
-    dependency: "direct main"
-    description:
-      name: flutter_svg
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.22.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -277,6 +270,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.0"
+  google_nav_bar:
+    dependency: "direct main"
+    description:
+      name: google_nav_bar
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.0.4"
   graphs:
     dependency: transitive
     description:
@@ -403,20 +403,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.8.0"
-  path_drawing:
-    dependency: transitive
-    description:
-      name: path_drawing
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.5.0"
-  path_parsing:
-    dependency: transitive
-    description:
-      name: path_parsing
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0"
   path_provider:
     dependency: transitive
     description:
@@ -604,6 +590,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.0+2"
+  tab_indicator_styler:
+    dependency: "direct main"
+    description:
+      name: tab_indicator_styler
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.0"
   term_glyph:
     dependency: transitive
     description:
@@ -690,4 +683,4 @@ packages:
     version: "3.1.0"
 sdks:
   dart: ">=2.12.0 <3.0.0"
-  flutter: ">=1.24.0-7.0"
+  flutter: ">=1.22.2"
