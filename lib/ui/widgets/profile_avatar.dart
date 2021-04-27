@@ -21,35 +21,14 @@ class ProfileAvatar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        //for the blue border
-        CircleAvatar(
-          radius: radius,
-          backgroundColor: BookGanga.kAccentColor,
-          child: CircleAvatar(
-            radius: hasBorder ? radius - 2 : radius,
-            backgroundColor: Colors.grey.shade200,
-            backgroundImage: CachedNetworkImageProvider(imageUrl),
-          ),
-        ),
-
-        //the green dot
-        isActive
-            ? Positioned(
-                bottom: 0.0,
-                right: 0.0,
-                child: Container(
-                  height: 15.0,
-                  width: 15.0,
-                  decoration: BoxDecoration(
-                      color: BookGanga.online,
-                      shape: BoxShape.circle,
-                      border: Border.all(width: 2.0, color: Colors.white)),
-                ),
-              )
-            : const SizedBox.shrink()
-      ],
+    return CircleAvatar(
+      radius: radius,
+      backgroundColor: BookGanga.kAccentColor,
+      child: CircleAvatar(
+        radius: hasBorder ? radius - 2 : radius,
+        backgroundColor: Colors.grey.shade200,
+        backgroundImage: CachedNetworkImageProvider(imageUrl),
+      ),
     );
   }
 }

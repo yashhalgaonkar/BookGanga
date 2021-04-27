@@ -1,9 +1,12 @@
 import 'package:book_ganga/config/book_ganga.dart';
+import 'package:book_ganga/config/color_constant.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/screens/UserProfileScreen/cubit/user_profile_screen_cubit.dart';
+import 'package:book_ganga/ui/widgets/custom_tab_indicator.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class UserProfileScreen extends StatefulWidget {
   final UserToDisplay user;
@@ -199,51 +202,74 @@ class _TabBarContainer extends StatelessWidget {
   final UserToDisplay user;
   const _TabBarContainer({Key key, @required this.user}) : super(key: key);
 
-  Widget _getTab(String label, BuildContext context, int count) {
-    return Tab(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            label,
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
-          const SizedBox(width: 10.0),
-          CircleAvatar(
-            radius: 10.0,
-            backgroundColor: BookGanga.kGrey,
-            child: Text(
-              '$count',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1
-                  .copyWith(fontSize: 10.0),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // Widget _getTab(String label, BuildContext context, int count) {
+  //   return Tab(
+  //     child: Row(
+  //       mainAxisAlignment: MainAxisAlignment.center,
+  //       children: [
+  //         Text(
+  //           label,
+  //           style: Theme.of(context).textTheme.bodyText1,
+  //         ),
+  //         const SizedBox(width: 10.0),
+  //         CircleAvatar(
+  //           radius: 10.0,
+  //           backgroundColor: BookGanga.kGrey,
+  //           child: Text(
+  //             '$count',
+  //             style: Theme.of(context)
+  //                 .textTheme
+  //                 .bodyText1
+  //                 .copyWith(fontSize: 10.0),
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width / 3;
     return Container(
-      //margin: const EdgeInsets.symmetric(horizontal: 10.0),
-      padding: const EdgeInsets.fromLTRB(6.0, 2.0, 6.0, 0.0),
-      child: Column(
-        children: [
-          TabBar(
-            isScrollable: false,
-            indicatorColor: BookGanga.kAccentColor,
-            tabs: [
-              _getTab('Blogs', context, user.numBlogs),
-              _getTab('Reviews', context, user.numReviews),
-              _getTab('Shares', context, user.numShares),
-            ],
-            onTap: (index) => print('Index $index tapped'),
-          ),
-        ],
-      ),
+      width: double.infinity,
+      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      //padding: const EdgeInsets.fromLTRB(6.0, 2.0, 6.0, 0.0),
+      child: TabBar(
+          labelPadding: EdgeInsets.all(0),
+          indicatorPadding: EdgeInsets.all(0),
+          isScrollable: false,
+          labelColor: kBlackColor,
+          unselectedLabelColor: kGreyColor,
+          labelStyle:
+              GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w700),
+          unselectedLabelStyle:
+              GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w600),
+          indicator: RoundedRectangleTabIndicator(
+              weight: 2, width: 30, color: kBlackColor),
+          tabs: [
+            Tab(
+              child: Container(
+                color: Colors.red,
+                margin: EdgeInsets.only(right: 39),
+                child: Text('Blogs'),
+              ),
+            ),
+            Tab(
+              child: Container(
+                //width: width,
+                margin: EdgeInsets.only(right: 39),
+                child: Text('Reviews'),
+              ),
+            ),
+            Tab(
+              child: Container(
+                //width: width,
+                margin: EdgeInsets.only(right: 39),
+                child: Text('Shares'),
+              ),
+            ),
+          ]),
     );
   }
 }

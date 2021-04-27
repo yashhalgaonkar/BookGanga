@@ -17,14 +17,14 @@ class BookGanga {
   // static const Color selectionColor = Colors.black;
 
   //* Most popular colous pallet - COlorHunt.co
-  static const Color kDarkBlack = Color(0xff222831);
+  static const Color kDarkBlack = Color(0xff080708);
   static const Color kBlack = Color(0xff393e46);
-  static const Color kAccentColor = Color(0xff00adb5);
+  static const Color kAccentColor = Color(0xffA663CC);
   static Color kDimAccentColor = Color(0xff00adb5).withOpacity(0.5);
 
-  static const Color kGrey = Color(0xffeeeeee);
-
-  static const Color online = Color(0xFF4BCB1F);
+  //static const Color kGrey = Color(0xffeeeeee);
+  //
+  static const Color kGrey = Colors.black54;
 
   static const LinearGradient storyGradient = LinearGradient(
     begin: Alignment.topCenter,

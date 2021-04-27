@@ -28,7 +28,6 @@ class _ActivityScreenState extends State<ActivityScreen> {
         child: CustomScrollView(
           slivers: [
             //_FollowerRequestWidget(),
-            LabelWidget(label: 'This Week'),
             // _NotificationTile(blog: blogs[0], user: currentUser),
             // _NotificationTile(blog: blogs[1], user: users[1]),
             // _NotificationTile(blog: blogs[2], user: users[2]),

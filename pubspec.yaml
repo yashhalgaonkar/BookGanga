@@ -28,12 +28,13 @@ dependencies:
   cached_network_image: ^2.5.0
   cupertino_icons: ^1.0.0
   flutter_bloc: ^7.0.0
+  flutter_svg: ^0.22.0
   get_it: ^6.1.1
   google_fonts: ^2.0.0
   http: ^0.13.1
-  #material_design_icons_flutter: 4.0.5855
-  eva_icons_flutter: ^3.0.0
-  quick_log: 
+  line_icons: ^2.0.1
+  ionicons: ^0.1.2
+  quick_log: null
 
 dev_dependencies:
   flutter_test:

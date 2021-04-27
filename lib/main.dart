@@ -28,19 +28,19 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: BookGanga.scaffold,
         textTheme: TextTheme(
           //for normal texts
-          bodyText1: GoogleFonts.raleway(color: BookGanga.kDarkBlack, fontWeight: FontWeight.w600),
+          bodyText1: GoogleFonts.lato(color: BookGanga.kDarkBlack),
           // for blog view screen
-          bodyText2: GoogleFonts.merriweather(color: BookGanga.kDarkBlack),
+          bodyText2: GoogleFonts.lato(color: BookGanga.kGrey),
         ),
         iconTheme: IconThemeData(color: BookGanga.kDarkBlack, size: 25.0),
         accentColor: BookGanga.kAccentColor,
         brightness: Brightness.light,
-        bottomAppBarColor: Colors.white,
       ),
       home: MultiBlocProvider(
         providers: [
-          BlocProvider<HomeScreenCubit>(create: (_)=> HomeScreenCubit()),
-          BlocProvider<UserProfileScreenCubit>(create: (_)=> UserProfileScreenCubit()),
+          BlocProvider<HomeScreenCubit>(create: (_) => HomeScreenCubit()),
+          BlocProvider<UserProfileScreenCubit>(
+              create: (_) => UserProfileScreenCubit()),
           //* add new cubits here to provide the thoughout the app
         ],
         child: NavScreen(),

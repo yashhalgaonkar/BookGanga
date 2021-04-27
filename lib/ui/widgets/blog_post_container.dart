@@ -4,7 +4,8 @@ import 'package:book_ganga/ui/screens/BlogReadScreen/blog_read_screen.dart';
 import 'package:book_ganga/ui/screens/UserProfileScreen/user_profile_screen.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:eva_icons_flutter/eva_icons_flutter.dart';
+import 'package:ionicons/ionicons.dart';
+import 'package:line_icons/line_icons.dart';
 
 /// Widget that contains the details of blog in [HomeScreen] and [UserProfileScreen]
 class BlogContainer extends StatefulWidget {
@@ -112,19 +113,8 @@ class _PostDetails extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(
-            EvaIcons.heart,
-            size: 15.0,
-            color: Colors.red,
-          ),
           Text(
-            ' ${blog.numLikes}',
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
-          const SizedBox(width: 5.0),
-          Icon(Icons.comment_outlined, size: 15.0),
-          Text(
-            ' ${blog.numComments}',
+            '${blog.numLikes} Likes and ${blog.numComments} Comments',
             style: Theme.of(context).textTheme.bodyText1,
           ),
           Expanded(
@@ -134,7 +124,7 @@ class _PostDetails extends StatelessWidget {
                 InkWell(
                   onTap: onSendTap,
                   child: Icon(
-                    Icons.send,
+                    LineIcons.share,
                     size: 25.0,
                     color: BookGanga.kBlack,
                   ),
@@ -143,7 +133,7 @@ class _PostDetails extends StatelessWidget {
                 InkWell(
                   onTap: onSavedTap,
                   child: Icon(
-                    (isSaved) ? EvaIcons.bookmark : EvaIcons.bookmarkOutline,
+                    isSaved ? Ionicons.bookmark : Ionicons.bookmark_outline,
                     color: BookGanga.kBlack,
                     size: 25.0,
                   ),
@@ -192,15 +182,6 @@ class _PostHeader extends StatelessWidget {
             '${blog.authorName}',
             style: Theme.of(context).textTheme.bodyText1,
           ),
-          // Expanded(
-          //   child: Align(
-          //     alignment: Alignment.centerRight,
-          //     child: Icon(
-          //       Icons.more_vert_rounded,
-          //       color: BookGanga.kBlack,
-          //     ),
-          //   ),
-          // ),
         ],
       ),
     );
