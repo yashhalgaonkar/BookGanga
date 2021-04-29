@@ -2,7 +2,7 @@ import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/config/color_constant.dart';
 import 'package:book_ganga/models/newbook_model.dart';
 import 'package:book_ganga/models/popularbook_model.dart';
-import 'package:book_ganga/ui/screens/HomeScreen/book_profile_screen.dart';
+import 'package:book_ganga/ui/screens/DiscoverBooksScreen/book_profile_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';

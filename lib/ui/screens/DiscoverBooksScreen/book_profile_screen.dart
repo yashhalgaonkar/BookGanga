@@ -2,7 +2,6 @@ import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/config/color_constant.dart';
 import 'package:book_ganga/models/popularbook_model.dart';
 import 'package:flutter/material.dart';
-
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 

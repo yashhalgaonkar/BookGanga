@@ -79,6 +79,11 @@ class _BlogContainerState extends State<BlogContainer> {
             ),
           ),
 
+          Text(
+            '9 hrs ago',
+            style: const TextStyle(color: Colors.grey, fontSize: 12),
+          ),
+
           //* Divider
           const Divider(
             thickness: 1.0,
