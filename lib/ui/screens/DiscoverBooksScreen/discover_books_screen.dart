@@ -3,6 +3,7 @@ import 'package:book_ganga/config/color_constant.dart';
 import 'package:book_ganga/models/newbook_model.dart';
 import 'package:book_ganga/models/popularbook_model.dart';
 import 'package:book_ganga/ui/screens/DiscoverBooksScreen/book_profile_screen.dart';
+import 'package:book_ganga/ui/screens/HomeScreen/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,41 +18,43 @@ class DiscoverBooksScreen extends StatefulWidget {
 }
 
 class _DiscoverBooksScreenState extends State<DiscoverBooksScreen> {
-  final List<String> categories = [
-    "New",
-    "Trending",
-    "Bestseller",
-    "Romantic",
-    "Horror",
-    "Biography",
-    "Self Help",
-  ];
   int selectedCategory = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        excludeHeaderSemantics: false,
+        elevation: 1.0,
+        backgroundColor: Colors.white,
+        title: Text(
+          'Discover Latest Book',
+          style: GoogleFonts.openSans(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: BookGanga.kDarkBlack),
+        ),
+        // bottom: PreferredSize(
+        //   preferredSize: Size(double.infinity, 30),
+        //   child: Container(
+        //       alignment: Alignment.center,
+        //       width: double.infinity,
+        //       child: Row(
+        //         mainAxisAlignment: MainAxisAlignment.center,
+        //         children: [
+        //           Icon(Ionicons.location_outline),
+        //           Text('Beed, Maharashtra'),
+        //         ],
+        //       )),
+        // ),
+      ),
       body: SafeArea(
         child: Container(
-          padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+          padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
           child: ListView(
             physics: BouncingScrollPhysics(),
             children: <Widget>[
               //* Title of the Screen
-              Row(
-                children: [
-                  IconButton(
-                      padding: EdgeInsets.zero,
-                      icon: Icon(Ionicons.arrow_back_circle),
-                      onPressed: () {}),
-                  Text(
-                    'Discover Latest Book',
-                    style: GoogleFonts.openSans(
-                        fontSize: 22,
-                        fontWeight: FontWeight.w600,
-                        color: BookGanga.kDarkBlack),
-                  ),
-                ],
-              ),
 
               //* Input Field
               Container(
@@ -98,50 +101,19 @@ class _DiscoverBooksScreenState extends State<DiscoverBooksScreen> {
                 ),
               ),
 
-              //* Tabs
-              Container(
-                child: DefaultTabController(
-                  length: 3,
-                  child: TabBar(
-                    labelPadding: EdgeInsets.all(0),
-                    indicatorPadding: EdgeInsets.all(0),
-                    isScrollable: false,
-                    labelColor: kBlackColor,
-                    unselectedLabelColor: kGreyColor,
-                    labelStyle: GoogleFonts.openSans(
-                        fontSize: 14, fontWeight: FontWeight.w700),
-                    unselectedLabelStyle: GoogleFonts.openSans(
-                        fontSize: 14, fontWeight: FontWeight.w600),
-                    indicator: MaterialIndicator(
-                      color: BookGanga.kAccentColor,
-                      tabPosition: TabPosition.bottom,
-                      horizontalPadding: 45,
-                      paintingStyle: PaintingStyle.fill,
-                    ),
-                    // indicator: DotIndicator(
-                    //   color: BookGanga.kAccentColor,
-                    //   radius: 3,
-                    //   distanceFromCenter: 16,
-                    //   paintingStyle: PaintingStyle.fill,
-                    // ),
-                    tabs: [
-                      Tab(
-                        text: 'New',
-                      ),
-                      Tab(
-                        text: 'Trending',
-                      ),
-                      Tab(
-                        text: 'Bestseller',
-                      ),
-                    ],
-                  ),
+              Padding(
+                padding: EdgeInsets.only(top: 20),
+                child: Text(
+                  'Popular',
+                  style: GoogleFonts.openSans(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: kBlackColor),
                 ),
               ),
-
               //*Horizontal ListView
               Container(
-                margin: EdgeInsets.only(top: 20),
+                margin: EdgeInsets.only(top: 10),
                 height: 210,
                 child: ListView.builder(
                     padding: EdgeInsets.only(right: 6),
@@ -164,11 +136,11 @@ class _DiscoverBooksScreenState extends State<DiscoverBooksScreen> {
                     }),
               ),
 
-              //* popular Sections
+              //* available Sections
               Padding(
                 padding: EdgeInsets.only(top: 20),
                 child: Text(
-                  'Popular',
+                  'Available',
                   style: GoogleFonts.openSans(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,
@@ -194,10 +166,15 @@ class _DiscoverBooksScreenState extends State<DiscoverBooksScreen> {
 
 class HorizontalBookTile extends StatelessWidget {
   final int index;
-  const HorizontalBookTile({
+  HorizontalBookTile({
     Key key,
     this.index,
   }) : super(key: key);
+
+  final prominent = GoogleFonts.openSans(
+      fontSize: 12, fontWeight: FontWeight.w600, color: kBlackColor);
+  final grey = GoogleFonts.openSans(
+      fontSize: 12, fontWeight: FontWeight.w400, color: kGreyColor);
 
   @override
   Widget build(BuildContext context) {
@@ -215,14 +192,14 @@ class HorizontalBookTile extends StatelessWidget {
       child: Container(
         //color: Colors.red,
         margin: EdgeInsets.only(bottom: 10),
-        height: 81,
-        width: MediaQuery.of(context).size.width - 50,
+        height: 80,
+        //width: MediaQuery.of(context).size.width - 50,
         //color: kBackgroundColor,
         child: Row(
           children: <Widget>[
             Container(
-              height: 81,
-              width: 62,
+              height: 80,
+              width: 60,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
                   image: DecorationImage(
@@ -234,38 +211,31 @@ class HorizontalBookTile extends StatelessWidget {
             SizedBox(
               width: 20,
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Expanded(
-                  child: Text(
-                    populars[index].title,
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(
+                    'The Alchemist',
                     style: GoogleFonts.openSans(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
                         color: kBlackColor),
                   ),
-                ),
-                Expanded(
-                  child: Text(
-                    populars[index].author,
-                    style: GoogleFonts.openSans(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w400,
-                        color: kGreyColor),
+                  Text(
+                    'Paulo Colheo',
+                    style: prominent,
                   ),
-                ),
-                Expanded(
-                  child: Text(
-                    '\$' + populars[index].price,
-                    style: GoogleFonts.openSans(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        color: kBlackColor),
-                  ),
-                )
-              ],
+                  Text(
+                    'Available with Aditya Giradkar from BookGanga Community',
+                    softWrap: true,
+                    maxLines: 3,
+                    overflow: TextOverflow.ellipsis,
+                    style: grey,
+                  )
+                ],
+              ),
             )
           ],
         ),

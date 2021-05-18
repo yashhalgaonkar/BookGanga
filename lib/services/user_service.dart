@@ -1,20 +1,19 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:book_ganga/core/api_response.dart';
-import 'package:quick_log/quick_log.dart';
 import '../models/user_model.dart';
 
 class UserService {
   static final APIEndpoint = Uri.parse(
       'https://my-json-server.typicode.com/yashhalgaonkar/fake_data/user');
 
-  final log = Logger('UserAPIService');
+  //final log = Logger('UserAPIService');
 
   Future<APIResponse<UserToDisplay>> getUser(String userId) {
-    log.fine('Called getUser');
+    //log.fine('Called getUser');
     return http.get(APIEndpoint).then((data) {
       if (data.statusCode == 200) {
-        log.fine('getUser reqyest siccessfull');
+        //log.fine('getUser reqyest siccessfull');
         final jsonData = json.decode(data.body);
 
         final UserToDisplay user = UserToDisplay.fromJson(jsonData);
