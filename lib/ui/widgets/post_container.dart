@@ -4,6 +4,8 @@ import 'package:book_ganga/ui/screens/BlogReadScreen/blog_read_screen.dart';
 import 'package:book_ganga/ui/widgets/post_image.dart';
 import 'package:book_ganga/ui/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
+import 'package:line_icons/line_icon.dart';
+import 'package:line_icons/line_icons.dart';
 
 class PostContainer extends StatefulWidget {
   final BlogToDisplay blog;
@@ -35,25 +37,74 @@ class _PostContainerState extends State<PostContainer> {
                 isActive: false,
               ),
               const SizedBox(width: 10.0),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Yash Halgaonkar',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText1
-                        .copyWith(fontWeight: FontWeight.w500),
-                  ),
-                  Text(
-                    '@yash.halgaonkar',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyText2
-                        .copyWith(fontSize: 12.0),
-                  ),
-                ],
-              )
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Yash Halgaonkar',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText1
+                          .copyWith(fontWeight: FontWeight.w500),
+                    ),
+                    Text(
+                      '@yash.halgaonkar',
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyText2
+                          .copyWith(fontSize: 12.0),
+                    ),
+                  ],
+                ),
+              ),
+              InkWell(
+                onTap: () {
+                  showModalBottomSheet(
+                      backgroundColor: Colors.transparent,
+                      shape: RoundedRectangleBorder(),
+                      elevation: 10.0,
+                      context: context,
+                      builder: (context) {
+                        return Container(
+                          height: 200,
+                          color: Colors.transparent,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(20),
+                                topRight: Radius.circular(20),
+                              ),
+                            ),
+                            child: ListView(
+                              children: [
+                                ModalListTile(
+                                  title: 'Share',
+                                  iconData: LineIcons.share,
+                                  onTap: () => print('shared'),
+                                ),
+                                ModalListTile(
+                                  title: 'Save for Later',
+                                  iconData: LineIcons.bookmark,
+                                  onTap: () => print('Saved'),
+                                ),
+                                ModalListTile(
+                                  title: 'Report',
+                                  iconData: LineIcons.flag,
+                                  onTap: () => print('Reported'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      });
+                },
+                child: Icon(
+                  Icons.more_vert,
+                  color: BookGanga.kDarkBlack,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 3.0),
@@ -102,6 +153,31 @@ class _PostContainerState extends State<PostContainer> {
             margin: const EdgeInsets.symmetric(vertical: 10.0),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ModalListTile extends StatelessWidget {
+  final String title;
+  final IconData iconData;
+  final Function onTap;
+  const ModalListTile({
+    Key key,
+    this.title,
+    this.iconData,
+    this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: onTap,
+      title: Text(title),
+      horizontalTitleGap: 0.0,
+      leading: Icon(
+        iconData,
+        color: BookGanga.kDarkBlack,
       ),
     );
   }
