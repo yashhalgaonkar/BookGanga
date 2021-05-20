@@ -4,7 +4,6 @@ import 'package:book_ganga/ui/screens/BlogReadScreen/blog_read_screen.dart';
 import 'package:book_ganga/ui/widgets/post_image.dart';
 import 'package:book_ganga/ui/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
-import 'package:line_icons/line_icon.dart';
 import 'package:line_icons/line_icons.dart';
 
 class PostContainer extends StatefulWidget {
@@ -46,7 +45,7 @@ class _PostContainerState extends State<PostContainer> {
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
-                          .copyWith(fontWeight: FontWeight.w500),
+                          .copyWith(fontWeight: FontWeight.w600),
                     ),
                     Text(
                       '@yash.halgaonkar',
@@ -94,6 +93,7 @@ class _PostContainerState extends State<PostContainer> {
                                   iconData: LineIcons.flag,
                                   onTap: () => print('Reported'),
                                 ),
+                                
                               ],
                             ),
                           ),
@@ -173,7 +173,7 @@ class ModalListTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: onTap,
-      title: Text(title),
+      title: Text(title, style: Theme.of(context).textTheme.bodyText1),
       horizontalTitleGap: 0.0,
       leading: Icon(
         iconData,

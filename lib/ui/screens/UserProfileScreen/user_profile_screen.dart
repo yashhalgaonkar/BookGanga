@@ -225,32 +225,6 @@ class _TabBarContainer extends StatelessWidget {
   final UserToDisplay user;
   const _TabBarContainer({Key key, @required this.user}) : super(key: key);
 
-  // Widget _getTab(String label, BuildContext context, int count) {
-  //   return Tab(
-  //     child: Row(
-  //       mainAxisAlignment: MainAxisAlignment.center,
-  //       children: [
-  //         Text(
-  //           label,
-  //           style: Theme.of(context).textTheme.bodyText1,
-  //         ),
-  //         const SizedBox(width: 10.0),
-  //         CircleAvatar(
-  //           radius: 10.0,
-  //           backgroundColor: BookGanga.kGrey,
-  //           child: Text(
-  //             '$count',
-  //             style: Theme.of(context)
-  //                 .textTheme
-  //                 .bodyText1
-  //                 .copyWith(fontSize: 10.0),
-  //           ),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Container(
