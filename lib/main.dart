@@ -28,9 +28,11 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: BookGanga.scaffold,
         textTheme: TextTheme(
           //for normal texts
-          bodyText1: GoogleFonts.lato(color: BookGanga.kDarkBlack),
+          bodyText1:
+              GoogleFonts.openSans(color: BookGanga.kDarkBlack, fontSize: 14.0),
           // for blog view screen
-          bodyText2: GoogleFonts.lato(color: BookGanga.kGrey),
+          bodyText2:
+              GoogleFonts.openSans(color: BookGanga.kGrey, fontSize: 14.0),
         ),
         accentColor: BookGanga.kAccentColor,
       ),

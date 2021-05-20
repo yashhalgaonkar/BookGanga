@@ -2,11 +2,14 @@ import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/config/color_constant.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/screens/UserProfileScreen/cubit/user_profile_screen_cubit.dart';
+import 'package:book_ganga/ui/widgets/post_container.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:loading/indicator/ball_pulse_indicator.dart';
+import 'package:loading/loading.dart';
 
 class UserProfileScreen extends StatefulWidget {
   final UserToDisplay user;
@@ -34,7 +37,7 @@ class _UserProfileScreenState extends State<UserProfileScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 50.0,
+        toolbarHeight: 40.0,
         elevation: 0.0,
         centerTitle: true,
         backgroundColor: BookGanga.scaffold,
@@ -71,7 +74,11 @@ class _UserProfileScreenState extends State<UserProfileScreen>
             if (state is UserProfileScreenLoading ||
                 state is UserProfileScreenInitial)
               return Center(
-                child: CircularProgressIndicator(),
+                //child: CircularProgressIndicator(),
+                child: Loading(
+                    indicator: BallPulseIndicator(),
+                    size: 30.0,
+                    color: BookGanga.kAccentColor),
               );
             else if (state is UserProfileScreenLoaded)
               return DefaultTabController(
@@ -131,32 +138,48 @@ class _ProfileHeader extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           ProfileAvatar(
-            imageUrl: user.profileImageUrl,
-            radius: 50.0,
+            //imageUrl: user.profileImageUrl,
+            imageUrl:
+                'https://media-exp1.licdn.com/dms/image/C4E03AQEpsk7Ff1GdFw/profile-displayphoto-shrink_800_800/0/1593516152439?e=1626912000&v=beta&t=Pwv1wZKgtxnEZge1GBucHNJXDexO6JkyZiqvVDHsa40',
+            radius: 45.0,
           ),
-          const SizedBox(height: 10.0),
+          const SizedBox(height: 5.0),
           //* Full Display name of the user
           Text(
             '${user.fname} ${user.lname}',
-            style:
-                Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 20.0),
+            //'Aditya Giradkar',
+            // style: Theme.of(context)
+            //     .textTheme
+            //     .bodyText1
+            //     .copyWith(fontWeight: FontWeight.w600),
+            style: GoogleFonts.sacramento(
+              fontWeight: FontWeight.w700,
+              fontSize: 28.0,
+              letterSpacing: 1,
+              color: BookGanga.kDarkBlack,
+            ),
           ),
-          //const SizedBox(height: 10.0)
+
+          Text('@${user.username}',
+              style: Theme.of(context).textTheme.bodyText1),
+          const SizedBox(height: 5.0),
           //* bio
-          Text(
-            user.bio,
-            //user.bio,
-            style: Theme.of(context).textTheme.bodyText1,
-            textAlign: TextAlign.center,
-            maxLines: 2,
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(
+              user.bio,
+              //user.bio,
+              style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    fontSize: 12.0,
+                  ),
+              textAlign: TextAlign.center,
+              maxLines: 2,
+            ),
           ),
-          const SizedBox(height: 10.0),
 
           _StatsCorner(
             user: user,
           ),
-
-          const SizedBox(height: 10.0),
 
           _FollowAndMessageButton(),
         ],
@@ -175,7 +198,7 @@ class _StatsCorner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       //color: Colors.amber,
-      margin: const EdgeInsets.symmetric(vertical: 5.0),
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -231,8 +254,9 @@ class _TabBarContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      //color: Colors.red,
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+      //padding: const EdgeInsets.only(horizontal: 10.0),
       //padding: const EdgeInsets.fromLTRB(6.0, 2.0, 6.0, 0.0),
       child: TabBar(
           labelPadding: EdgeInsets.all(0),
@@ -247,7 +271,7 @@ class _TabBarContainer extends StatelessWidget {
           indicator: MaterialIndicator(
             color: BookGanga.kAccentColor,
             tabPosition: TabPosition.bottom,
-            horizontalPadding: 45,
+            horizontalPadding: 50,
             paintingStyle: PaintingStyle.fill,
           ),
           // indicator: DotIndicator(
@@ -324,11 +348,18 @@ class _StatsWidgetTile extends StatelessWidget {
           children: [
             Container(
               alignment: Alignment.center,
-              child: Text(count, style: Theme.of(context).textTheme.bodyText1),
+              child: Text(count,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(fontSize: 12.0)),
             ),
             Text(
               label,
-              style: Theme.of(context).textTheme.bodyText1,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  .copyWith(fontSize: 12.0),
             ),
           ],
         ),
@@ -363,8 +394,22 @@ class _ReviewsListWidget extends StatelessWidget {
 }
 
 class _BlogListWidget extends StatelessWidget {
+  final BlogToDisplay blog = BlogToDisplay(
+      authorImageUrl: '',
+      authorName: 'Yash Halgaonkar',
+      title: 'Happyness or Happiness',
+      blogHeaderImageUrl:
+          'https://images.unsplash.com/photo-1604346782646-13dac014c258?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8Ym84alFLVGFFMFl8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: ListView.builder(
+        padding: const EdgeInsets.only(top: 10.0),
+        itemBuilder: (_, index) {
+          return PostContainer(blog: blog);
+        },
+        itemCount: 25,
+      ),
+    );
   }
 }

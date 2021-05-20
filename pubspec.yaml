@@ -37,6 +37,8 @@ dependencies:
   line_icons: ^2.0.1
   path_provider: ^2.0.1
   tab_indicator_styler: ^1.0.0
+  loading: ^1.0.2
+  skeleton_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:

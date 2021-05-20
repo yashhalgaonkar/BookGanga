@@ -2,6 +2,7 @@ import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class PostImage extends StatelessWidget {
   final BlogToDisplay blog;
@@ -51,10 +52,8 @@ class PostImage extends StatelessWidget {
                     width: textBoxwidth,
                     child: Text(
                       blog.title,
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          .copyWith(fontSize: 20.0, color: Colors.white),
+                      style: GoogleFonts.merriweather(
+                          fontSize: 20, color: Colors.white),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),

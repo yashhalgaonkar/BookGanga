@@ -1,0 +1,108 @@
+import 'package:book_ganga/config/book_ganga.dart';
+import 'package:book_ganga/models/blog_model.dart';
+import 'package:book_ganga/ui/screens/BlogReadScreen/blog_read_screen.dart';
+import 'package:book_ganga/ui/widgets/post_image.dart';
+import 'package:book_ganga/ui/widgets/profile_avatar.dart';
+import 'package:flutter/material.dart';
+
+class PostContainer extends StatefulWidget {
+  final BlogToDisplay blog;
+
+  PostContainer({this.blog});
+  @override
+  _PostContainerState createState() => _PostContainerState();
+}
+
+class _PostContainerState extends State<PostContainer> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      //color: Colors.amber.shade500,
+      padding: const EdgeInsets.fromLTRB(6.0, 0.0, 6.0, 6.0),
+      margin: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          //* Header
+          Row(
+            children: [
+              ProfileAvatar(
+                radius: 16.0,
+                //imageUrl: widget.blog.authorImageUrl,
+                imageUrl:
+                    'https://media-exp1.licdn.com/dms/image/C4E03AQEpsk7Ff1GdFw/profile-displayphoto-shrink_800_800/0/1593516152439?e=1626912000&v=beta&t=Pwv1wZKgtxnEZge1GBucHNJXDexO6JkyZiqvVDHsa40',
+                hasBorder: false,
+                isActive: false,
+              ),
+              const SizedBox(width: 10.0),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Yash Halgaonkar',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText1
+                        .copyWith(fontWeight: FontWeight.w500),
+                  ),
+                  Text(
+                    '@yash.halgaonkar',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyText2
+                        .copyWith(fontSize: 12.0),
+                  ),
+                ],
+              )
+            ],
+          ),
+          const SizedBox(height: 3.0),
+          //* Post Image
+          GestureDetector(
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => BlogViewScreen(
+                  blog: widget.blog,
+                ),
+              ),
+            ),
+            child: PostImage(blog: widget.blog),
+          ),
+          const SizedBox(height: 3.0),
+          //* Description
+          Container(
+            child: Text(
+              'This is a really long discription about what the blog is to attract the users to open and read it!',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  .copyWith(fontSize: 12.0),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
+
+          //* Likes and Comments
+          Text('8,964 likes and 879 comments',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText2
+                  .copyWith(fontSize: 12.0)),
+
+          //* Time or Date
+          Text('9 hrs',
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText2
+                  .copyWith(fontSize: 12.0)),
+          Container(
+            height: 1.0,
+            color: Colors.black12,
+            margin: const EdgeInsets.symmetric(vertical: 10.0),
+          ),
+        ],
+      ),
+    );
+  }
+}

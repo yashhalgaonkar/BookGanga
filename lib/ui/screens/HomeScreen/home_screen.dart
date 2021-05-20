@@ -1,12 +1,13 @@
 import 'package:book_ganga/config/book_ganga.dart';
-import 'package:book_ganga/config/color_constant.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/screens/HomeScreen/cubit/home_screen_cubit.dart';
+import 'package:book_ganga/ui/widgets/post_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
-import '../../widgets/widgets.dart';
+import 'package:loading/indicator/ball_pulse_indicator.dart';
+import 'package:loading/loading.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -31,12 +32,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        toolbarHeight: 50.0,
         title: Text(
-          'BookGanga',
-          style: GoogleFonts.pacifico(
-            fontSize: 24.0,
+          'Book Ganga',
+          style: GoogleFonts.sacramento(
+            fontSize: 28.0,
             color: BookGanga.kDarkBlack,
+            fontWeight: FontWeight.w900,
           ),
         ),
         centerTitle: true,
@@ -66,10 +67,10 @@ class _HomeScreenState extends State<HomeScreen> {
         physics: BouncingScrollPhysics(),
         children: [
           //* Greeting widget
-          _GreetingWidget(),
+          // _GreetingWidget(),
 
           //* saved articles widget
-          _ReadSavedBlogsWidget(),
+          // _ReadSavedBlogsWidget(),
 
           //* List of blogs feeds
           Expanded(
@@ -97,13 +98,19 @@ class _HomeScreenState extends State<HomeScreen> {
                         physics: ScrollPhysics(),
                         itemBuilder: (_, index) {
                           final BlogToDisplay blog = state.blogs[index];
-                          return BlogContainer(blog: blog, paddingTop: false);
+                          //return BlogContainer(blog: blog, paddingTop: false);
+                          return PostContainer(blog: blog);
                         },
                         //separatorBuilder: (_, index) {},
                         itemCount: state.blogs.length);
                   else if (state is HomeScreenLoading)
-                    return Container(
-                        child: Center(child: CircularProgressIndicator()));
+                    return Center(
+                      //child: CircularProgressIndicator(),
+                      child: Loading(
+                          indicator: BallPulseIndicator(),
+                          size: 30.0,
+                          color: BookGanga.kAccentColor),
+                    );
                   else
                     return Center(
                         child: Column(
