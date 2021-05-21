@@ -1,7 +1,9 @@
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/screens/HomeScreen/cubit/home_screen_cubit.dart';
+import 'package:book_ganga/ui/widgets/my_text_button.dart';
 import 'package:book_ganga/ui/widgets/post_container.dart';
+import 'package:book_ganga/ui/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -63,77 +65,128 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: SafeArea(
-          child: ListView(
-        scrollDirection: Axis.vertical,
-        physics: BouncingScrollPhysics(),
-        children: [
-          //* Greeting widget
-          // _GreetingWidget(),
+        child: Container(
+          alignment: Alignment.center,
+          child: BlocConsumer<HomeScreenCubit, HomeScreenState>(
+            listener: (context, state) {
+              if (state is HomeScreenError)
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text('Error Occured'),
+                  action: SnackBarAction(
+                    label: 'Retry',
+                    onPressed: () {
+                      _homeScreenCubit.getHomeScreenBlogs('dummy_user_id');
+                    },
+                  ),
+                ));
+            },
+            builder: (context, state) {
+              if (state is HomeScreenLoaded)
+                return ListView.builder(
+                    padding: const EdgeInsets.only(top: 10),
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                    physics: ScrollPhysics(),
+                    itemBuilder: (_, index) {
+                      //return BlogContainer(blog: blog, paddingTop: false);
+                      if (index % 5 == 0 && index != 0)
+                        return FollowerSuggesstionWidget();
+                      if (index < state.blogs.length) {
+                        final BlogToDisplay blog = state.blogs[index];
+                        return PostContainer(blog: blog);
+                      }
 
-          //* saved articles widget
-          // _ReadSavedBlogsWidget(),
-
-          //* List of blogs feeds
-          Expanded(
-            child: Container(
-              alignment: Alignment.center,
-              child: BlocConsumer<HomeScreenCubit, HomeScreenState>(
-                listener: (context, state) {
-                  if (state is HomeScreenError)
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                      content: Text('Error Occured'),
-                      action: SnackBarAction(
-                        label: 'Retry',
+                      return const SizedBox();
+                    },
+                    //separatorBuilder: (_, index) {},
+                    itemCount: state.blogs.length + state.blogs.length ~/ 5);
+              else if (state is HomeScreenLoading)
+                return Center(
+                  //child: CircularProgressIndicator(),
+                  child: Loading(
+                      indicator: BallPulseIndicator(),
+                      size: 30.0,
+                      color: BookGanga.kAccentColor),
+                );
+              else
+                return Center(
+                  child: Column(
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          Ionicons.reload,
+                        ),
                         onPressed: () {
                           _homeScreenCubit.getHomeScreenBlogs('dummy_user_id');
                         },
                       ),
-                    ));
-                },
-                builder: (context, state) {
-                  if (state is HomeScreenLoaded)
-                    return ListView.builder(
-                        padding: const EdgeInsets.only(top: 10),
-                        shrinkWrap: true,
-                        scrollDirection: Axis.vertical,
-                        physics: ScrollPhysics(),
-                        itemBuilder: (_, index) {
-                          final BlogToDisplay blog = state.blogs[index];
-                          //return BlogContainer(blog: blog, paddingTop: false);
-                          return PostContainer(blog: blog);
-                        },
-                        //separatorBuilder: (_, index) {},
-                        itemCount: state.blogs.length);
-                  else if (state is HomeScreenLoading)
-                    return Center(
-                      //child: CircularProgressIndicator(),
-                      child: Loading(
-                          indicator: BallPulseIndicator(),
-                          size: 30.0,
-                          color: BookGanga.kAccentColor),
-                    );
-                  else
-                    return Center(
-                        child: Column(
-                      children: [
-                        IconButton(
-                          icon: Icon(
-                            Ionicons.reload,
-                          ),
-                          onPressed: () {
-                            _homeScreenCubit
-                                .getHomeScreenBlogs('dummy_user_id');
-                          },
-                        ),
-                        Text('Error Occured.'),
-                      ],
-                    ));
-                },
-              ),
-            ),
+                      Text('Error Occured.'),
+                    ],
+                  ),
+                );
+            },
           ),
-        ],
-      )),
+        ),
+      ),
+    );
+  }
+}
+
+class FollowerSuggesstionWidget extends StatelessWidget {
+  const FollowerSuggesstionWidget({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 10.0),
+      height: 190,
+      child: ListView.builder(
+        itemBuilder: (context, index) {
+          return Container(
+            width: 150,
+            margin: const EdgeInsets.only(right: 10.0),
+            padding: const EdgeInsets.all(6.0),
+            decoration: BoxDecoration(
+              border: Border.all(color: BookGanga.kLightGreyColor),
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            child: Column(
+              children: [
+                ProfileAvatar(
+                    radius: 45,
+                    imageUrl:
+                        'https://media-exp1.licdn.com/dms/image/C4E03AQEpsk7Ff1GdFw/profile-displayphoto-shrink_800_800/0/1593516152439?e=1626912000&v=beta&t=Pwv1wZKgtxnEZge1GBucHNJXDexO6JkyZiqvVDHsa40'),
+                const Spacer(),
+                Text(
+                  'Yash Halgaonkar',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText1
+                      .copyWith(fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  '@yash.halgaonkar',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyText2
+                      .copyWith(fontSize: 12.0),
+                ),
+                const Spacer(),
+                Container(
+                  width: double.maxFinite,
+                  height: 30.0,
+                  child: MyTextButton(
+                      label: 'Follow', onClick: () => print('Follows')),
+                ),
+              ],
+            ),
+          );
+        },
+        itemCount: 10,
+        scrollDirection: Axis.horizontal,
+      ),
     );
   }
 }
