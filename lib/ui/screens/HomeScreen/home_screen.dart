@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
+import 'package:line_icons/line_icons.dart';
 import 'package:loading/indicator/ball_pulse_indicator.dart';
 import 'package:loading/loading.dart';
 
@@ -35,14 +36,14 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text(
           'Book Ganga',
           style: GoogleFonts.sacramento(
-            fontSize: 28.0,
+            fontSize: 32.0,
             color: BookGanga.kDarkBlack,
             fontWeight: FontWeight.w900,
           ),
         ),
         centerTitle: true,
         leading: Icon(
-          Icons.format_quote_sharp,
+          LineIcons.quoteRight,
           color: BookGanga.kDarkBlack,
           size: 24.0,
         ),
@@ -50,12 +51,12 @@ class _HomeScreenState extends State<HomeScreen> {
         elevation: 0,
         actions: [
           IconButton(
-            icon: Icon(Icons.search_rounded),
+            icon: Icon(LineIcons.search),
             onPressed: () {},
             color: BookGanga.kDarkBlack,
           ),
           IconButton(
-            icon: Icon(Icons.people),
+            icon: Icon(LineIcons.userFriends),
             onPressed: () {},
             color: BookGanga.kDarkBlack,
           ),

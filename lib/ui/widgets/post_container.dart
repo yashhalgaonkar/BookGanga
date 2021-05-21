@@ -19,8 +19,11 @@ class _PostContainerState extends State<PostContainer> {
   Widget build(BuildContext context) {
     return Container(
       //color: Colors.amber.shade500,
+      // padding: const EdgeInsets.fromLTRB(6.0, 0.0, 6.0, 6.0),
+      // margin: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
+
+      margin: const EdgeInsets.all(10.0),
       padding: const EdgeInsets.fromLTRB(6.0, 0.0, 6.0, 6.0),
-      margin: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 0.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -41,7 +44,7 @@ class _PostContainerState extends State<PostContainer> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Yash Halgaonkar',
+                      '${widget.blog.authorName}',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText1
@@ -59,6 +62,7 @@ class _PostContainerState extends State<PostContainer> {
               ),
               InkWell(
                 onTap: () {
+                  //* More options Menu
                   showModalBottomSheet(
                       backgroundColor: Colors.transparent,
                       shape: RoundedRectangleBorder(),
@@ -93,7 +97,6 @@ class _PostContainerState extends State<PostContainer> {
                                   iconData: LineIcons.flag,
                                   onTap: () => print('Reported'),
                                 ),
-                                
                               ],
                             ),
                           ),
@@ -101,7 +104,7 @@ class _PostContainerState extends State<PostContainer> {
                       });
                 },
                 child: Icon(
-                  Icons.more_vert,
+                  LineIcons.verticalEllipsis,
                   color: BookGanga.kDarkBlack,
                 ),
               ),
@@ -147,17 +150,20 @@ class _PostContainerState extends State<PostContainer> {
                   .textTheme
                   .bodyText2
                   .copyWith(fontSize: 12.0)),
-          Container(
-            height: 1.0,
-            color: Colors.black12,
-            margin: const EdgeInsets.symmetric(vertical: 10.0),
-          ),
+          // Container(
+          //   height: 1.0,
+          //   color: Colors.black12,
+          //   margin: const EdgeInsets.symmetric(vertical: 10.0),
+          // ),
         ],
       ),
     );
   }
 }
 
+/// This is the ListTile displayed in the list
+/// when user clicked on three vertical dots
+/// for more options
 class ModalListTile extends StatelessWidget {
   final String title;
   final IconData iconData;

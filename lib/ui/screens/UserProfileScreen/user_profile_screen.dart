@@ -131,7 +131,6 @@ class _ProfileHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      //color: Colors.red,
       padding: const EdgeInsets.fromLTRB(10.0, 0.0, 10.0, 10.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -154,8 +153,7 @@ class _ProfileHeader extends StatelessWidget {
             //     .copyWith(fontWeight: FontWeight.w600),
             style: GoogleFonts.sacramento(
               fontWeight: FontWeight.w700,
-              fontSize: 28.0,
-              letterSpacing: 1,
+              fontSize: 32.0,
               color: BookGanga.kDarkBlack,
             ),
           ),

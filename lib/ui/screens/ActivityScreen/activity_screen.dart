@@ -5,6 +5,7 @@ import 'package:book_ganga/ui/widgets/profile_avatar.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ActivityScreen extends StatefulWidget {
   @override
@@ -16,38 +17,58 @@ class _ActivityScreenState extends State<ActivityScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 2.0,
+        elevation: 0.0,
         centerTitle: false,
         title: Text(
           'Activity',
-          style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 20.0),
+          style: GoogleFonts.sacramento(
+            fontSize: 28.0,
+            color: BookGanga.kDarkBlack,
+            fontWeight: FontWeight.w900,
+          ),
         ),
         backgroundColor: BookGanga.scaffold,
       ),
       body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            //_FollowerRequestWidget(),
-            // _NotificationTile(blog: blogs[0], user: currentUser),
-            // _NotificationTile(blog: blogs[1], user: users[1]),
-            // _NotificationTile(blog: blogs[2], user: users[2]),
-            // _NotificationTile(blog: blogs[3], user: users[3]),
-            // _NotificationTile(blog: blogs[4], user: users[4]),
-            // _NotificationTile(blog: blogs[5], user: users[5]),
-            // LabelWidget(label: 'This Month'),
-            // _NotificationTile(blog: blogs[6], user: users[6]),
-            // _NotificationTile(blog: blogs[7], user: users[7]),
-            // _NotificationTile(blog: blogs[8], user: users[8]),
-            // _NotificationTile(blog: blogs[9], user: users[9]),
-            // _NotificationTile(blog: blogs[0], user: users[0]),
-            // _NotificationTile(blog: blogs[1], user: users[1]),
-            // LabelWidget(label: 'Suggetions'),
-            // _ProfileSuggetionWidget(user: users[0]),
-            // _ProfileSuggetionWidget(user: users[1]),
-            // _ProfileSuggetionWidget(user: users[2]),
-            // _ProfileSuggetionWidget(user: users[3]),
-            // _ProfileSuggetionWidget(user: users[4]),
-          ],
+        child: ListView.builder(
+          itemCount: 25,
+          itemBuilder: (context, index) {
+            //TODO: Add fields to these variables
+            final user = UserToDisplay(
+                fname: 'Yash',
+                lname: 'Halgaonkar',
+                profileImageUrl:
+                    'https://media-exp1.licdn.com/dms/image/C4E03AQEpsk7Ff1GdFw/profile-displayphoto-shrink_800_800/0/1593516152439?e=1626912000&v=beta&t=Pwv1wZKgtxnEZge1GBucHNJXDexO6JkyZiqvVDHsa40');
+            final blog = BlogToDisplay();
+            //return _NotificationTile();
+            return ListTile(
+              leading: ProfileAvatar(
+                imageUrl: user.profileImageUrl,
+                radius: 20,
+              ),
+              horizontalTitleGap: 10,
+              title: RichText(
+                text: TextSpan(children: [
+                  TextSpan(
+                      text: 'Yash Halgaonkar ',
+                      style: Theme.of(context).textTheme.bodyText1),
+                  TextSpan(
+                      text: 'has liked your blog - ',
+                      style: Theme.of(context).textTheme.bodyText2),
+                  TextSpan(
+                      text: 'Happiness or Hapyness',
+                      style: Theme.of(context).textTheme.bodyText1),
+                ]),
+              ),
+              // trailing: CachedNetworkImage(
+              //   imageUrl:
+              //       'https://images.unsplash.com/photo-1604346782646-13dac014c258?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8Ym84alFLVGFFMFl8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+              //   height: 50.0,
+              //   width: 50.0,
+              //   fit: BoxFit.cover,
+              // ),
+            );
+          },
         ),
       ),
     );
@@ -80,7 +101,10 @@ class _ProfileSuggetionWidget extends StatelessWidget {
           },
           child: Text(
             'Follow',
-            style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.white),
+            style: Theme.of(context)
+                .textTheme
+                .bodyText1
+                .copyWith(color: Colors.white),
           ),
         ),
       ),
@@ -99,7 +123,10 @@ class _FollowerRequestWidget extends StatelessWidget {
             backgroundColor: Colors.red,
             child: Text(
               '9+',
-              style: Theme.of(context).textTheme.bodyText1.copyWith(color: Colors.white),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText1
+                  .copyWith(color: Colors.white),
             ),
           ),
           title: Text('Follow Requests'),
@@ -122,34 +149,37 @@ class _NotificationTile extends StatelessWidget {
   }) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return SliverToBoxAdapter(
-      child: Container(
-        padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10.0),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ProfileAvatar(imageUrl: user.profileImageUrl),
-            const SizedBox(width: 15.0),
-            Expanded(
-                child:
-                    //Text('${user.username} has liked you blog - ${blog.title}'),
-                    RichText(
-              text: TextSpan(children: [
-                TextSpan(text: '${user.username} ', style: Theme.of(context).textTheme.bodyText1),
-                TextSpan(
-                    text: 'has liked your blog - ', style: Theme.of(context).textTheme.bodyText2),
-                TextSpan(text: '${blog.title}', style: Theme.of(context).textTheme.bodyText1),
-              ]),
-            )),
-            const SizedBox(width: 15.0),
-            CachedNetworkImage(
-              imageUrl: blog.blogHeaderImageUrl,
-              height: 50.0,
-              width: 50.0,
-              fit: BoxFit.cover,
-            )
-          ],
-        ),
+    return Container(
+      padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 10.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ProfileAvatar(imageUrl: user.profileImageUrl),
+          const SizedBox(width: 15.0),
+          Expanded(
+              child:
+                  //Text('${user.username} has liked you blog - ${blog.title}'),
+                  RichText(
+            text: TextSpan(children: [
+              TextSpan(
+                  text: '${user.username} ',
+                  style: Theme.of(context).textTheme.bodyText1),
+              TextSpan(
+                  text: 'has liked your blog - ',
+                  style: Theme.of(context).textTheme.bodyText2),
+              TextSpan(
+                  text: '${blog.title}',
+                  style: Theme.of(context).textTheme.bodyText1),
+            ]),
+          )),
+          const SizedBox(width: 15.0),
+          CachedNetworkImage(
+            imageUrl: blog.blogHeaderImageUrl,
+            height: 50.0,
+            width: 50.0,
+            fit: BoxFit.cover,
+          )
+        ],
       ),
     );
   }
