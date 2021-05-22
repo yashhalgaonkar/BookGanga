@@ -7,7 +7,6 @@ import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:loading/indicator/ball_pulse_indicator.dart';
 import 'package:loading/loading.dart';
 
@@ -114,7 +113,7 @@ class _UserProfileScreenState extends State<UserProfileScreen>
               );
             else if (state is UserProfileScreenError)
               return Center(
-                child: Text(state.errorMessage),
+                child: Text(state.errorMessage + 'NOT MY FAULT'),
               );
           },
         ),
@@ -155,11 +154,7 @@ class _ProfileHeader extends StatelessWidget {
             //     .textTheme
             //     .bodyText1
             //     .copyWith(fontWeight: FontWeight.w600),
-            style: GoogleFonts.sacramento(
-              fontWeight: FontWeight.w700,
-              fontSize: 32.0,
-              color: BookGanga.kDarkBlack,
-            ),
+            style: BookGanga.titleStyle,
           ),
 
           Text('@${user.username}',
@@ -240,10 +235,18 @@ class _TabBarContainer extends StatelessWidget {
           isScrollable: false,
           labelColor: kBlackColor,
           unselectedLabelColor: kGreyColor,
-          labelStyle:
-              GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w700),
-          unselectedLabelStyle:
-              GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w600),
+          // labelStyle:
+          //     GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w700),
+          labelStyle: Theme.of(context)
+              .textTheme
+              .bodyText1
+              .copyWith(fontSize: 14.0, fontWeight: FontWeight.w700),
+          // unselectedLabelStyle:
+          //     GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w600),
+          unselectedLabelStyle: Theme.of(context)
+              .textTheme
+              .bodyText1
+              .copyWith(fontSize: 14.0, fontWeight: FontWeight.w600),
           indicator: MaterialIndicator(
             color: BookGanga.kAccentColor,
             tabPosition: TabPosition.bottom,

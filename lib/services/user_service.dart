@@ -24,5 +24,7 @@ class UserService {
           errorMessage: 'Request failed with response code ${data.statusCode}');
     }).catchError((_) => APIResponse<UserToDisplay>(
         error: true, errorMessage: 'An error occured'));
+
+    
   }
 }

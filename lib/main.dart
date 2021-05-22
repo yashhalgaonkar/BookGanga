@@ -4,7 +4,7 @@ import 'package:book_ganga/ui/screens/HomeScreen/cubit/home_screen_cubit.dart';
 import 'package:book_ganga/ui/screens/UserProfileScreen/cubit/user_profile_screen_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 
 import 'ui/screens/screens.dart';
 
@@ -28,11 +28,13 @@ class _MyAppState extends State<MyApp> {
         scaffoldBackgroundColor: BookGanga.scaffold,
         textTheme: TextTheme(
           //for normal texts
-          bodyText1:
-              GoogleFonts.openSans(color: BookGanga.kDarkBlack, fontSize: 14.0),
+          // bodyText1:
+          //     GoogleFonts.openSans(color: BookGanga.kDarkBlack, fontSize: 14.0),
+          bodyText1: TextStyle(fontFamily: 'OpenSans',fontSize: 14.0,color: BookGanga.kDarkBlack),
           // for blog view screen
-          bodyText2:
-              GoogleFonts.openSans(color: BookGanga.kGrey, fontSize: 14.0),
+          // bodyText2:
+          //     GoogleFonts.openSans(color: BookGanga.kGrey, fontSize: 14.0),
+          bodyText2: TextStyle(fontFamily: 'OpenSans',color: BookGanga.kGrey,fontSize: 14.0),
         ),
         accentColor: BookGanga.kAccentColor,
       ),

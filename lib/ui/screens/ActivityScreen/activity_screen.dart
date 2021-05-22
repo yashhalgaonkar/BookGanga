@@ -5,7 +5,6 @@ import 'package:book_ganga/ui/widgets/profile_avatar.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class ActivityScreen extends StatefulWidget {
   @override
@@ -21,11 +20,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
         centerTitle: false,
         title: Text(
           'Activity',
-          style: GoogleFonts.sacramento(
-            fontSize: 28.0,
-            color: BookGanga.kDarkBlack,
-            fontWeight: FontWeight.w900,
-          ),
+          style: BookGanga.titleStyle,
         ),
         backgroundColor: BookGanga.scaffold,
       ),

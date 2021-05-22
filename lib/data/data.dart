@@ -1,3 +1,5 @@
+import 'package:book_ganga/models/book.dart';
+
 import '../models/models.dart';
 
 final UserToDisplay currentUser = UserToDisplay(
@@ -201,29 +203,30 @@ final List<BlogToDisplay> blogs = [
 final String loren =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin lacus libero, placerat ut justo vitae, sagittis convallis magna. Mauris eget quam quis justo finibus efficitur non quis tellus. Pellentesque viverra nulla dolor, id luctus tellus congue quis. Morbi aliquet eu arcu at volutpat. Quisque euismod dictum eleifend. Donec eu sagittis felis, sed viverra libero. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas vestibulum nec ipsum non venenatis. Quisque interdum, ligula in dictum rhoncus, ipsum felis placerat est, in venenatis dui lorem ac eros.';
 
-final List<Book> books = [
-  Book(title: 'Think and Grow Rich', author: 'Nepolean Hill', coverUrl: 'https://images-na.ssl-images-amazon.com/images/I/71AdHA+qqwL.jpg'),
-  Book(title : 'Harry Potter and the Order Of Pheonix', author: 'J K Rowling', coverUrl:'https://i.guim.co.uk/img/media/a445392b08f934fb517dcae17a7c1f58cd1885c3/0_0_1660_2493/master/1660.jpg?width=700&quality=85&auto=format&fit=max&s=f3043efa7373598a6c69ba1eae3fae4e' ),
-  Book(
-      title: 'The 7 Habits of Highly Effective People',
-      author: 'Stephen R Covey',
-      coverUrl: ''),
-  Book(title: 'Crime and Punishment', author: '', coverUrl: ''),
-  Book(title: 'Elon Musk', author: 'Ashley Vance', coverUrl: ''),
-  Book(title: 'Shoe Dog', author: 'Phil Knight', coverUrl: ''),
-  Book(title: 'Deep Work', author: 'Cal Newport', coverUrl: ''),
-  Book(title: 'Inner Engineering', author: 'Sadhguru', coverUrl: ''),
-  Book(
-      title: 'The Power of our Subconcious Mind',
-      author: 'Joseph Murphy',
-      coverUrl: ''),
-  Book(title: 'Steve Jobs', author: 'Issac Walterson', coverUrl: ''),
-  Book(title: 'Albert Einstine', author: 'Issac Walterson', coverUrl: ''),
-  Book(title: 'Adiyogi', author: 'Sadhguru', coverUrl: ''),
-  Book(title: 'Zero to One', author: '', coverUrl: ''),
-  Book(title: 'Think Like a Monk', author: 'Jay Shetty', coverUrl: ''),
-  Book(title: 'The Infinite Game', author: 'Simon Sinek', coverUrl: ''),
-  Book(title: 'The Stranger', author: 'Albert Camus', coverUrl: ''),
-];
+// final List<Book> books = [
+//   Book(title: 'Think and Grow Rich', author: 'Nepolean Hill', coverUrl: 'https://images-na.ssl-images-amazon.com/images/I/71AdHA+qqwL.jpg'),
+//   Book(title : 'Harry Potter and the Order Of Pheonix', author: 'J K Rowling', coverUrl:'https://i.guim.co.uk/img/media/a445392b08f934fb517dcae17a7c1f58cd1885c3/0_0_1660_2493/master/1660.jpg?width=700&quality=85&auto=format&fit=max&s=f3043efa7373598a6c69ba1eae3fae4e' ),
+//   Book(
+//       title: 'The 7 Habits of Highly Effective People',
+//       author: 'Stephen R Covey',
+//       coverUrl: ''),
+//   Book(title: 'Crime and Punishment', author: '', coverUrl: ''),
+//   Book(title: 'Elon Musk', author: 'Ashley Vance', coverUrl: ''),
+//   Book(title: 'Shoe Dog', author: 'Phil Knight', coverUrl: ''),
+//   Book(title: 'Deep Work', author: 'Cal Newport', coverUrl: ''),
+//   Book(title: 'Inner Engineering', author: 'Sadhguru', coverUrl: ''),
+//   Book(
+//       title: 'The Power of our Subconcious Mind',
+//       author: 'Joseph Murphy',
+//       coverUrl: ''),
+//   Book(title: 'Steve Jobs', author: 'Issac Walterson', coverUrl: ''),
+//   Book(title: 'Albert Einstine', author: 'Issac Walterson', coverUrl: ''),
+//   Book(title: 'Adiyogi', author: 'Sadhguru', coverUrl: ''),
+//   Book(title: 'Zero to One', author: '', coverUrl: ''),
+//   Book(title: 'Think Like a Monk', author: 'Jay Shetty', coverUrl: ''),
+//   Book(title: 'The Infinite Game', author: 'Simon Sinek', coverUrl: ''),
+//   Book(title: 'The Stranger', author: 'Albert Camus', coverUrl: ''),
+// ];
 
-final String dummyBlogText = "Vivamus augue ante, vehicula a ligula vel, ultrices venenatis elit. Praesent facilisis ullamcorper magna, in fringilla arcu sodales finibus. Proin ac pellentesque felis. Maecenas porttitor elit a ante ultrices, egestas elementum augue euismod. Quisque vitae dictum metus, a tempus arcu. Praesent enim mi, suscipit in fermentum ac, sodales ac ante. Nam egestas faucibus orci nec malesuada. Sed eu tincidunt nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque et volutpat purus. Integer in justo leo. Quisque lacinia arcu in elit mollis, in tincidunt turpis tincidunt. Fusce aliquam, metus vitae bibendum aliquet, eros eros semper justo, suscipit elementum ante massa in nisl. Nunc facilisis ex a nisi eleifend, sed pharetra leo ultrices. Pellentesque quis ligula fringilla, laoreet ipsum eu, malesuada erat. Vivamus et lacus sit amet dolor scelerisque rutrum aliquet ac ante. Praesent sed tincidunt mauris, ut accumsan lectus. Sed convallis efficitur metus a tristique. Suspendisse aliquet non metus id pulvinar. Phasellus quis augue sit amet augue pellentesque vehicula eget eu quam. Nullam auctor nulla hendrerit dignissim vulputate. Aliquam non lectus in tortor eleifend rutrum eget at arcu. Aliquam erat volutpat. Phasellus maximus porttitor ultrices.Donec justo enim, molestie et vulputate ac, elementum at felis. Donec mi lectus, semper eget vehicula at, porttitor nec sapien. Proin finibus ante ac libero ultricies, quis cursus risus hendrerit. Vestibulum vitae hendrerit nibh. Duis ac magna ac purus mollis sodales sit amet quis nulla. Proin ut nisl eget ante pharetra placerat. Nunc lacinia in erat eu euismod. Sed ac mauris vel nunc malesuada accumsan.Suspendisse potenti. Donec pulvinar, neque eget dapibus aliquam, quam eros suscipit purus, vitae viverra ex ipsum id libero. Vestibulum viverra nibh a velit aliquam, a iaculis diam luctus. Nunc pharetra convallis vehicula. Aliquam eget urna vitae sem dignissim tincidunt. Morbi ornare ligula a sapien pulvinar interdum. Nullam finibus gravida eros, eget finibus risus tristique ut. Sed sit amet rhoncus lectus, aliquam laoreet ligula. Mauris vitae velit vel urna tincidunt rutrum. Aliquam erat volutpat. In quis massa sagittis orci facilisis tempus. Fusce vestibulum erat eu sagittis dictum.";
+final String dummyBlogText =
+    "Vivamus augue ante, vehicula a ligula vel, ultrices venenatis elit. Praesent facilisis ullamcorper magna, in fringilla arcu sodales finibus. Proin ac pellentesque felis. Maecenas porttitor elit a ante ultrices, egestas elementum augue euismod. Quisque vitae dictum metus, a tempus arcu. Praesent enim mi, suscipit in fermentum ac, sodales ac ante. Nam egestas faucibus orci nec malesuada. Sed eu tincidunt nisl. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Quisque et volutpat purus. Integer in justo leo. Quisque lacinia arcu in elit mollis, in tincidunt turpis tincidunt. Fusce aliquam, metus vitae bibendum aliquet, eros eros semper justo, suscipit elementum ante massa in nisl. Nunc facilisis ex a nisi eleifend, sed pharetra leo ultrices. Pellentesque quis ligula fringilla, laoreet ipsum eu, malesuada erat. Vivamus et lacus sit amet dolor scelerisque rutrum aliquet ac ante. Praesent sed tincidunt mauris, ut accumsan lectus. Sed convallis efficitur metus a tristique. Suspendisse aliquet non metus id pulvinar. Phasellus quis augue sit amet augue pellentesque vehicula eget eu quam. Nullam auctor nulla hendrerit dignissim vulputate. Aliquam non lectus in tortor eleifend rutrum eget at arcu. Aliquam erat volutpat. Phasellus maximus porttitor ultrices.Donec justo enim, molestie et vulputate ac, elementum at felis. Donec mi lectus, semper eget vehicula at, porttitor nec sapien. Proin finibus ante ac libero ultricies, quis cursus risus hendrerit. Vestibulum vitae hendrerit nibh. Duis ac magna ac purus mollis sodales sit amet quis nulla. Proin ut nisl eget ante pharetra placerat. Nunc lacinia in erat eu euismod. Sed ac mauris vel nunc malesuada accumsan.Suspendisse potenti. Donec pulvinar, neque eget dapibus aliquam, quam eros suscipit purus, vitae viverra ex ipsum id libero. Vestibulum viverra nibh a velit aliquam, a iaculis diam luctus. Nunc pharetra convallis vehicula. Aliquam eget urna vitae sem dignissim tincidunt. Morbi ornare ligula a sapien pulvinar interdum. Nullam finibus gravida eros, eget finibus risus tristique ut. Sed sit amet rhoncus lectus, aliquam laoreet ligula. Mauris vitae velit vel urna tincidunt rutrum. Aliquam erat volutpat. In quis massa sagittis orci facilisis tempus. Fusce vestibulum erat eu sagittis dictum.";

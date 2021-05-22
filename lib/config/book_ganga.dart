@@ -33,4 +33,16 @@ class BookGanga {
     colors: [Colors.transparent, Colors.black87],
   );
 
+  // static TextStyle titleStyle = GoogleFonts.sacramento(
+  //   fontWeight: FontWeight.w700,
+  //   fontSize: 32.0,
+  //   color: BookGanga.kDarkBlack,
+  // );
+
+  static TextStyle titleStyle = const TextStyle(
+    fontFamily: 'Sacramento',
+    fontSize: 32.0,
+    color: kDarkBlack,
+    fontWeight: FontWeight.w700,
+  );
 }

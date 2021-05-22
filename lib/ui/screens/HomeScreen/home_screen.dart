@@ -8,7 +8,6 @@ import 'package:book_ganga/ui/widgets/post_container.dart';
 import 'package:book_ganga/ui/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -43,11 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text(
           'Book Ganga',
-          style: GoogleFonts.sacramento(
-            fontSize: 32.0,
-            color: BookGanga.kDarkBlack,
-            fontWeight: FontWeight.w900,
-          ),
+          style: BookGanga.titleStyle,
         ),
         centerTitle: true,
         leading: Icon(
@@ -207,8 +202,7 @@ class _ReadSavedBlogsWidget extends StatelessWidget {
           children: [
             Text(
               'Read your saved blogs here',
-              style: GoogleFonts.openSans(
-                  fontSize: 14, color: BookGanga.kDarkBlack),
+              style: Theme.of(context).textTheme.bodyText1,
             ),
             Expanded(
               child: Container(
@@ -226,33 +220,33 @@ class _ReadSavedBlogsWidget extends StatelessWidget {
   }
 }
 
-class _GreetingWidget extends StatelessWidget {
-  const _GreetingWidget({
-    Key key,
-  }) : super(key: key);
+// class _GreetingWidget extends StatelessWidget {
+//   const _GreetingWidget({
+//     Key key,
+//   }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-        padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'Hi, Yash',
-              style: GoogleFonts.openSans(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w600,
-                  color: Colors.grey),
-            ),
-            Text(
-              'Good Morning!',
-              style: GoogleFonts.openSans(
-                  fontSize: 22,
-                  fontWeight: FontWeight.w600,
-                  color: BookGanga.kDarkBlack),
-            ),
-          ],
-        ));
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Padding(
+//         padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+//         child: Column(
+//           crossAxisAlignment: CrossAxisAlignment.start,
+//           children: <Widget>[
+//             Text(
+//               'Hi, Yash',
+//               style: GoogleFonts.openSans(
+//                   fontSize: 14,
+//                   fontWeight: FontWeight.w600,
+//                   color: Colors.grey),
+//             ),
+//             Text(
+//               'Good Morning!',
+//               style: GoogleFonts.openSans(
+//                   fontSize: 22,
+//                   fontWeight: FontWeight.w600,
+//                   color: BookGanga.kDarkBlack),
+//             ),
+//           ],
+//         ));
+//   }
+// }
