@@ -1,6 +1,8 @@
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/screens/HomeScreen/cubit/home_screen_cubit.dart';
+import 'package:book_ganga/ui/widgets/error_widget.dart';
+import 'package:book_ganga/ui/widgets/loading_widget.dart';
 import 'package:book_ganga/ui/widgets/my_text_button.dart';
 import 'package:book_ganga/ui/widgets/post_container.dart';
 import 'package:book_ganga/ui/widgets/profile_avatar.dart';
@@ -9,8 +11,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:loading/indicator/ball_pulse_indicator.dart';
-import 'package:loading/loading.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -29,6 +29,12 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     super.dispose();
+  }
+
+
+  void _onRefreshTapped()
+  {
+   _homeScreenCubit.getHomeScreenBlogs('dummy_user_id');
   }
 
   @override
@@ -95,34 +101,17 @@ class _HomeScreenState extends State<HomeScreen> {
                         final BlogToDisplay blog = state.blogs[index];
                         return PostContainer(blog: blog);
                       }
-
                       return const SizedBox();
                     },
                     //separatorBuilder: (_, index) {},
                     itemCount: state.blogs.length + state.blogs.length ~/ 5);
               else if (state is HomeScreenLoading)
-                return Center(
-                  //child: CircularProgressIndicator(),
-                  child: Loading(
-                      indicator: BallPulseIndicator(),
-                      size: 30.0,
-                      color: BookGanga.kAccentColor),
-                );
+                return LoadingWidget();
+              //return LoadingStateBuilder();
               else
-                return Center(
-                  child: Column(
-                    children: [
-                      IconButton(
-                        icon: Icon(
-                          Ionicons.reload,
-                        ),
-                        onPressed: () {
-                          _homeScreenCubit.getHomeScreenBlogs('dummy_user_id');
-                        },
-                      ),
-                      Text('Error Occured.'),
-                    ],
-                  ),
+                return MyErrorWidget(
+                  errorMessage: (state as HomeScreenError).errorMessage,
+                  onRefresh: _onRefreshTapped,
                 );
             },
           ),

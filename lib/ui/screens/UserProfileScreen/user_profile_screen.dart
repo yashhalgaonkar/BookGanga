@@ -33,6 +33,16 @@ class _UserProfileScreenState extends State<UserProfileScreen>
     _userProfileScreenCubit.getUser('dummy_user_id');
   }
 
+  Widget _buildLoadingWidget() {
+    return Center(
+      //child: CircularProgressIndicator(),
+      child: Loading(
+          indicator: BallPulseIndicator(),
+          size: 30.0,
+          color: BookGanga.kAccentColor),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -73,13 +83,7 @@ class _UserProfileScreenState extends State<UserProfileScreen>
           builder: (_, state) {
             if (state is UserProfileScreenLoading ||
                 state is UserProfileScreenInitial)
-              return Center(
-                //child: CircularProgressIndicator(),
-                child: Loading(
-                    indicator: BallPulseIndicator(),
-                    size: 30.0,
-                    color: BookGanga.kAccentColor),
-              );
+              return _buildLoadingWidget();
             else if (state is UserProfileScreenLoaded)
               return DefaultTabController(
                 length: 3,
