@@ -2,6 +2,7 @@ import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/config/color_constant.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/screens/UserProfileScreen/cubit/user_profile_screen_cubit.dart';
+import 'package:book_ganga/ui/widgets/error_widget.dart';
 import 'package:book_ganga/ui/widgets/post_container.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
@@ -112,9 +113,10 @@ class _UserProfileScreenState extends State<UserProfileScreen>
                 ),
               );
             else if (state is UserProfileScreenError)
-              return Center(
-                child: Text(state.errorMessage + 'NOT MY FAULT'),
-              );
+              return MyErrorWidget(
+                  onRefresh: () =>
+                      _userProfileScreenCubit.getUser('dummy_user_id'),
+                  errorMessage: state.errorMessage);
           },
         ),
       ),
