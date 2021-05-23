@@ -8,6 +8,7 @@ part 'home_screen_state.dart';
 
 class HomeScreenCubit extends Cubit<HomeScreenState> {
   final BlogRepository _blogRepository = GetIt.I<BlogRepository>();
+  //final BlogService _blogService = GetIt.I<BlogService>();
   HomeScreenCubit() : super(HomeScreenLoading());
 
   Future<void> getHomeScreenBlogs(String userId) async {
@@ -19,7 +20,7 @@ class HomeScreenCubit extends Cubit<HomeScreenState> {
       else
         emit(HomeScreenLoaded(blogs: apiresponse.data));
     } catch (e) {
-      emit(HomeScreenError(errorMessage: e.toString()));
+      emit(HomeScreenError(errorMessage: e.toString() + 'inside the cubit'));
     }
   }
 }

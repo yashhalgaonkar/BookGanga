@@ -55,7 +55,6 @@ class UserService {
 
     return _dio.get(APIEndpoint).then((value) {
       if (value.statusCode == 200) {
-        print('Statuc code 200');
         // final jsonData = json.decode(value.data);
         final UserToDisplay user = UserToDisplay.fromJson(value.data);
         return APIResponse<UserToDisplay>(data: user);

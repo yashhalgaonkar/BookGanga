@@ -17,7 +17,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        centerTitle: false,
+        centerTitle: true,
         title: Text(
           'Activity',
           style: BookGanga.titleStyle,
