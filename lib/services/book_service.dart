@@ -8,15 +8,15 @@ class BookService {
   Future<List<Book>> fetchBooks() async {
     List<Book> books = [];
     await getBookOfCategory(category: 'fiction', books: books);
-    // await getBookOfCategory(category: 'poetry', books: books);
-    // await getBookOfCategory(category: 'design', books: books);
-    // await getBookOfCategory(category: 'cooking', books: books);
-    // await getBookOfCategory(category: 'nature', books: books);
-    // await getBookOfCategory(category: 'philosophy', books: books);
-    // await getBookOfCategory(category: 'education', books: books);
-    // await getBookOfCategory(category: 'comics', books: books);
-    // await getBookOfCategory(category: 'health', books: books);
-    // await getBookOfCategory(category: 'business', books: books);
+    await getBookOfCategory(category: 'poetry', books: books);
+    await getBookOfCategory(category: 'design', books: books);
+    await getBookOfCategory(category: 'cooking', books: books);
+    await getBookOfCategory(category: 'nature', books: books);
+    await getBookOfCategory(category: 'philosophy', books: books);
+    await getBookOfCategory(category: 'education', books: books);
+    await getBookOfCategory(category: 'comics', books: books);
+    await getBookOfCategory(category: 'health', books: books);
+    await getBookOfCategory(category: 'business', books: books);
     return books;
   }
 

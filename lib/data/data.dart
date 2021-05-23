@@ -1,5 +1,3 @@
-import 'package:book_ganga/models/book.dart';
-
 import '../models/models.dart';
 
 final UserToDisplay currentUser = UserToDisplay(

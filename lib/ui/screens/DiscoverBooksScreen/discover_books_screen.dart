@@ -1,6 +1,7 @@
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/models/book.dart';
 import 'package:book_ganga/ui/screens/DiscoverBooksScreen/cubit/discoverbooks_cubit.dart';
+import 'package:book_ganga/ui/screens/DiscoverBooksScreen/widgets/new_book_builder.dart';
 import 'package:book_ganga/ui/widgets/error_widget.dart';
 import 'package:book_ganga/ui/widgets/loading_widget.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,7 @@ class DiscoverBooksScreen extends StatefulWidget {
 
 class _DiscoverBooksScreenState extends State<DiscoverBooksScreen> {
   Future<List<Book>> _future;
-
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   DiscoverbooksCubit _discoverbooksCubit;
 
   @override
@@ -31,6 +32,7 @@ class _DiscoverBooksScreenState extends State<DiscoverBooksScreen> {
   Widget build(BuildContext context) {
     var style = Theme.of(context).textTheme.bodyText1;
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
@@ -44,19 +46,39 @@ class _DiscoverBooksScreenState extends State<DiscoverBooksScreen> {
             if (state is DiscoverbooksInitial || state is DiscoverBooksLoading)
               return LoadingWidget();
             else if (state is DiscoverBooksLoaded)
-              return Column(
-                children: [
-                  MyInputField(),
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: state.discoverNew.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        Book book = state.discoverNew[index];
-                        return Text(book.title);
-                      },
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding:
+                          const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
+                      child: MyInputField(),
                     ),
-                  ),
-                ],
+                    NewBooksBuilder(
+                      sectionTitle: 'Recommended for you',
+                      sectionSubtitle:
+                          'Hunt new books before other bookworms do it!',
+                      alignLeft: true,
+                      books: state.discoverNew,
+                      scaffoldKey: _scaffoldKey,
+                    ),
+                    NewBooksBuilder(
+                      sectionTitle: 'Near You',
+                      sectionSubtitle: 'Find books that are near you!',
+                      alignLeft: false,
+                      books: state.discoverNew,
+                      scaffoldKey: _scaffoldKey,
+                    ),
+                    NewBooksBuilder(
+                      sectionTitle: 'In the Book Club',
+                      sectionSubtitle:
+                          'Books that are available in clubs you have joined',
+                      alignLeft: true,
+                      books: state.discoverNew,
+                      scaffoldKey: _scaffoldKey,
+                    ),
+                  ],
+                ),
               );
             else
               return MyErrorWidget(
