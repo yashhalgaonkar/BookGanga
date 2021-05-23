@@ -1,7 +1,5 @@
-import 'dart:convert';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
-import 'package:http/http.dart' as http;
 import 'package:book_ganga/core/api_response.dart';
 import '../models/user_model.dart';
 
@@ -37,22 +35,6 @@ class UserService {
   //final log = Logger('UserAPIService');
 
   Future<APIResponse<UserToDisplay>> getUser(String userId) {
-    //log.fine('Called getUser');
-    //   return http.get(APIEndpoint).then((data) {
-    //     if (data.statusCode == 200) {
-    //       //log.fine('getUser reqyest siccessfull');
-    //       final jsonData = json.decode(data.body);
-
-    //       final UserToDisplay user = UserToDisplay.fromJson(jsonData);
-    //       return APIResponse(data: user);
-    //     }
-    //     return APIResponse<UserToDisplay>(
-    //         error: true,
-    //         errorMessage: 'Request failed with response code ${data.statusCode}');
-    //   }).catchError((_) => APIResponse<UserToDisplay>(
-    //       error: true, errorMessage: 'An error occured'));
-    // }
-
     return _dio.get(APIEndpoint).then((value) {
       if (value.statusCode == 200) {
         // final jsonData = json.decode(value.data);
