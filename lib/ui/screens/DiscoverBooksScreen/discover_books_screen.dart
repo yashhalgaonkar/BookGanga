@@ -100,24 +100,29 @@ class MyInputField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 40,
+      height: 45,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: BookGanga.kLightGreyColor),
       child: Stack(
         children: <Widget>[
           TextField(
+            autofocus: false,
+            cursorColor: BookGanga.kAccentColor,
+            enabled: true,
+            enableSuggestions: true,
+            keyboardType: TextInputType.text,
             maxLengthEnforcement: MaxLengthEnforcement.enforced,
             style: Theme.of(context)
                 .textTheme
                 .bodyText1
-                .copyWith(fontSize: 12.0, fontWeight: FontWeight.w600),
+                .copyWith(fontSize: 14.0, fontWeight: FontWeight.w600),
             decoration: InputDecoration(
-              contentPadding: EdgeInsets.only(left: 10, bottom: 10),
+              contentPadding: EdgeInsets.only(left: 10, bottom: 5),
               border: InputBorder.none,
               hintText: 'Search book..',
               hintStyle: Theme.of(context).textTheme.bodyText1.copyWith(
-                    fontSize: 12.0,
+                    fontSize: 14.0,
                     fontWeight: FontWeight.w600,
                     color: BookGanga.kGrey,
                   ),
@@ -126,20 +131,15 @@ class MyInputField extends StatelessWidget {
           Positioned(
               right: 0,
               child: Container(
-                height: 40,
-                width: 40,
+                height: 45,
+                width: 45,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
                   color: BookGanga.kAccentColor.withOpacity(0.8),
                 ),
+                child: Icon(LineIcons.search, color: Colors.white),
+                alignment: Alignment.center,
               )),
-          Positioned(
-            top: 8,
-            right: 9,
-            // child: SvgPicture.asset(
-            //     'assets/icons/icon_search_white.svg'),
-            child: Icon(LineIcons.search, color: Colors.white),
-          )
         ],
       ),
     );

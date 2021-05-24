@@ -1,5 +1,6 @@
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/models/book.dart';
+import 'package:book_ganga/ui/screens/DiscoverBooksScreen/book_profile_screen.dart';
 import 'package:book_ganga/ui/widgets/loading_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -135,7 +136,14 @@ class NewBooksBuilder extends StatelessWidget {
                   //         fromLibrary: false,
                   //         bookList: books,
                   //         index: index)),
-                  onPressed: null,
+                  onPressed: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => BookProfileScreen(
+                              book: books[index],
+                              index: index,
+                              bookList: books,
+                              fromLibrary: true))),
                   child: _BookTile(book: books[index]),
                 ),
               ),

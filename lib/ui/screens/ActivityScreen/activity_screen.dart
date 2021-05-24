@@ -37,6 +37,9 @@ class _ActivityScreenState extends State<ActivityScreen> {
             final blog = BlogToDisplay();
             //return _NotificationTile();
             return ListTile(
+              contentPadding: const EdgeInsets.all(10.0),
+              dense: true,
+              onTap: () => print('Tapped'),
               leading: ProfileAvatar(
                 imageUrl: user.profileImageUrl,
                 radius: 20,
@@ -55,13 +58,13 @@ class _ActivityScreenState extends State<ActivityScreen> {
                       style: Theme.of(context).textTheme.bodyText1),
                 ]),
               ),
-              // trailing: CachedNetworkImage(
-              //   imageUrl:
-              //       'https://images.unsplash.com/photo-1604346782646-13dac014c258?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8Ym84alFLVGFFMFl8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-              //   height: 50.0,
-              //   width: 50.0,
-              //   fit: BoxFit.cover,
-              // ),
+              trailing: CachedNetworkImage(
+                imageUrl:
+                    'https://images.unsplash.com/photo-1604346782646-13dac014c258?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8Ym84alFLVGFFMFl8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
+                height: 50.0,
+                width: 50.0,
+                fit: BoxFit.cover,
+              ),
             );
           },
         ),
