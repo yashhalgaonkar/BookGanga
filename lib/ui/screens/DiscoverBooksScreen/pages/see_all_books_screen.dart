@@ -1,14 +1,16 @@
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/models/book.dart';
 import 'package:book_ganga/services/book_service.dart';
-import 'package:book_ganga/ui/widgets/error_widget.dart';
-import 'package:book_ganga/ui/widgets/loading_widget.dart';
+import 'package:book_ganga/ui/screens/DiscoverBooksScreen/pages/book_profile_screen.dart';
+import 'package:book_ganga/ui/widgets/widgets.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
 import 'package:get_it/get_it.dart';
 import 'package:line_icons/line_icons.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 class SeeAllBooksPage extends StatefulWidget {
   final int category;
@@ -41,8 +43,7 @@ class _SeeAllBooksPageState extends State<SeeAllBooksPage>
     super.dispose();
   }
 
-  Widget categoryBuilder(
-      {@required int selectedIndex, String title, TextStyle style}) {
+  Widget categoryBuilder({String title, TextStyle style}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 4),
       child: Text(
@@ -51,167 +52,15 @@ class _SeeAllBooksPageState extends State<SeeAllBooksPage>
     );
   }
 
-  Widget searchBar(TextStyle style) {
-    return GestureDetector(
-      onTap: () {
-        _scaffoldKey.currentState.showSnackBar(SnackBar(
-          content: Text(
-            'Tapped on search',
-            style: style.copyWith(color: Colors.white),
-          ),
-          backgroundColor: BookGanga.kAccentColor,
-          duration: Duration(seconds: 1),
-        ));
-      },
-      child: Container(
-        width: double.maxFinite,
-        height: 40,
-        decoration: BoxDecoration(
-            border: Border.all(color: BookGanga.kAccentColor),
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(20)),
-        margin: EdgeInsets.only(left: 20, right: 20, top: 30, bottom: 20),
-        child: Row(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
-              child: Icon(
-                Icons.search,
-                color: BookGanga.kAccentColor,
-              ),
-            ),
-            Text(
-              'Search books by name',
-              style: style.copyWith(color: BookGanga.kAccentColor),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  // Future<Null> _addToWishList(
-  //     {FirebaseFirestore firestore,
-  //     TextStyle style,
-  //     int index,
-  //     List<Book> bookList,
-  //     BuildContext context,
-  //     ValueNotifier wishlistNotifier}) async {
-  //   var user = FirebaseAuth.instance.currentUser;
-  //   return await firestore
-  //       .collection(UsersCollection)
-  //       .doc(user.uid)
-  //       .collection(WishListCollection)
-  //       .get()
-  //       .then((snapshot) {
-  //     for (var ds in snapshot.docs) {
-  //       if (ds.data()['imgUrl'] == bookList[index].imgUrl) {
-  //         wishlistNotifier.value = Document.present;
-  //         break;
-  //       } else {
-  //         wishlistNotifier.value = Document.absent;
-  //       }
-  //     }
-  //     if (wishlistNotifier.value == Document.present) {
-  //       _scaffoldKey.currentState.showSnackBar(SnackBar(
-  //         content: Text(
-  //           'Book already exist',
-  //           style: style.copyWith(color: Colors.white),
-  //         ),
-  //         backgroundColor: BookGanga.kAccentColor,
-  //         duration: Duration(seconds: 1),
-  //       ));
-  //     } else {
-  //       firestore
-  //           .collection(UsersCollection)
-  //           .doc(user.uid)
-  //           .collection(WishListCollection)
-  //           .add({
-  //         'title': bookList[index].title,
-  //         'author': bookList[index].author,
-  //         'imgUrl': bookList[index].imgUrl,
-  //         'language': bookList[index].language,
-  //         'pages': bookList[index].pages,
-  //         'desc': bookList[index].desc,
-  //         'category': bookList[index].category
-  //       });
-  //       _scaffoldKey.currentState.showSnackBar(SnackBar(
-  //         content: Text(
-  //           'Added to wishlist',
-  //           style: style.copyWith(color: Colors.white),
-  //         ),
-  //         backgroundColor: BookGanga.kAccentColor,
-  //         duration: Duration(seconds: 1),
-  //       ));
-  //     }
-  //   });
-  // }
-
-  // Future<Null> _addToReadingList(
-  //     {FirebaseFirestore firestore,
-  //     TextStyle style,
-  //     int index,
-  //     List<Book> bookList,
-  //     BuildContext context,
-  //     ValueNotifier readingNotifier}) async {
-  //   var user = FirebaseAuth.instance.currentUser;
-  //   return await firestore
-  //       .collection(UsersCollection)
-  //       .doc(user.uid)
-  //       .collection(ReadingCollection)
-  //       .get()
-  //       .then((snapshot) {
-  //     for (var ds in snapshot.docs) {
-  //       if (ds.data()['imgUrl'] == bookList[index].imgUrl) {
-  //         readingNotifier.value = Document.present;
-  //         break;
-  //       } else {
-  //         readingNotifier.value = Document.absent;
-  //       }
-  //     }
-  //     if (readingNotifier.value == Document.present) {
-  //       _scaffoldKey.currentState.showSnackBar(SnackBar(
-  //         content: Text(
-  //           'Book already exist',
-  //           style: style.copyWith(color: Colors.white),
-  //         ),
-  //         backgroundColor: BookGanga.kAccentColor,
-  //         duration: Duration(seconds: 1),
-  //       ));
-  //     } else {
-  //       firestore
-  //           .collection(UsersCollection)
-  //           .doc(user.uid)
-  //           .collection(ReadingCollection)
-  //           .add({
-  //         'title': bookList[index].title,
-  //         'author': bookList[index].author,
-  //         'imgUrl': bookList[index].imgUrl,
-  //         'language': bookList[index].language,
-  //         'pages': bookList[index].pages,
-  //         'desc': bookList[index].desc,
-  //         'category': bookList[index].category
-  //       });
-  //       _scaffoldKey.currentState.showSnackBar(SnackBar(
-  //         content: Text(
-  //           'Added to reading list',
-  //           style: style.copyWith(color: Colors.white),
-  //         ),
-  //         backgroundColor: BookGanga.kAccentColor,
-  //         duration: Duration(seconds: 1),
-  //       ));
-  //     }
-  //   });
-  // }
-
-  Widget bookBuilder({List<Book> books, int index, TextStyle style}) {
+  Widget bookBuilder({Book book, int index, List<Book> books}) {
+    final TextStyle style = Theme.of(context).textTheme.bodyText1;
     return FocusedMenuHolder(
       menuWidth: 170,
       menuItems: <FocusedMenuItem>[
         FocusedMenuItem(
-            title: Text('Add to wish list',
-                style: style.copyWith(color: Colors.black)),
+            title: Text('Add to Book Shelf', style: style),
             onPressed: () {
+              //todo: Complete Add to book shelf
               // _addToWishList(
               //     firestore: _firestore,
               //     index: index,
@@ -224,9 +73,9 @@ class _SeeAllBooksPageState extends State<SeeAllBooksPage>
               size: 16,
             )),
         FocusedMenuItem(
-            title: Text('Add to read next',
-                style: style.copyWith(color: Colors.black)),
+            title: Text('Add to Wish List', style: style),
             onPressed: () {
+              //todo: Complete add to wish list
               // _addToReadingList(
               //     firestore: _firestore,
               //     index: index,
@@ -245,24 +94,34 @@ class _SeeAllBooksPageState extends State<SeeAllBooksPage>
       //         fromLibrary: false,
       //         index: index,
       //         bookList: books)),
-      onPressed: null,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-        child: Image.network(
-          books[index].imgUrl,
-          height: 140,
-          width: 100,
-        ),
-      ),
+
+      //todo: Navigate to BookProfile screen
+      onPressed: () => Navigator.of(context).push(MaterialPageRoute(
+          builder: (_) => BookProfileScreen(
+              book: book, bookList: books, fromLibrary: false, index: index))),
+      child: Container(
+          padding: const EdgeInsets.all(10.0),
+          child: Column(
+            children: [
+              CachedNetworkImage(
+                imageUrl: book.imgUrl,
+                height: 140,
+                width: 100,
+                fit: BoxFit.fill,
+              ),
+              Text(book.title,
+                  style: style, maxLines: 2, overflow: TextOverflow.ellipsis),
+            ],
+          )),
     );
   }
 
-  Widget tabBody({List<Book> books, TextStyle style}) {
+  Widget tabBody({List<Book> books}) {
     return StaggeredGridView.countBuilder(
       padding: EdgeInsets.symmetric(horizontal: 10).copyWith(bottom: 20),
       itemCount: books.length,
       itemBuilder: (BuildContext context, int index) {
-        return bookBuilder(books: books, index: index, style: style);
+        return bookBuilder(book: books[index], books: books, index: index);
       },
       staggeredTileBuilder: (int index) => StaggeredTile.fit(1),
       mainAxisSpacing: 4.0,
@@ -275,122 +134,136 @@ class _SeeAllBooksPageState extends State<SeeAllBooksPage>
   Widget build(BuildContext context) {
     final style = Theme.of(context).textTheme.bodyText1;
     return SafeArea(
-      child: FutureBuilder<List<List<Book>>>(
-        future: _future,
-        builder: (BuildContext context,
-            AsyncSnapshot<List<List<Book>>> listOfBooks) {
-          if (listOfBooks.connectionState == ConnectionState.done) {
-            if (listOfBooks.hasError) {
-              return MyErrorWidget(onRefresh: ()=> print('Refreshed'),);
-            } else {
-              return Scaffold(
-                key: _scaffoldKey,
-                appBar: AppBar(
-                  elevation: 0,
-                  backgroundColor: Colors.transparent,
-                  leading: IconButton(
-                      icon: Icon(
-                        Icons.arrow_back_ios,
-                        size: 16,
-                        color: Colors.black,
-                      ),
-                      onPressed: () => Navigator.pop(context)),
-                ),
-                body: Column(
-                  children: <Widget>[
-                    TabBar(
-                      controller: _tabController,
-                      onTap: (index) {
-                        _currentTab.value = index;
-                      },
-                      isScrollable: true,
-                      labelStyle: style.copyWith(fontWeight: FontWeight.w600),
-                      unselectedLabelStyle: style.copyWith(fontWeight: null),
-                      labelColor: Colors.black,
-                      unselectedLabelColor: Colors.black26,
-                      indicatorColor: BookGanga.kAccentColor,
-                      indicatorSize: TabBarIndicatorSize.label,
-                      indicatorWeight: 4,
-                      tabs: [
-                        categoryBuilder(
-                            selectedIndex: 0, title: 'Fiction', style: style),
-                        categoryBuilder(
-                            selectedIndex: 1, title: 'Poetry', style: style),
-                        categoryBuilder(
-                            selectedIndex: 2, title: 'Design', style: style),
-                        categoryBuilder(
-                            selectedIndex: 3, title: 'Cooking', style: style),
-                        categoryBuilder(
-                            selectedIndex: 4, title: 'Nature', style: style),
-                        categoryBuilder(
-                            selectedIndex: 5,
-                            title: 'Philosophy',
-                            style: style),
-                        categoryBuilder(
-                            selectedIndex: 6, title: 'Education', style: style),
-                        categoryBuilder(
-                            selectedIndex: 7, title: 'Comics', style: style),
-                        categoryBuilder(
-                            selectedIndex: 8, title: 'Health', style: style),
-                        categoryBuilder(
-                            selectedIndex: 9, title: 'Business', style: style),
-                      ],
-                    ),
-                    Expanded(
-                        child: Container(
-                      margin: EdgeInsets.only(top: 30, left: 20, right: 20),
-                      width: double.maxFinite,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30),
-                              topRight: Radius.circular(30)),
-                          color: Colors.white,
-                          boxShadow: [
-                            BoxShadow(
-                                color: Colors.black12,
-                                spreadRadius: 10,
-                                blurRadius: 20)
-                          ]),
-                      child: Column(
-                        children: <Widget>[
-                          searchBar(style),
-                          Expanded(
-                            child: TabBarView(
-                              controller: _tabController,
-                              children: <Widget>[
-                                tabBody(
-                                    books: listOfBooks.data[0], style: style),
-                                tabBody(
-                                    books: listOfBooks.data[1], style: style),
-                                tabBody(
-                                    books: listOfBooks.data[2], style: style),
-                                tabBody(
-                                    books: listOfBooks.data[3], style: style),
-                                tabBody(
-                                    books: listOfBooks.data[4], style: style),
-                                tabBody(
-                                    books: listOfBooks.data[5], style: style),
-                                tabBody(
-                                    books: listOfBooks.data[6], style: style),
-                                tabBody(
-                                    books: listOfBooks.data[7], style: style),
-                                tabBody(
-                                    books: listOfBooks.data[8], style: style),
-                                tabBody(
-                                    books: listOfBooks.data[9], style: style),
-                              ],
-                            ),
-                          ),
+      child: Scaffold(
+        key: _scaffoldKey,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.transparent,
+          leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back_ios,
+                size: 16,
+                color: Colors.black,
+              ),
+              onPressed: () => Navigator.pop(context)),
+        ),
+        body: FutureBuilder<List<List<Book>>>(
+          future: _future,
+          builder: (BuildContext context,
+              AsyncSnapshot<List<List<Book>>> listOfBooks) {
+            if (listOfBooks.connectionState == ConnectionState.done) {
+              if (listOfBooks.hasError) {
+                return MyErrorWidget(
+                  onRefresh: () => print('Refreshed'),
+                );
+              } else {
+                return Container(
+                  child: Column(
+                    children: <Widget>[
+                      //* Tab bar
+                      TabBar(
+                        controller: _tabController,
+                        onTap: (index) {
+                          _currentTab.value = index;
+                        },
+                        isScrollable: true,
+                        labelStyle: style.copyWith(fontWeight: FontWeight.w600),
+                        unselectedLabelStyle: style.copyWith(fontWeight: null),
+                        labelColor: Colors.black,
+                        unselectedLabelColor: Colors.black26,
+                        indicatorColor: BookGanga.kAccentColor,
+                        indicatorSize: TabBarIndicatorSize.label,
+                        indicator: MaterialIndicator(
+                            color: BookGanga.kAccentColor,
+                            horizontalPadding: 10.0),
+                        indicatorWeight: 4,
+                        tabs: [
+                          categoryBuilder(title: 'Fiction', style: style),
+                          categoryBuilder(title: 'Poetry', style: style),
+                          categoryBuilder(title: 'Design', style: style),
+                          categoryBuilder(title: 'Cooking', style: style),
+                          categoryBuilder(title: 'Nature', style: style),
+                          categoryBuilder(title: 'Philosophy', style: style),
+                          categoryBuilder(title: 'Education', style: style),
+                          categoryBuilder(title: 'Comics', style: style),
+                          categoryBuilder(title: 'Health', style: style),
+                          categoryBuilder(title: 'Business', style: style),
                         ],
                       ),
-                    ))
-                  ],
-                ),
-              );
-            }
-          } else
-            return LoadingWidget();
-        },
+
+                      //* Holding Container with a shadow
+                      Expanded(
+                        child: Container(
+                          margin: EdgeInsets.only(top: 30, left: 20, right: 20),
+                          width: double.maxFinite,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(30),
+                                  topRight: Radius.circular(30)),
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                    color: Colors.black12,
+                                    spreadRadius: 10,
+                                    blurRadius: 20)
+                              ]),
+                          child: Column(children: [
+                            //searchBar(style),
+                            //* Search bar
+                            Padding(
+                              padding: const EdgeInsets.all(20.0),
+                              child: MyInputField(),
+                            ),
+
+                            //* Tab bar view with stagerred grid view
+                            Expanded(
+                              child: TabBarView(
+                                controller: _tabController,
+                                children: <Widget>[
+                                  tabBody(
+                                    books: listOfBooks.data[0],
+                                  ),
+                                  tabBody(
+                                    books: listOfBooks.data[1],
+                                  ),
+                                  tabBody(
+                                    books: listOfBooks.data[2],
+                                  ),
+                                  tabBody(
+                                    books: listOfBooks.data[3],
+                                  ),
+                                  tabBody(
+                                    books: listOfBooks.data[4],
+                                  ),
+                                  tabBody(
+                                    books: listOfBooks.data[5],
+                                  ),
+                                  tabBody(
+                                    books: listOfBooks.data[6],
+                                  ),
+                                  tabBody(
+                                    books: listOfBooks.data[7],
+                                  ),
+                                  tabBody(
+                                    books: listOfBooks.data[8],
+                                  ),
+                                  tabBody(
+                                    books: listOfBooks.data[9],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ]),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }
+            } else
+              return LoadingWidget();
+          },
+        ),
       ),
     );
   }

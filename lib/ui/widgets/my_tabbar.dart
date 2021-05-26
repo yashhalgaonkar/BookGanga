@@ -9,6 +9,7 @@ class MyTabBar extends StatelessWidget {
     @required TabController tabController,
     @required this.context,
     @required List<Tab> tabs,
+    this.isScrollable = false,
   })  : _tabController = tabController,
         _tabs = tabs,
         super(key: key);
@@ -16,6 +17,7 @@ class MyTabBar extends StatelessWidget {
   final TabController _tabController;
   final BuildContext context;
   final List<Tab> _tabs;
+  final bool isScrollable;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class MyTabBar extends StatelessWidget {
         controller: _tabController,
         labelPadding: EdgeInsets.all(0),
         indicatorPadding: EdgeInsets.all(0),
-        isScrollable: false,
+        isScrollable: isScrollable,
         labelColor: kBlackColor,
         unselectedLabelColor: kGreyColor,
         // labelStyle:

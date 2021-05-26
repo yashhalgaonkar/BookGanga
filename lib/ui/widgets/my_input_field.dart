@@ -7,7 +7,7 @@ class MyInputField extends StatelessWidget {
   final String hintText;
   const MyInputField({
     Key key,
-    this.hintText,
+    this.hintText = 'Search Books...',
   }) : super(key: key);
 
   @override
