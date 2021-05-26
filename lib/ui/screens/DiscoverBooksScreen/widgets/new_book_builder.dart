@@ -1,6 +1,7 @@
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/models/book.dart';
-import 'package:book_ganga/ui/screens/DiscoverBooksScreen/book_profile_screen.dart';
+import 'package:book_ganga/ui/screens/DiscoverBooksScreen/pages/book_profile_screen.dart';
+import 'package:book_ganga/ui/screens/DiscoverBooksScreen/pages/see_all_books_screen.dart';
 import 'package:book_ganga/ui/widgets/loading_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -61,11 +62,8 @@ class NewBooksBuilder extends StatelessWidget {
                       .copyWith(fontSize: 18.0, fontWeight: FontWeight.w600),
                 ),
                 GestureDetector(
-                  //todo: handle the gesture
-                  // onTap: () => Navigator.pushNamed(
-                  //   context,
-                  //   PageRouter.seeAllBooksPage,
-                  // ),
+                  onTap: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => SeeAllBooksPage())),
                   child: Text(
                     'See all',
                     style: Theme.of(context).textTheme.bodyText1.copyWith(
@@ -128,14 +126,6 @@ class NewBooksBuilder extends StatelessWidget {
                           size: 16,
                         )),
                   ],
-                  //todo: handle the tap
-                  // onPressed: () => Navigator.pushNamed(
-                  //     context, PageRouter.bookPage,
-                  //     arguments: BookPageArguments(
-                  //         book: books[index],
-                  //         fromLibrary: false,
-                  //         bookList: books,
-                  //         index: index)),
                   onPressed: () => Navigator.push(
                       context,
                       MaterialPageRoute(
