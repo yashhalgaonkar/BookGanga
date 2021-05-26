@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/screens/HomeScreen/cubit/home_screen_cubit.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:line_icons/line_icons.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -30,19 +32,27 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-
-  void _onRefreshTapped()
-  {
-   _homeScreenCubit.getHomeScreenBlogs('dummy_user_id');
+  void _onRefreshTapped() {
+    _homeScreenCubit.getHomeScreenBlogs('dummy_user_id');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Book Ganga',
+        // title: Text(
+        //   'Book Ganga',
+        //   style: BookGanga.titleStyle,
+        // ),
+        title: DefaultTextStyle(
           style: BookGanga.titleStyle,
+          child: AnimatedTextKit(
+            repeatForever: false,
+            animatedTexts: [
+              TyperAnimatedText('BookGanga'),
+            ],
+            displayFullTextOnTap: true,
+          ),
         ),
         centerTitle: true,
         leading: Icon(
@@ -87,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.only(top: 10),
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,
-                    physics: ScrollPhysics(),
+                    physics: BouncingScrollPhysics(),
                     itemBuilder: (_, index) {
                       //return BlogContainer(blog: blog, paddingTop: false);
                       if (index % 5 == 0 && index != 0)
@@ -102,7 +112,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: state.blogs.length + state.blogs.length ~/ 5);
               else if (state is HomeScreenLoading)
                 return LoadingWidget();
-              //return LoadingStateBuilder();
               else
                 return MyErrorWidget(
                   errorMessage: (state as HomeScreenError).errorMessage,
