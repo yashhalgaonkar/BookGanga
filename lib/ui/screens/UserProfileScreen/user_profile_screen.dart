@@ -97,7 +97,21 @@ class _UserProfileScreenState extends State<UserProfileScreen>
                   body: Column(
                     children: [
                       //const SizedBox(height: 6.0),
-                      _TabBarContainer(user: state.user),
+                      //_TabBarContainer(user: state.user,tabController: DefaultTabController.of(context)),
+                      MyTabBar(
+                          tabController: DefaultTabController.of(context),
+                          context: context,
+                          tabs: [
+                            Tab(
+                              text: 'Blogs',
+                            ),
+                            Tab(
+                              text: 'Reviews',
+                            ),
+                            Tab(
+                              text: 'Shares',
+                            ),
+                          ]),
                       Expanded(
                         child: TabBarView(
                           children: [
@@ -220,55 +234,59 @@ class _StatsCorner extends StatelessWidget {
 }
 
 ///widget for the tabs - Blog, Reviews, Shares
-class _TabBarContainer extends StatelessWidget {
-  final UserToDisplay user;
-  const _TabBarContainer({Key key, @required this.user}) : super(key: key);
+// class _TabBarContainer extends StatelessWidget {
+//   final UserToDisplay user;
+//   final TabController _tabController;
+//   const _TabBarContainer(
+//       {Key key, @required this.user, @required TabController tabController})
+//       : _tabController = tabController,
+//         super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return TabBar(
-        labelPadding: EdgeInsets.all(0),
-        indicatorPadding: EdgeInsets.all(0),
-        isScrollable: false,
-        labelColor: kBlackColor,
-        unselectedLabelColor: kGreyColor,
-        // labelStyle:
-        //     GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w700),
-        labelStyle: Theme.of(context)
-            .textTheme
-            .bodyText1
-            .copyWith(fontSize: 14.0, fontWeight: FontWeight.w700),
-        // unselectedLabelStyle:
-        //     GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w600),
-        unselectedLabelStyle: Theme.of(context)
-            .textTheme
-            .bodyText1
-            .copyWith(fontSize: 14.0, fontWeight: FontWeight.w600),
-        indicator: MaterialIndicator(
-          color: BookGanga.kAccentColor,
-          tabPosition: TabPosition.bottom,
-          horizontalPadding: 50,
-          paintingStyle: PaintingStyle.fill,
-        ),
-        // indicator: DotIndicator(
-        //   color: BookGanga.kAccentColor,
-        //   radius: 3,
-        //   distanceFromCenter: 16,
-        //   paintingStyle: PaintingStyle.fill,
-        // ),
-        tabs: [
-          Tab(
-            text: 'Blogs',
-          ),
-          Tab(
-            text: 'Reviews',
-          ),
-          Tab(
-            text: 'Shares',
-          ),
-        ]);
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return TabBar(
+//         labelPadding: EdgeInsets.all(0),
+//         indicatorPadding: EdgeInsets.all(0),
+//         isScrollable: false,
+//         labelColor: kBlackColor,
+//         unselectedLabelColor: kGreyColor,
+//         // labelStyle:
+//         //     GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w700),
+//         labelStyle: Theme.of(context)
+//             .textTheme
+//             .bodyText1
+//             .copyWith(fontSize: 14.0, fontWeight: FontWeight.w700),
+//         // unselectedLabelStyle:
+//         //     GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w600),
+//         unselectedLabelStyle: Theme.of(context)
+//             .textTheme
+//             .bodyText1
+//             .copyWith(fontSize: 14.0, fontWeight: FontWeight.w600),
+//         indicator: MaterialIndicator(
+//           color: BookGanga.kAccentColor,
+//           tabPosition: TabPosition.bottom,
+//           horizontalPadding: 50,
+//           paintingStyle: PaintingStyle.fill,
+//         ),
+//         // indicator: DotIndicator(
+//         //   color: BookGanga.kAccentColor,
+//         //   radius: 3,
+//         //   distanceFromCenter: 16,
+//         //   paintingStyle: PaintingStyle.fill,
+//         // ),
+//         tabs: [
+//           Tab(
+//             text: 'Blogs',
+//           ),
+//           Tab(
+//             text: 'Reviews',
+//           ),
+//           Tab(
+//             text: 'Shares',
+//           ),
+//         ]);
+//   }
+// }
 
 /// Follow and message button on the profile
 class _FollowAndMessageButton extends StatelessWidget {
