@@ -28,6 +28,91 @@ class _DiscoverBooksScreenState extends State<DiscoverBooksScreen> {
     _discoverbooksCubit.fetchBooks('dummy_user_id');
   }
 
+  Container buildCategories(TextStyle style) {
+    return Container(
+      //margin: EdgeInsets.only(top: 600),
+      //height: 300,
+      width: double.maxFinite,
+
+      padding: const EdgeInsets.all(10.0),
+      child: Column(
+        children: <Widget>[
+          Text(
+            'Categories',
+            style: style.copyWith(fontSize: 30, color: Colors.black),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          LimitedBox(
+            maxHeight: 100,
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: <Widget>[
+                categoryChild(style: style, title: 'Fiction', category: 0),
+                categoryChild(style: style, title: 'Poetry', category: 1),
+                categoryChild(style: style, title: 'Design', category: 2),
+                categoryChild(style: style, title: 'Cooking', category: 3),
+                categoryChild(style: style, title: 'Nature', category: 4),
+                categoryChild(style: style, title: 'Philosophy', category: 5),
+                categoryChild(style: style, title: 'Education', category: 6),
+                categoryChild(style: style, title: 'Comics', category: 7),
+                categoryChild(style: style, title: 'Health', category: 8),
+                categoryChild(style: style, title: 'Business', category: 9),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget categoryChild({TextStyle style, String title, int category}) {
+    return GestureDetector(
+      // onTap: () => Navigator.pushNamed(context, PageRouter.seeAllBooksPage,
+      //     arguments: category),
+      child: Container(
+        margin: EdgeInsets.all(10),
+        padding: EdgeInsets.all(10),
+        //width: 120,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.black12,
+                  spreadRadius: 1,
+                  blurRadius: 10,
+                  offset: Offset(0, 4))
+            ]),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            // SvgPicture.asset(
+            //   'assets/books/categories/${title.toLowerCase()}.svg',
+            //   height: 30,
+            //   width: 30,
+            // ),
+            // SizedBox(
+            //   height: 10,
+            // ),
+            Text(
+              title,
+              style: style.copyWith(color: Colors.black, fontSize: 20),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Text(
+              '45 books',
+              style: style.copyWith(color: Colors.grey),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     var style = Theme.of(context).textTheme.bodyText1;
@@ -54,6 +139,7 @@ class _DiscoverBooksScreenState extends State<DiscoverBooksScreen> {
                           const EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
                       child: MyInputField(),
                     ),
+                    //buildCategories(Theme.of(context).textTheme.bodyText1),
                     NewBooksBuilder(
                       sectionTitle: 'Recommended for you',
                       sectionSubtitle:

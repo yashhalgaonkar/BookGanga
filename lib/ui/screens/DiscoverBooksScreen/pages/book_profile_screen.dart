@@ -7,8 +7,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
-import 'widgets/book_profile_bottom_buttons.dart';
-import 'widgets/book_profile_tabbar_view.dart';
+import '../widgets/book_profile_bottom_buttons.dart';
+import '../widgets/book_profile_tabbar_view.dart';
 
 class BookProfileScreen extends StatefulWidget {
   final Book book;
