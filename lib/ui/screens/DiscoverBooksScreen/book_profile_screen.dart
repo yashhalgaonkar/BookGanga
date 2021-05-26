@@ -1,7 +1,14 @@
 import 'dart:math';
 import 'package:book_ganga/config/book_ganga.dart';
+import 'package:book_ganga/config/color_constant.dart';
 import 'package:book_ganga/models/book.dart';
+import 'package:book_ganga/ui/widgets/loading_widget.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:tab_indicator_styler/tab_indicator_styler.dart';
+
+import 'widgets/book_profile_bottom_buttons.dart';
+import 'widgets/book_profile_tabbar_view.dart';
 
 class BookProfileScreen extends StatefulWidget {
   final Book book;
@@ -18,7 +25,8 @@ class BookProfileScreen extends StatefulWidget {
   _BookProfileScreenState createState() => _BookProfileScreenState();
 }
 
-class _BookProfileScreenState extends State<BookProfileScreen> with TickerProviderStateMixin {
+class _BookProfileScreenState extends State<BookProfileScreen>
+    with TickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   TabController _tabController;
   AnimationController _animationController;
@@ -26,7 +34,7 @@ class _BookProfileScreenState extends State<BookProfileScreen> with TickerProvid
   @override
   void initState() {
     _pageController = PageController(initialPage: widget.index);
-    _tabController = TabController(length: 2, vsync: this);
+    _tabController = TabController(length: 3, vsync: this);
     _animationController = AnimationController(
         vsync: this,
         lowerBound: 0.09,
@@ -46,7 +54,6 @@ class _BookProfileScreenState extends State<BookProfileScreen> with TickerProvid
 
   @override
   Widget build(BuildContext context) {
-    final style = Theme.of(context).textTheme.bodyText1;
     return SafeArea(
       child: Scaffold(
         key: _scaffoldKey,
@@ -68,10 +75,7 @@ class _BookProfileScreenState extends State<BookProfileScreen> with TickerProvid
           itemBuilder: (BuildContext context, int index) {
             return Stack(
               alignment: Alignment.topCenter,
-              children: <Widget>[
-                buildBookHolder(style, index),
-                buildBookCover(index)
-              ],
+              children: <Widget>[buildBookHolder(index), buildBookCover(index)],
             );
           },
         ),
@@ -79,7 +83,7 @@ class _BookProfileScreenState extends State<BookProfileScreen> with TickerProvid
     );
   }
 
-  Widget buildBookHolder(TextStyle style, int index) {
+  Widget buildBookHolder(int index) {
     return Container(
       height: double.maxFinite,
       margin: EdgeInsets.only(top: 70, left: 20, right: 20),
@@ -96,6 +100,7 @@ class _BookProfileScreenState extends State<BookProfileScreen> with TickerProvid
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
+            //* Category
             Container(
               margin: EdgeInsets.only(bottom: 15),
               color: BookGanga.kAccentColor,
@@ -103,16 +108,13 @@ class _BookProfileScreenState extends State<BookProfileScreen> with TickerProvid
               padding: EdgeInsets.symmetric(horizontal: 10, vertical: 2),
               child: Text(
                 widget.book.category,
-                style: style.copyWith(color: Colors.white),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(color: Colors.white),
               ),
             ),
-            Text(
-              widget.bookList[index].author,
-              style: style.copyWith(color: Colors.grey),
-            ),
-            SizedBox(
-              height: 5,
-            ),
+            //* Book Title
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Text(
@@ -120,11 +122,27 @@ class _BookProfileScreenState extends State<BookProfileScreen> with TickerProvid
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
-                style: style.copyWith(color: Colors.black, fontSize: 20),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(fontSize: 16, fontWeight: FontWeight.w600),
               ),
             ),
+
             SizedBox(
-              height: 30,
+              height: 5,
+            ),
+            //* Author
+            Text(
+              widget.bookList[index].author,
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyText2
+                  .copyWith(fontSize: 14.0),
+            ),
+
+            SizedBox(
+              height: 5,
             ),
             Divider(
               color: Colors.black12,
@@ -133,20 +151,20 @@ class _BookProfileScreenState extends State<BookProfileScreen> with TickerProvid
               thickness: 1,
             ),
             SizedBox(
-              height: 20,
+              height: 5,
             ),
-            buildTabBar(style),
-            // BookPageTabBarView(
-            //   index: index,
-            //   bookList: widget.bookList,
-            //   tabController: _tabController,
-            // ),
-            // BookPageBottomButtons(
-            //   fromLibrary: widget.fromLibrary,
-            //   bookList: widget.bookList,
-            //   scaffoldKey: _scaffoldKey,
-            //   index: index,
-            // )
+            buildTabBar(),
+            BookPageTabBarView(
+              index: index,
+              bookList: widget.bookList,
+              tabController: _tabController,
+            ),
+            BookPageBottomButtons(
+              fromLibrary: widget.fromLibrary,
+              bookList: widget.bookList,
+              scaffoldKey: _scaffoldKey,
+              index: index,
+            )
           ],
         ),
       ),
@@ -157,54 +175,99 @@ class _BookProfileScreenState extends State<BookProfileScreen> with TickerProvid
     return Positioned(
       top: -2,
       child: AnimatedBuilder(
-          builder: (BuildContext context, Widget child) {
-            return Transform(
-              transform: Matrix4.identity()
-                ..setEntry(3, 2, 0.0006)
-                ..rotateY(pi / _animationController.value),
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 200,
-                width: 150,
-                decoration: BoxDecoration(boxShadow: [
-                  BoxShadow(
-                      color: Colors.black12,
-                      spreadRadius: 1,
-                      blurRadius: 20,
-                      offset: Offset(0, 200 * _animationController.value))
-                ]),
-                child: Image.network(
-                  widget.bookList[index].imgUrl,
-                  height: 200,
-                  width: 150,
-                ),
+        builder: (BuildContext context, Widget child) {
+          return Transform(
+            transform: Matrix4.identity()
+              ..setEntry(3, 2, 0.0006)
+              ..rotateY(pi / _animationController.value),
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: 200,
+              width: 150,
+              decoration: BoxDecoration(boxShadow: [
+                BoxShadow(
+                    color: Colors.black12,
+                    spreadRadius: 1,
+                    blurRadius: 20,
+                    offset: Offset(0, 200 * _animationController.value))
+              ]),
+              child: CachedNetworkImage(
+                imageUrl: widget.bookList[index].imgUrl,
+                placeholder: (context, string) => LoadingWidget(),
+                height: 200.0,
+                width: 150.0,
               ),
-            );
-          },
-          animation: CurvedAnimation(
-              parent: _animationController, curve: Curves.easeOut)),
+            ),
+          );
+        },
+        animation: CurvedAnimation(
+            parent: _animationController, curve: Curves.easeOut),
+      ),
     );
   }
 
-  TabBar buildTabBar(TextStyle style) {
+  TabBar buildTabBar() {
+    // return TabBar(
+    //   controller: _tabController,
+    //   labelColor: BookGanga.kAccentColor,
+    //   indicatorColor: BookGanga.kAccentColor,
+    //   indicatorSize: TabBarIndicatorSize.label,
+    //   indicatorWeight: 4,
+    //   labelPadding: EdgeInsets.only(bottom: 5),
+    //   indicatorPadding: EdgeInsets.symmetric(horizontal: 15),
+    //   tabs: [
+    //     Text(
+    //       'About Book',
+    //       style: style.copyWith(color: Colors.black),
+    //     ),
+    //     Text(
+    //       'Owner\'s Info',
+    //       style: style.copyWith(color: Colors.black),
+    //     ),
+    //   ],
+    // );
+
     return TabBar(
-      controller: _tabController,
-      labelColor: BookGanga.kAccentColor,
-      indicatorColor: BookGanga.kAccentColor,
-      indicatorSize: TabBarIndicatorSize.label,
-      indicatorWeight: 4,
-      labelPadding: EdgeInsets.only(bottom: 5),
-      indicatorPadding: EdgeInsets.symmetric(horizontal: 15),
-      tabs: [
-        Text(
-          'About Book',
-          style: style.copyWith(color: Colors.black),
+        controller: _tabController,
+        labelPadding: EdgeInsets.all(0),
+        indicatorPadding: EdgeInsets.all(0),
+        isScrollable: false,
+        labelColor: kBlackColor,
+        unselectedLabelColor: kGreyColor,
+        // labelStyle:
+        //     GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w700),
+        labelStyle: Theme.of(context)
+            .textTheme
+            .bodyText1
+            .copyWith(fontSize: 14.0, fontWeight: FontWeight.w700),
+        // unselectedLabelStyle:
+        //     GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w600),
+        unselectedLabelStyle: Theme.of(context)
+            .textTheme
+            .bodyText1
+            .copyWith(fontSize: 14.0, fontWeight: FontWeight.w600),
+        indicator: MaterialIndicator(
+          color: BookGanga.kAccentColor,
+          tabPosition: TabPosition.bottom,
+          horizontalPadding: 45,
+          paintingStyle: PaintingStyle.fill,
         ),
-        Text(
-          'Owner\'s Info',
-          style: style.copyWith(color: Colors.black),
-        ),
-      ],
-    );
+        // indicator: DotIndicator(
+        //   color: BookGanga.kAccentColor,
+        //   radius: 3,
+        //   distanceFromCenter: 16,
+        //   paintingStyle: PaintingStyle.fill,
+        // ),
+        tabs: [
+          Tab(
+            text: 'About Book',
+          ),
+          Tab(
+            text: 'Reviews',
+          ),
+          Tab(
+            text: 'Available',
+          ),
+        ]);
   }
 }

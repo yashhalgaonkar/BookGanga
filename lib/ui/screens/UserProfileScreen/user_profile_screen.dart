@@ -226,53 +226,47 @@ class _TabBarContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      //color: Colors.red,
-      width: double.infinity,
-      //padding: const EdgeInsets.only(horizontal: 10.0),
-      //padding: const EdgeInsets.fromLTRB(6.0, 2.0, 6.0, 0.0),
-      child: TabBar(
-          labelPadding: EdgeInsets.all(0),
-          indicatorPadding: EdgeInsets.all(0),
-          isScrollable: false,
-          labelColor: kBlackColor,
-          unselectedLabelColor: kGreyColor,
-          // labelStyle:
-          //     GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w700),
-          labelStyle: Theme.of(context)
-              .textTheme
-              .bodyText1
-              .copyWith(fontSize: 14.0, fontWeight: FontWeight.w700),
-          // unselectedLabelStyle:
-          //     GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w600),
-          unselectedLabelStyle: Theme.of(context)
-              .textTheme
-              .bodyText1
-              .copyWith(fontSize: 14.0, fontWeight: FontWeight.w600),
-          indicator: MaterialIndicator(
-            color: BookGanga.kAccentColor,
-            tabPosition: TabPosition.bottom,
-            horizontalPadding: 50,
-            paintingStyle: PaintingStyle.fill,
+    return TabBar(
+        labelPadding: EdgeInsets.all(0),
+        indicatorPadding: EdgeInsets.all(0),
+        isScrollable: false,
+        labelColor: kBlackColor,
+        unselectedLabelColor: kGreyColor,
+        // labelStyle:
+        //     GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w700),
+        labelStyle: Theme.of(context)
+            .textTheme
+            .bodyText1
+            .copyWith(fontSize: 14.0, fontWeight: FontWeight.w700),
+        // unselectedLabelStyle:
+        //     GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w600),
+        unselectedLabelStyle: Theme.of(context)
+            .textTheme
+            .bodyText1
+            .copyWith(fontSize: 14.0, fontWeight: FontWeight.w600),
+        indicator: MaterialIndicator(
+          color: BookGanga.kAccentColor,
+          tabPosition: TabPosition.bottom,
+          horizontalPadding: 50,
+          paintingStyle: PaintingStyle.fill,
+        ),
+        // indicator: DotIndicator(
+        //   color: BookGanga.kAccentColor,
+        //   radius: 3,
+        //   distanceFromCenter: 16,
+        //   paintingStyle: PaintingStyle.fill,
+        // ),
+        tabs: [
+          Tab(
+            text: 'Blogs',
           ),
-          // indicator: DotIndicator(
-          //   color: BookGanga.kAccentColor,
-          //   radius: 3,
-          //   distanceFromCenter: 16,
-          //   paintingStyle: PaintingStyle.fill,
-          // ),
-          tabs: [
-            Tab(
-              text: 'Blogs',
-            ),
-            Tab(
-              text: 'Reviews',
-            ),
-            Tab(
-              text: 'Shares',
-            ),
-          ]),
-    );
+          Tab(
+            text: 'Reviews',
+          ),
+          Tab(
+            text: 'Shares',
+          ),
+        ]);
   }
 }
 
