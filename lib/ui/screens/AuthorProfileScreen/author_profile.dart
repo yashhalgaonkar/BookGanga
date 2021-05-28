@@ -9,17 +9,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading/indicator/ball_pulse_indicator.dart';
 import 'package:loading/loading.dart';
 
-class UserProfileScreen extends StatefulWidget {
+
+
+/// This screen shows the details of the author 
+/// It will be displayed when user clicks on Author name from the Book Details page
+class AuthorProfileScreen extends StatefulWidget {
   final UserToDisplay user;
 
-  UserProfileScreen({
+  AuthorProfileScreen({
     @required this.user,
   });
   @override
-  _UserProfileScreenState createState() => _UserProfileScreenState();
+  _AuthorProfileScreenState createState() => _AuthorProfileScreenState();
 }
 
-class _UserProfileScreenState extends State<UserProfileScreen>
+class _AuthorProfileScreenState extends State<AuthorProfileScreen>
     with SingleTickerProviderStateMixin {
   //UserToDisplay get user => widget.user;
 
