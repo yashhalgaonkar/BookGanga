@@ -9,3 +9,4 @@ export 'TagProfileScreen/tag_profile_screen.dart';
 export 'DiscoverBooksScreen/pages/discover_books_screen.dart';
 export 'DiscoverBooksScreen/pages/see_all_books_screen.dart';
 export 'DiscoverBooksScreen/pages/book_profile_screen.dart';
+export 'BookClub/club_list_screen.dart';

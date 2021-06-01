@@ -1,7 +1,7 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/models/models.dart';
-import 'package:book_ganga/ui/screens/HomeScreen/cubit/home_screen_cubit.dart';
+import 'package:book_ganga/ui/screens/screens.dart';
+import 'cubit/home_screen_cubit.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -25,7 +25,6 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     super.dispose();
-    
   }
 
   void _onRefreshTapped() {
@@ -40,16 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
         //   'Book Ganga',
         //   style: BookGanga.titleStyle,
         // ),
-        title: DefaultTextStyle(
-          style: BookGanga.titleStyle,
-          child: AnimatedTextKit(
-            repeatForever: false,
-            animatedTexts: [
-              TyperAnimatedText('BookGanga'),
-            ],
-            displayFullTextOnTap: true,
-          ),
-        ),
+        title: Text('Book Ganga', style: BookGanga.titleStyle),
         centerTitle: true,
         leading: Icon(
           LineIcons.quoteRight,
@@ -66,7 +56,10 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           IconButton(
             icon: Icon(LineIcons.userFriends),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => BookClubList()));
+            },
             color: BookGanga.kDarkBlack,
           ),
         ],
