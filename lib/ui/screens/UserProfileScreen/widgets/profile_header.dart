@@ -9,24 +9,24 @@ import 'follow_message_buttons.dart';
 /// The main header of the profile screen
 /// with Profile image, Name, bio, stats
 /// and follow and like button
-///
-///
-///
 
-class UserProfileHeader extends StatefulWidget {
+class UserProfileHeader extends StatelessWidget {
   final UserToDisplay user;
-  bool isFollowing;
-
+  final bool isFollowing;
+  final Function onFollowTap,
+      onMessageTap,
+      onFollowersTap,
+      onBookShelfTap,
+      onWishListTap;
   UserProfileHeader({
     @required this.user,
     @required this.isFollowing,
+    @required this.onFollowTap,
+    @required this.onMessageTap,
+    @required this.onFollowersTap,
+    @required this.onBookShelfTap,
+    @required this.onWishListTap,
   });
-
-  @override
-  _UserProfileHeaderState createState() => _UserProfileHeaderState();
-}
-
-class _UserProfileHeaderState extends State<UserProfileHeader> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -44,7 +44,7 @@ class _UserProfileHeaderState extends State<UserProfileHeader> {
           const SizedBox(height: 5.0),
           //* Full Display name of the user
           Text(
-            '${widget.user.fname} ${widget.user.lname}',
+            '${user.fname} ${user.lname}',
             //'Aditya Giradkar',
             // style: Theme.of(context)
             //     .textTheme
@@ -53,14 +53,14 @@ class _UserProfileHeaderState extends State<UserProfileHeader> {
             style: BookGanga.titleStyle,
           ),
 
-          Text('@${widget.user.username}',
+          Text('@${user.username}',
               style: Theme.of(context).textTheme.bodyText1),
           const SizedBox(height: 5.0),
           //* bio
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
-              widget.user.bio,
+              user.bio,
               //user.bio,
               style: Theme.of(context).textTheme.bodyText1.copyWith(
                     fontSize: 12.0,
@@ -70,20 +70,15 @@ class _UserProfileHeaderState extends State<UserProfileHeader> {
             ),
           ),
 
-          StatsRow(user: widget.user),
+          StatsRow(user: user),
 
           FollowAndMessageButton(
-            isFollowing: widget.isFollowing,
-            onFollowTap: () {
-              setState(() {
-                widget.isFollowing = !widget.isFollowing;
-              });
-            },
-            onMessageTap: () {},
+            isFollowing: isFollowing,
+            onFollowTap: onFollowTap,
+            onMessageTap: onMessageTap,
           ),
         ],
       ),
     );
   }
 }
-

@@ -33,8 +33,6 @@ class StatsRow extends StatelessWidget {
   }
 }
 
-
-
 /// Individual Tile in the stats
 class _StatsWidgetTile extends StatelessWidget {
   final String label;
@@ -50,12 +48,12 @@ class _StatsWidgetTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 35.0,
-      //color: Colors.green,
-      //padding: const EdgeInsets.all(8.0),
-      child: GestureDetector(
-        onTap: onClick,
+    return GestureDetector(
+      onTap: onClick,
+      child: Container(
+        height: 35.0,
+        //color: Colors.green,
+        //padding: const EdgeInsets.all(8.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
@@ -80,4 +78,3 @@ class _StatsWidgetTile extends StatelessWidget {
     );
   }
 }
-

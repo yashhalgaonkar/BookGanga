@@ -1,17 +1,19 @@
-import 'package:book_ganga/ui/screens/UserProfileScreen/widgets/profile_header.dart';
+import 'package:book_ganga/ui/screens/UserProfileScreen/book_shelf_screen.dart';
+
+import 'widgets/profile_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading/indicator/ball_pulse_indicator.dart';
 import 'package:loading/loading.dart';
-
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/screens/UserProfileScreen/cubit/user_profile_screen_cubit.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
+import 'widgets/tab_view_widgets.dart';
 
 class UserProfileScreen extends StatefulWidget {
   final UserToDisplay user;
-  final bool isFollowing;
+  bool isFollowing;
 
   UserProfileScreen({
     @required this.user,
@@ -84,9 +86,32 @@ class _UserProfileScreenState extends State<UserProfileScreen>
                   headerSliverBuilder: (context, _) {
                     return [
                       SliverToBoxAdapter(
-                          child: UserProfileHeader(
-                              user: state.user,
-                              isFollowing: widget.isFollowing)),
+                        child: UserProfileHeader(
+                          user: state.user,
+                          isFollowing: widget.isFollowing,
+                          onFollowTap: () {
+                            setState(() {
+                              widget.isFollowing = !widget.isFollowing;
+                            });
+                          },
+                          onMessageTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => BookShelfScreen()));
+                          },
+                          onBookShelfTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => BookShelfScreen()));
+                          },
+                          onWishListTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => BookShelfScreen()));
+                          },
+                          onFollowersTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => BookShelfScreen()));
+                          },
+                        ),
+                      ),
                     ];
                   },
                   body: Column(
@@ -110,10 +135,9 @@ class _UserProfileScreenState extends State<UserProfileScreen>
                       Expanded(
                         child: TabBarView(
                           children: [
-                            _BlogListWidget(),
-                            _ReviewsListWidget(),
-                            //_BlogListWidget(),
-                            _ShareListWidget(),
+                            BlogListWidget(),
+                            ReviewsListWidget(),
+                            ShareListWidget(),
                           ],
                         ),
                       )
@@ -128,55 +152,6 @@ class _UserProfileScreenState extends State<UserProfileScreen>
                   errorMessage: state.errorMessage);
           },
         ),
-      ),
-    );
-  }
-}
-
-
-
-
-/// TAB layout views to be displayed inside each tab
-class _ShareListWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 100.0,
-      //color: Colors.redAccent,
-      alignment: Alignment.center,
-      child: Text('No Shares'),
-    );
-  }
-}
-
-class _ReviewsListWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 100.0,
-      //color: Colors.redAccent,
-      alignment: Alignment.center,
-      child: Text('No Reviews'),
-    );
-  }
-}
-
-class _BlogListWidget extends StatelessWidget {
-  final BlogToDisplay blog = BlogToDisplay(
-      authorImageUrl: '',
-      authorName: 'Yash Halgaonkar',
-      title: 'Happyness or Happiness',
-      blogHeaderImageUrl:
-          'https://images.unsplash.com/photo-1604346782646-13dac014c258?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8Ym84alFLVGFFMFl8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      child: ListView.builder(
-        padding: const EdgeInsets.only(top: 10.0),
-        itemBuilder: (_, index) {
-          return PostContainer(blog: blog);
-        },
-        itemCount: 25,
       ),
     );
   }
