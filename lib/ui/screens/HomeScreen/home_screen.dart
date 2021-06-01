@@ -2,16 +2,11 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/screens/HomeScreen/cubit/home_screen_cubit.dart';
-import 'package:book_ganga/ui/widgets/error_widget.dart';
-import 'package:book_ganga/ui/widgets/loading_widget.dart';
-import 'package:book_ganga/ui/widgets/my_text_button.dart';
-import 'package:book_ganga/ui/widgets/post_container.dart';
-import 'package:book_ganga/ui/widgets/profile_avatar.dart';
+import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:line_icons/line_icons.dart';
-import 'package:shimmer/shimmer.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -168,12 +163,12 @@ class FollowerSuggesstionWidget extends StatelessWidget {
                       .copyWith(fontSize: 12.0),
                 ),
                 const Spacer(),
-                Container(
-                  width: double.maxFinite,
-                  height: 30.0,
-                  child: MyTextButton(
-                      label: 'Follow', onClick: () => print('Follows')),
-                ),
+                // Container(
+                //   width: double.maxFinite,
+                //   height: 30.0,
+                //   child: MyTextButton(
+                //       label: 'Follow', onClick: () => print('Follows')),
+                // ),
               ],
             ),
           );

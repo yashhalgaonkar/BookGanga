@@ -31,11 +31,15 @@ class _MyAppState extends State<MyApp> {
           //for normal texts
           // bodyText1:
           //     GoogleFonts.openSans(color: BookGanga.kDarkBlack, fontSize: 14.0),
-          bodyText1: TextStyle(fontFamily: 'OpenSans',fontSize: 14.0,color: BookGanga.kDarkBlack),
+          bodyText1: TextStyle(
+              fontFamily: 'OpenSans',
+              fontSize: 14.0,
+              color: BookGanga.kDarkBlack),
           // for blog view screen
           // bodyText2:
           //     GoogleFonts.openSans(color: BookGanga.kGrey, fontSize: 14.0),
-          bodyText2: TextStyle(fontFamily: 'OpenSans',color: BookGanga.kGrey,fontSize: 14.0),
+          bodyText2: TextStyle(
+              fontFamily: 'OpenSans', color: BookGanga.kGrey, fontSize: 14.0),
         ),
         accentColor: BookGanga.kAccentColor,
       ),
@@ -44,7 +48,7 @@ class _MyAppState extends State<MyApp> {
           BlocProvider<HomeScreenCubit>(create: (_) => HomeScreenCubit()),
           BlocProvider<UserProfileScreenCubit>(
               create: (_) => UserProfileScreenCubit()),
-          BlocProvider<DiscoverbooksCubit>(create: (_)=> DiscoverbooksCubit()),
+          BlocProvider<DiscoverbooksCubit>(create: (_) => DiscoverbooksCubit()),
           //* add new cubits here to provide the thoughout the app
         ],
         child: NavScreen(),

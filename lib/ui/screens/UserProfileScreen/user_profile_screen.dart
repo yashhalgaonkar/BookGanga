@@ -11,9 +11,11 @@ import 'package:loading/loading.dart';
 
 class UserProfileScreen extends StatefulWidget {
   final UserToDisplay user;
+  final bool isFollowing;
 
   UserProfileScreen({
     @required this.user,
+    this.isFollowing = true,
   });
   @override
   _UserProfileScreenState createState() => _UserProfileScreenState();
@@ -49,13 +51,6 @@ class _UserProfileScreenState extends State<UserProfileScreen>
         elevation: 0.0,
         centerTitle: true,
         backgroundColor: BookGanga.scaffold,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          color: Colors.black,
-          onPressed: () {
-            print('Back pressed');
-          },
-        ),
         actions: [
           IconButton(
             icon: Icon(Icons.more_vert_sharp),
@@ -89,7 +84,9 @@ class _UserProfileScreenState extends State<UserProfileScreen>
                   headerSliverBuilder: (context, _) {
                     return [
                       SliverToBoxAdapter(
-                          child: _ProfileHeader(user: state.user)),
+                          child: _ProfileHeader(
+                              user: state.user,
+                              isFollowing: widget.isFollowing)),
                     ];
                   },
                   body: Column(
@@ -139,12 +136,20 @@ class _UserProfileScreenState extends State<UserProfileScreen>
 /// The main header of the profile screen
 /// with Profile image, Name, bio, stats
 /// and follow and like button
-class _ProfileHeader extends StatelessWidget {
+class _ProfileHeader extends StatefulWidget {
   final UserToDisplay user;
+  final bool isFollowing;
 
   _ProfileHeader({
-    this.user,
+    @required this.user,
+    @required this.isFollowing,
   });
+
+  @override
+  __ProfileHeaderState createState() => __ProfileHeaderState();
+}
+
+class __ProfileHeaderState extends State<_ProfileHeader> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -162,7 +167,7 @@ class _ProfileHeader extends StatelessWidget {
           const SizedBox(height: 5.0),
           //* Full Display name of the user
           Text(
-            '${user.fname} ${user.lname}',
+            '${widget.user.fname} ${widget.user.lname}',
             //'Aditya Giradkar',
             // style: Theme.of(context)
             //     .textTheme
@@ -171,14 +176,14 @@ class _ProfileHeader extends StatelessWidget {
             style: BookGanga.titleStyle,
           ),
 
-          Text('@${user.username}',
+          Text('@${widget.user.username}',
               style: Theme.of(context).textTheme.bodyText1),
           const SizedBox(height: 5.0),
           //* bio
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Text(
-              user.bio,
+              widget.user.bio,
               //user.bio,
               style: Theme.of(context).textTheme.bodyText1.copyWith(
                     fontSize: 12.0,
@@ -188,11 +193,9 @@ class _ProfileHeader extends StatelessWidget {
             ),
           ),
 
-          _StatsCorner(
-            user: user,
-          ),
+          _StatsRow(user: widget.user),
 
-          _FollowAndMessageButton(),
+          _FollowAndMessageButton(isFollowing: widget.isFollowing),
         ],
       ),
     );
@@ -201,15 +204,15 @@ class _ProfileHeader extends StatelessWidget {
 
 /// This widget tells that stats of the user
 /// Number of follwers, number of books in bookshelf and wish list
-class _StatsCorner extends StatelessWidget {
+class _StatsRow extends StatelessWidget {
   final UserToDisplay user;
 
-  _StatsCorner({@required this.user});
+  _StatsRow({@required this.user});
   @override
   Widget build(BuildContext context) {
     return Container(
       //color: Colors.amber,
-      margin: const EdgeInsets.symmetric(vertical: 10.0),
+      margin: const EdgeInsets.symmetric(vertical: 15.0),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -231,84 +234,70 @@ class _StatsCorner extends StatelessWidget {
   }
 }
 
-///widget for the tabs - Blog, Reviews, Shares
-// class _TabBarContainer extends StatelessWidget {
-//   final UserToDisplay user;
-//   final TabController _tabController;
-//   const _TabBarContainer(
-//       {Key key, @required this.user, @required TabController tabController})
-//       : _tabController = tabController,
-//         super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return TabBar(
-//         labelPadding: EdgeInsets.all(0),
-//         indicatorPadding: EdgeInsets.all(0),
-//         isScrollable: false,
-//         labelColor: kBlackColor,
-//         unselectedLabelColor: kGreyColor,
-//         // labelStyle:
-//         //     GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w700),
-//         labelStyle: Theme.of(context)
-//             .textTheme
-//             .bodyText1
-//             .copyWith(fontSize: 14.0, fontWeight: FontWeight.w700),
-//         // unselectedLabelStyle:
-//         //     GoogleFonts.openSans(fontSize: 14, fontWeight: FontWeight.w600),
-//         unselectedLabelStyle: Theme.of(context)
-//             .textTheme
-//             .bodyText1
-//             .copyWith(fontSize: 14.0, fontWeight: FontWeight.w600),
-//         indicator: MaterialIndicator(
-//           color: BookGanga.kAccentColor,
-//           tabPosition: TabPosition.bottom,
-//           horizontalPadding: 50,
-//           paintingStyle: PaintingStyle.fill,
-//         ),
-//         // indicator: DotIndicator(
-//         //   color: BookGanga.kAccentColor,
-//         //   radius: 3,
-//         //   distanceFromCenter: 16,
-//         //   paintingStyle: PaintingStyle.fill,
-//         // ),
-//         tabs: [
-//           Tab(
-//             text: 'Blogs',
-//           ),
-//           Tab(
-//             text: 'Reviews',
-//           ),
-//           Tab(
-//             text: 'Shares',
-//           ),
-//         ]);
-//   }
-// }
-
 /// Follow and message button on the profile
-class _FollowAndMessageButton extends StatelessWidget {
+class _FollowAndMessageButton extends StatefulWidget {
+  bool isFollowing;
+
+  _FollowAndMessageButton({@required this.isFollowing});
+
+  @override
+  __FollowAndMessageButtonState createState() =>
+      __FollowAndMessageButtonState();
+}
+
+class __FollowAndMessageButtonState extends State<_FollowAndMessageButton> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 30.0,
+      height: 35.0,
       child: Row(
         children: [
           Expanded(
-              child: MyTextButton(
-            label: 'Follow',
-            onClick: () {
-              print('Follow Clicked');
-            },
-          )),
+            child: TextButton(
+              child: Text(widget.isFollowing ? 'Following' : 'Follow'),
+              onPressed: () {
+                setState(() {
+                  widget.isFollowing = !widget.isFollowing;
+                });
+              },
+              style: ButtonStyle(
+                elevation: MaterialStateProperty.all(0.0),
+                backgroundColor: MaterialStateProperty.all(
+                    widget.isFollowing ? Colors.white : BookGanga.kAccentColor),
+                foregroundColor: MaterialStateProperty.all(
+                    !widget.isFollowing ? Colors.white : BookGanga.kDarkBlack),
+                overlayColor: MaterialStateProperty.resolveWith(
+                  (states) {
+                    if (states.contains(MaterialState.pressed))
+                      return BookGanga.kAccentColor.withOpacity(0.5);
+                    return BookGanga.kAccentColor;
+                  },
+                ),
+              ),
+            ),
+          ),
           const SizedBox(width: 10.0),
           Expanded(
-              child: MyTextButton(
-            label: 'Message',
-            onClick: () {
-              print('MEssage Clicked');
-            },
-          )),
+            child: TextButton(
+              child: Text('Message'),
+              onPressed: () {
+                print('Message Pressed');
+              },
+              style: ButtonStyle(
+                elevation: MaterialStateProperty.all(0.0),
+                backgroundColor:
+                    MaterialStateProperty.all(BookGanga.kAccentColor),
+                foregroundColor: MaterialStateProperty.all(Colors.white),
+                overlayColor: MaterialStateProperty.resolveWith(
+                  (states) {
+                    if (states.contains(MaterialState.pressed))
+                      return BookGanga.kAccentColor.withOpacity(0.5);
+                    return BookGanga.kAccentColor;
+                  },
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -333,9 +322,11 @@ class _StatsWidgetTile extends StatelessWidget {
     return InkWell(
       onTap: onClick,
       child: Container(
+        height: 35.0,
         //color: Colors.green,
         //padding: const EdgeInsets.all(8.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Container(
               alignment: Alignment.center,
