@@ -298,21 +298,21 @@ class _FollowAndMessageButton extends StatelessWidget {
       height: 30.0,
       child: Row(
         children: [
-          Expanded(
-              child: MyTextButton(
-            label: 'Follow',
-            onClick: () {
-              print('Follow Clicked');
-            },
-          )),
-          const SizedBox(width: 10.0),
-          Expanded(
-              child: MyTextButton(
-            label: 'Message',
-            onClick: () {
-              print('MEssage Clicked');
-            },
-          )),
+          // Expanded(
+          //     child: MyTextButton(
+          //   label: 'Follow',
+          //   onClick: () {
+          //     print('Follow Clicked');
+          //   },
+          // )),
+          // const SizedBox(width: 10.0),
+          // Expanded(
+          //     child: MyTextButton(
+          //   label: 'Message',
+          //   onClick: () {
+          //     print('MEssage Clicked');
+          //   },
+          // )),
         ],
       ),
     );

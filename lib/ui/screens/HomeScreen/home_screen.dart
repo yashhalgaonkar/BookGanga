@@ -224,34 +224,3 @@ class _ReadSavedBlogsWidget extends StatelessWidget {
     );
   }
 }
-
-// class _GreetingWidget extends StatelessWidget {
-//   const _GreetingWidget({
-//     Key key,
-//   }) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Padding(
-//         padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: <Widget>[
-//             Text(
-//               'Hi, Yash',
-//               style: GoogleFonts.openSans(
-//                   fontSize: 14,
-//                   fontWeight: FontWeight.w600,
-//                   color: Colors.grey),
-//             ),
-//             Text(
-//               'Good Morning!',
-//               style: GoogleFonts.openSans(
-//                   fontSize: 22,
-//                   fontWeight: FontWeight.w600,
-//                   color: BookGanga.kDarkBlack),
-//             ),
-//           ],
-//         ));
-//   }
-// }

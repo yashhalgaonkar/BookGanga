@@ -1,8 +1,6 @@
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/screens/UserProfileScreen/cubit/user_profile_screen_cubit.dart';
-import 'package:book_ganga/ui/widgets/error_widget.dart';
-import 'package:book_ganga/ui/widgets/post_container.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -253,25 +251,29 @@ class __FollowAndMessageButtonState extends State<_FollowAndMessageButton> {
       child: Row(
         children: [
           Expanded(
-            child: TextButton(
-              child: Text(widget.isFollowing ? 'Following' : 'Follow'),
-              onPressed: () {
-                setState(() {
-                  widget.isFollowing = !widget.isFollowing;
-                });
-              },
-              style: ButtonStyle(
-                elevation: MaterialStateProperty.all(0.0),
-                backgroundColor: MaterialStateProperty.all(
-                    widget.isFollowing ? Colors.white : BookGanga.kAccentColor),
-                foregroundColor: MaterialStateProperty.all(
-                    !widget.isFollowing ? Colors.white : BookGanga.kDarkBlack),
-                overlayColor: MaterialStateProperty.resolveWith(
-                  (states) {
-                    if (states.contains(MaterialState.pressed))
-                      return BookGanga.kAccentColor.withOpacity(0.5);
-                    return BookGanga.kAccentColor;
-                  },
+            child: Container(
+              decoration: BoxDecoration(
+                  border: Border.all(
+                      color: widget.isFollowing
+                          ? BookGanga.kBlack
+                          : Colors.transparent,
+                      width: 1.0),
+                  borderRadius: BorderRadius.circular(6)),
+              child: TextButton(
+                child: Text(widget.isFollowing ? 'Following' : 'Follow'),
+                onPressed: () {
+                  setState(() {
+                    widget.isFollowing = !widget.isFollowing;
+                  });
+                },
+                style: ButtonStyle(
+                  elevation: MaterialStateProperty.all(0.0),
+                  backgroundColor: MaterialStateProperty.all(widget.isFollowing
+                      ? Colors.white
+                      : BookGanga.kAccentColor),
+                  foregroundColor: MaterialStateProperty.all(
+                      widget.isFollowing ? BookGanga.kDarkBlack : Colors.white),
+                  overlayColor: MaterialStateProperty.all(Colors.transparent),
                 ),
               ),
             ),
