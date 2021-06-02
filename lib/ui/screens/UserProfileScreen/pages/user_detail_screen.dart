@@ -8,6 +8,10 @@ import 'package:flutter/material.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:line_icons/line_icons.dart';
 
+import 'bookshelf_tab.dart';
+import 'follower_tab.dart';
+import 'wish_list_tab.dart';
+
 class UserDetailScreen extends StatefulWidget {
   @override
   _UserDetailScreenState createState() => _UserDetailScreenState();
@@ -56,223 +60,14 @@ class _UserDetailScreenState extends State<UserDetailScreen>
             child: TabBarView(
               controller: _tabController,
               children: [
-                _FollowerList(),
-                _BookShelfList(),
-                _WishListList(),
+                FollowerList(),
+                BookShelfList(),
+                WishListList(),
               ],
             ),
           )
         ],
       ),
-    );
-  }
-}
-
-class _FollowerList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: 60,
-          width: double.infinity,
-          alignment: Alignment.center,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(LineIcons.userFriends),
-              const SizedBox(width: 5),
-              Text(
-                '${dummyUser.length}',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .copyWith(fontWeight: FontWeight.w600),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.all(10.0),
-          child: MyInputField(
-            hintText: 'Search...',
-          ),
-        ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: dummyUser.length,
-            itemBuilder: (BuildContext context, int index) {
-              return HorizontalUserTile(
-                isFollowing: false,
-                showFollowButton: true,
-                user: dummyUser[index],
-                onTap: () {
-                  // take them to userProfile screen
-                },
-                onButtonTap: () {
-                  // make a follow requrest
-                  // setState(() {
-                  //   isFollowing = !isFollowing;
-                  // });
-                },
-              );
-            },
-          ),
-        )
-      ],
-    );
-  }
-}
-
-class _WishListList extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: 60,
-          width: double.infinity,
-          alignment: Alignment.center,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(LineIcons.book),
-              const SizedBox(width: 5),
-              Text(
-                '${dummyUser.length}',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .copyWith(fontWeight: FontWeight.w600),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.all(10.0),
-          child: MyInputField(),
-        ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: dummyUser.length,
-            itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                title: Text('Harry Potter and the Deathly Hallows'),
-                subtitle: Text('J.K Rowling'),
-                leading: CachedNetworkImage(
-                  imageUrl:
-                      'https://images-na.ssl-images-amazon.com/images/I/71xcuT33RpL._AC_SY879_.jpg',
-                ),
-              );
-            },
-          ),
-        )
-      ],
-    );
-  }
-}
-
-/// This is the list of Books
-/// It takes list of books as input
-class _BookShelfList extends StatelessWidget {
-  final List<Book> books;
-
-  _BookShelfList({this.books});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: 60,
-          width: double.infinity,
-          alignment: Alignment.center,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(LineIcons.book),
-              const SizedBox(width: 5),
-              Text(
-                '${dummyUser.length}',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .copyWith(fontWeight: FontWeight.w600),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.all(10.0),
-          child: MyInputField(),
-        ),
-        Expanded(
-          child: ListView.builder(
-            itemCount: dummyUser.length,
-            itemBuilder: (BuildContext context, int index) {
-              return ListTile(
-                title: Text('Harry Potter and the Deathly Hallows'),
-                subtitle: Text('J.K Rowling'),
-                leading: CachedNetworkImage(
-                  imageUrl:
-                      'https://images-na.ssl-images-amazon.com/images/I/71xcuT33RpL._AC_SY879_.jpg',
-                ),
-              );
-            },
-          ),
-        )
-      ],
-    );
-  }
-}
-
-class HorizontalUserTile extends StatelessWidget {
-  const HorizontalUserTile(
-      {Key key,
-      this.user,
-      @required this.isFollowing,
-      @required this.showFollowButton,
-      @required this.onButtonTap,
-      @required this.onTap})
-      : super(key: key);
-
-  final UserToDisplay user;
-  final bool isFollowing;
-  final bool showFollowButton;
-  final Function onTap;
-  final Function onButtonTap;
-
-  @override
-  Widget build(BuildContext context) {
-    return ListTile(
-      onTap: onTap,
-      leading: ProfileAvatar(imageUrl: currentUser.profileImageUrl),
-      title: Text(user.fname + ' ' + user.lname),
-      subtitle: Text('@' + user.username),
-      trailing: showFollowButton
-          ? Container(
-              width: 100,
-              height: 35,
-              decoration: BoxDecoration(
-                  border: Border.all(
-                      color:
-                          isFollowing ? BookGanga.kBlack : Colors.transparent,
-                      width: 1.0),
-                  borderRadius: BorderRadius.circular(6)),
-              child: TextButton(
-                child: Text(isFollowing ? 'Following' : 'Follow'),
-                onPressed: onButtonTap,
-                style: ButtonStyle(
-                  elevation: MaterialStateProperty.all(0.0),
-                  backgroundColor: MaterialStateProperty.all(
-                      isFollowing ? Colors.white : BookGanga.kAccentColor),
-                  foregroundColor: MaterialStateProperty.all(
-                      isFollowing ? BookGanga.kDarkBlack : Colors.white),
-                  overlayColor: MaterialStateProperty.all(Colors.transparent),
-                ),
-              ),
-            )
-          : const SizedBox(),
     );
   }
 }

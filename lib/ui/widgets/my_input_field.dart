@@ -5,10 +5,15 @@ import 'package:line_icons/line_icons.dart';
 
 class MyInputField extends StatelessWidget {
   final String hintText;
+  final TextEditingController _textEditingController;
+  final Function onChange;
   const MyInputField({
     Key key,
+    this.onChange,
+    TextEditingController textEditingController,
     this.hintText = 'Search Books...',
-  }) : super(key: key);
+  })  : this._textEditingController = textEditingController,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +25,8 @@ class MyInputField extends StatelessWidget {
       child: Stack(
         children: <Widget>[
           TextField(
+            onChanged: onChange,
+            controller: _textEditingController,
             autofocus: false,
             cursorColor: BookGanga.kAccentColor,
             enabled: true,
