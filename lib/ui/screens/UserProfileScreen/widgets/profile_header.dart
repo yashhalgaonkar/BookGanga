@@ -37,8 +37,7 @@ class UserProfileHeader extends StatelessWidget {
         children: [
           ProfileAvatar(
             //imageUrl: user.profileImageUrl,
-            imageUrl:
-                'https://media-exp1.licdn.com/dms/image/C4E03AQEpsk7Ff1GdFw/profile-displayphoto-shrink_800_800/0/1593516152439?e=1626912000&v=beta&t=Pwv1wZKgtxnEZge1GBucHNJXDexO6JkyZiqvVDHsa40',
+            imageUrl: user.profileImageUrl,
             radius: 45.0,
           ),
           const SizedBox(height: 5.0),

@@ -1,6 +1,7 @@
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/models/blog_model.dart';
 import 'package:book_ganga/ui/screens/BlogReadScreen/blog_read_screen.dart';
+import 'package:book_ganga/ui/screens/screens.dart';
 import 'package:book_ganga/ui/widgets/post_image.dart';
 import 'package:book_ganga/ui/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ class PostContainer extends StatefulWidget {
 }
 
 class _PostContainerState extends State<PostContainer> {
+  BlogToDisplay get blog => widget.blog;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -28,86 +30,91 @@ class _PostContainerState extends State<PostContainer> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           //* Header
-          Row(
-            children: [
-              ProfileAvatar(
-                radius: 16.0,
-                //imageUrl: widget.blog.authorImageUrl,
-                imageUrl: widget.blog.authorImageUrl,
-                hasBorder: false,
-                isActive: false,
-              ),
-              const SizedBox(width: 10.0),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      '${widget.blog.authorName}',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText1
-                          .copyWith(fontWeight: FontWeight.w600),
-                    ),
-                    Text(
-                      '@${widget.blog.authorUsername}',
-                      style: Theme.of(context)
-                          .textTheme
-                          .bodyText2
-                          .copyWith(fontSize: 12.0),
-                    ),
-                  ],
+          GestureDetector(
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) =>
+                    UserProfileScreen(username: blog.authorUsername))),
+            child: Row(
+              children: [
+                ProfileAvatar(
+                  radius: 16.0,
+                  //imageUrl: widget.blog.authorImageUrl,
+                  imageUrl: widget.blog.authorImageUrl,
+                  hasBorder: false,
+                  isActive: false,
                 ),
-              ),
-              InkWell(
-                onTap: () {
-                  //* More options Menu
-                  showModalBottomSheet(
-                      backgroundColor: Colors.transparent,
-                      shape: RoundedRectangleBorder(),
-                      elevation: 10.0,
-                      context: context,
-                      builder: (context) {
-                        return Container(
-                          height: 200,
-                          color: Colors.transparent,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(20),
-                                topRight: Radius.circular(20),
+                const SizedBox(width: 10.0),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${widget.blog.authorName}',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1
+                            .copyWith(fontWeight: FontWeight.w600),
+                      ),
+                      Text(
+                        '@${widget.blog.authorUsername}',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText2
+                            .copyWith(fontSize: 12.0),
+                      ),
+                    ],
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    //* More options Menu
+                    showModalBottomSheet(
+                        backgroundColor: Colors.transparent,
+                        shape: RoundedRectangleBorder(),
+                        elevation: 10.0,
+                        context: context,
+                        builder: (context) {
+                          return Container(
+                            height: 200,
+                            color: Colors.transparent,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(20),
+                                  topRight: Radius.circular(20),
+                                ),
+                              ),
+                              child: ListView(
+                                children: [
+                                  ModalListTile(
+                                    title: 'Share',
+                                    iconData: LineIcons.share,
+                                    onTap: () => print('shared'),
+                                  ),
+                                  ModalListTile(
+                                    title: 'Save for Later',
+                                    iconData: LineIcons.bookmark,
+                                    onTap: () => print('Saved'),
+                                  ),
+                                  ModalListTile(
+                                    title: 'Report',
+                                    iconData: LineIcons.flag,
+                                    onTap: () => print('Reported'),
+                                  ),
+                                ],
                               ),
                             ),
-                            child: ListView(
-                              children: [
-                                ModalListTile(
-                                  title: 'Share',
-                                  iconData: LineIcons.share,
-                                  onTap: () => print('shared'),
-                                ),
-                                ModalListTile(
-                                  title: 'Save for Later',
-                                  iconData: LineIcons.bookmark,
-                                  onTap: () => print('Saved'),
-                                ),
-                                ModalListTile(
-                                  title: 'Report',
-                                  iconData: LineIcons.flag,
-                                  onTap: () => print('Reported'),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      });
-                },
-                child: Icon(
-                  LineIcons.verticalEllipsis,
-                  color: BookGanga.kDarkBlack,
+                          );
+                        });
+                  },
+                  child: Icon(
+                    LineIcons.verticalEllipsis,
+                    color: BookGanga.kDarkBlack,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
           const SizedBox(height: 3.0),
           //* Post Image
