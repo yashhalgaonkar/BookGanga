@@ -33,8 +33,7 @@ class _PostContainerState extends State<PostContainer> {
               ProfileAvatar(
                 radius: 16.0,
                 //imageUrl: widget.blog.authorImageUrl,
-                imageUrl:
-                    'https://media-exp1.licdn.com/dms/image/C4E03AQEpsk7Ff1GdFw/profile-displayphoto-shrink_800_800/0/1593516152439?e=1626912000&v=beta&t=Pwv1wZKgtxnEZge1GBucHNJXDexO6JkyZiqvVDHsa40',
+                imageUrl: widget.blog.authorImageUrl,
                 hasBorder: false,
                 isActive: false,
               ),
@@ -51,7 +50,7 @@ class _PostContainerState extends State<PostContainer> {
                           .copyWith(fontWeight: FontWeight.w600),
                     ),
                     Text(
-                      '@yash.halgaonkar',
+                      '@${widget.blog.authorUsername}',
                       style: Theme.of(context)
                           .textTheme
                           .bodyText2

@@ -88,17 +88,10 @@ class _HomeScreenState extends State<HomeScreen> {
                     scrollDirection: Axis.vertical,
                     physics: BouncingScrollPhysics(),
                     itemBuilder: (_, index) {
-                      //return BlogContainer(blog: blog, paddingTop: false);
-                      if (index % 5 == 0 && index != 0)
-                        return FollowerSuggesstionWidget();
-                      if (index < state.blogs.length) {
-                        final BlogToDisplay blog = state.blogs[index];
-                        return PostContainer(blog: blog);
-                      }
-                      return const SizedBox();
+                      final BlogToDisplay blog = state.blogs[index];
+                      return PostContainer(blog: blog);
                     },
-                    //separatorBuilder: (_, index) {},
-                    itemCount: state.blogs.length + state.blogs.length ~/ 5);
+                    itemCount: state.blogs.length);
               else if (state is HomeScreenLoading)
                 return LoadingWidget();
               else
