@@ -30,7 +30,7 @@ class _BookClubListState extends State<BookClubList>
         ),
         backgroundColor: Colors.white,
         title: Text(
-          'Book Clubs',
+          'Clubs and Chats',
           style: Theme.of(context)
               .textTheme
               .bodyText1

@@ -1,7 +1,8 @@
-import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/ui/widgets/my_input_field.dart';
 import 'package:book_ganga/ui/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
+
+import 'club_profile_page.dart';
 
 class ClubList extends StatelessWidget {
   @override
@@ -24,10 +25,16 @@ class ClubList extends StatelessWidget {
                     child: Column(
                       children: [
                         ListTile(
-                          leading: ProfileAvatar(
-                            imageUrl:
-                                'https://www.vit.edu/images/Technical_chapter/trf-logo.jpg',
-                            radius: 25,
+                          onTap: () => Navigator.of(context).push(
+                              MaterialPageRoute(
+                                  builder: (_) => ClubProfileScreen())),
+                          leading: Hero(
+                            tag: 'trf',
+                            child: ProfileAvatar(
+                              imageUrl:
+                                  'https://www.vit.edu/images/Technical_chapter/trf-logo.jpg',
+                              radius: 25,
+                            ),
                           ),
                           title: Text('TRF Book Club'),
                           subtitle: Text(
