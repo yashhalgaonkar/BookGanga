@@ -1,9 +1,11 @@
 import 'package:book_ganga/config/book_ganga.dart';
-import 'package:book_ganga/ui/screens/UserProfileScreen/widgets/follow_message_buttons.dart';
 import 'package:book_ganga/ui/widgets/my_tabbar.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icons.dart';
+
+import 'widgets/club_book_tab.dart';
+import 'widgets/club_member_tab.dart';
 
 class ClubProfileScreen extends StatefulWidget {
   const ClubProfileScreen({Key key}) : super(key: key);
@@ -68,28 +70,6 @@ class _ClubProfileScreenState extends State<ClubProfileScreen> {
   }
 }
 
-class ClubMemberTab extends StatelessWidget {
-  const ClubMemberTab({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.red,
-    );
-  }
-}
-
-class ClubBookTab extends StatelessWidget {
-  const ClubBookTab({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.teal,
-    );
-  }
-}
-
 class ClubProfileHeader extends StatelessWidget {
   const ClubProfileHeader({Key key}) : super(key: key);
 
@@ -143,8 +123,9 @@ class ClubProfileHeader extends StatelessWidget {
                 Container(
                   child: Column(
                     children: [
-                      Text('80'),
-                      Text('Books'),
+                      Text('80', style: Theme.of(context).textTheme.bodyText1),
+                      Text('Books',
+                          style: Theme.of(context).textTheme.bodyText1),
                     ],
                   ),
                 ),
@@ -152,8 +133,9 @@ class ClubProfileHeader extends StatelessWidget {
                 Container(
                   child: Column(
                     children: [
-                      Text('80'),
-                      Text('Members'),
+                      Text('80', style: Theme.of(context).textTheme.bodyText1),
+                      Text('Members',
+                          style: Theme.of(context).textTheme.bodyText1),
                     ],
                   ),
                 ),

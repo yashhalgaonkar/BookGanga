@@ -8,4 +8,4 @@ export 'AuthorProfileScreen/author_profile.dart';
 export 'DiscoverBooksScreen/pages/discover_books_screen.dart';
 export 'DiscoverBooksScreen/pages/see_all_books_screen.dart';
 export 'DiscoverBooksScreen/pages/book_profile_screen.dart';
-export 'BookClub/list_screen.dart';
+export 'ClubsAndChatsScreen/list_screen.dart';
