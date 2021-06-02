@@ -9,6 +9,7 @@ class MyTabBar extends StatelessWidget {
     @required TabController tabController,
     @required this.context,
     @required List<Tab> tabs,
+    this.horizontalPadding = 45,
     this.isScrollable = false,
   })  : _tabController = tabController,
         _tabs = tabs,
@@ -18,6 +19,7 @@ class MyTabBar extends StatelessWidget {
   final BuildContext context;
   final List<Tab> _tabs;
   final bool isScrollable;
+  final double horizontalPadding;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class MyTabBar extends StatelessWidget {
         indicator: MaterialIndicator(
           color: BookGanga.kAccentColor,
           tabPosition: TabPosition.bottom,
-          horizontalPadding: 45,
+          horizontalPadding: horizontalPadding,
           paintingStyle: PaintingStyle.fill,
         ),
         // indicator: DotIndicator(

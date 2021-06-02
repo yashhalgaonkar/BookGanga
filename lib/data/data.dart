@@ -12,7 +12,7 @@ final UserToDisplay currentUser = UserToDisplay(
   numReviews: 9,
 );
 
-final List<UserToDisplay> users = [
+final List<UserToDisplay> dummyUser = [
   currentUser,
   UserToDisplay(
     username: 'aditya.giradkar57',
@@ -38,6 +38,12 @@ final List<UserToDisplay> users = [
     profileImageUrl:
         'https://media-exp1.licdn.com/dms/image/C5603AQFFx9eM8hYSww/profile-displayphoto-shrink_800_800/0/1614458904242?e=1620259200&v=beta&t=gTK3PBhHXJFiu5CoPgtvFdubbNUrr_Wm3SeoXkIUC2k',
   ),
+  UserToDisplay(
+      fname: 'Harshali',
+      lname: 'Birari',
+      profileImageUrl: '',
+      username: 'harshali.krishna',
+      bio: 'Unreachable'),
   UserToDisplay(
     username: 'patil.sunita',
     fname: 'Sunita',

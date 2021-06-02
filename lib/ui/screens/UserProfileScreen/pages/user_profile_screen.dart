@@ -1,6 +1,6 @@
-import 'package:book_ganga/ui/screens/UserProfileScreen/book_shelf_screen.dart';
+import 'package:book_ganga/ui/screens/UserProfileScreen/pages/user_detail_screen.dart';
 
-import 'widgets/profile_header.dart';
+import '../widgets/profile_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loading/indicator/ball_pulse_indicator.dart';
@@ -9,7 +9,7 @@ import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/screens/UserProfileScreen/cubit/user_profile_screen_cubit.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
-import 'widgets/tab_view_widgets.dart';
+import '../widgets/tab_view_widgets.dart';
 
 class UserProfileScreen extends StatefulWidget {
   final UserToDisplay user;
@@ -96,19 +96,19 @@ class _UserProfileScreenState extends State<UserProfileScreen>
                           },
                           onMessageTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => BookShelfScreen()));
+                                builder: (_) => UserDetailScreen()));
                           },
                           onBookShelfTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => BookShelfScreen()));
+                                builder: (_) => UserDetailScreen()));
                           },
                           onWishListTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => BookShelfScreen()));
+                                builder: (_) => UserDetailScreen()));
                           },
                           onFollowersTap: () {
                             Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => BookShelfScreen()));
+                                builder: (_) => UserDetailScreen()));
                           },
                         ),
                       ),
