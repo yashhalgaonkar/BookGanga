@@ -25,7 +25,9 @@ class _UserProfileScreenState extends State<UserProfileScreen>
   //UserToDisplay get user => widget.user;
 
   void getUser() {
-    _future = _userService.getUser(widget.username);
+    setState(() {
+      _future = _userService.getUser(widget.username); 
+    });
   }
 
   @override
@@ -62,80 +64,89 @@ class _UserProfileScreenState extends State<UserProfileScreen>
       ),
       body: FutureBuilder<UserToDisplay>(
           future: _future,
-          builder: (BuildContext context, AsyncSnapshot<UserToDisplay> user) {
-            if (user.connectionState == ConnectionState.done) {
-              if (user.hasError)
-                return MyErrorWidget(onRefresh: getUser);
-              else
-                //* Loaded widget
-                return DefaultTabController(
-                  length: 3,
-                  child: NestedScrollView(
-                    headerSliverBuilder: (context, _) {
-                      return [
-                        SliverToBoxAdapter(
-                          child: UserProfileHeader(
-                            user: user.data,
-                            isFollowing: user.data.isFollowing,
-                            onFollowTap: () {
-                              setState(() {
-                                user.data.isFollowing = !user.data.isFollowing;
-                              });
-                            },
-                            onMessageTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (_) => UserDetailScreen()));
-                            },
-                            onBookShelfTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (_) => UserDetailScreen()));
-                            },
-                            onWishListTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (_) => UserDetailScreen()));
-                            },
-                            onFollowersTap: () {
-                              Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (_) => UserDetailScreen()));
-                            },
-                          ),
-                        ),
-                      ];
-                    },
-                    body: Column(
-                      children: [
-                        //const SizedBox(height: 6.0),
-                        //_TabBarContainer(user: state.user,tabController: DefaultTabController.of(context)),
-                        MyTabBar(
-                            tabController: DefaultTabController.of(context),
-                            context: context,
-                            tabs: [
-                              Tab(
-                                text: 'Blogs',
-                              ),
-                              Tab(
-                                text: 'Reviews',
-                              ),
-                              Tab(
-                                text: 'Shares',
-                              ),
-                            ]),
-                        Expanded(
-                          child: TabBarView(
-                            children: [
-                              BlogListWidget(),
-                              ReviewsListWidget(),
-                              ShareListWidget(),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+          builder: (BuildContext context,
+              AsyncSnapshot<UserToDisplay> userSnapshot) {
+            if (userSnapshot.hasData) {
+              if (userSnapshot.data == null)
+                return MyErrorWidget(
+                  onRefresh: getUser,
+                  errorMessage: 'some error here',
                 );
-            } else
-              //* Loading Widget
-              return _buildLoadingWidget();
+              //* Loaded widget
+              return DefaultTabController(
+                length: 3,
+                child: NestedScrollView(
+                  headerSliverBuilder: (context, _) {
+                    return [
+                      SliverToBoxAdapter(
+                        child: UserProfileHeader(
+                          user: userSnapshot.data,
+                          isFollowing: userSnapshot.data.isFollowing,
+                          onFollowTap: () {
+                            setState(() {
+                              userSnapshot.data.isFollowing =
+                                  !userSnapshot.data.isFollowing;
+                            });
+                          },
+                          onMessageTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => UserDetailScreen()));
+                          },
+                          onBookShelfTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => UserDetailScreen()));
+                          },
+                          onWishListTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => UserDetailScreen()));
+                          },
+                          onFollowersTap: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => UserDetailScreen()));
+                          },
+                        ),
+                      ),
+                    ];
+                  },
+                  body: Column(
+                    children: [
+                      //const SizedBox(height: 6.0),
+                      //_TabBarContainer(user: state.user,tabController: DefaultTabController.of(context)),
+                      MyTabBar(
+                          tabController: DefaultTabController.of(context),
+                          context: context,
+                          tabs: [
+                            Tab(
+                              text: 'Blogs',
+                            ),
+                            Tab(
+                              text: 'Reviews',
+                            ),
+                            Tab(
+                              text: 'Shares',
+                            ),
+                          ]),
+                      Expanded(
+                        child: TabBarView(
+                          children: [
+                            BlogListWidget(),
+                            ReviewsListWidget(),
+                            ShareListWidget(),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              );
+            }
+            if (userSnapshot.hasError) {
+              return MyErrorWidget(
+                  onRefresh: getUser,
+                  errorMessage: userSnapshot.error.toString());
+            } else {
+              return LoadingWidget();
+            }
           }),
     );
   }

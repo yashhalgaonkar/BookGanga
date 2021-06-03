@@ -36,6 +36,7 @@ class UserService {
 
   Future<UserToDisplay> getUser(String username) {
     return _dio.get(APIEndpoint).then((value) {
+      print('Status code for UPS: ' + value.statusCode.toString());
       if (value.statusCode == 200) {
         // final jsonData = json.decode(value.data);
         for (var item in value.data) {

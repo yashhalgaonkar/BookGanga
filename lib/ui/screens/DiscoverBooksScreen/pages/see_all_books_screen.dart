@@ -155,6 +155,7 @@ class _SeeAllBooksPageState extends State<SeeAllBooksPage>
               if (listOfBooks.hasError) {
                 return MyErrorWidget(
                   onRefresh: () => print('Refreshed'),
+                  errorMessage: listOfBooks.error.toString(),
                 );
               } else {
                 return Container(

@@ -6,7 +6,7 @@ class MyErrorWidget extends StatelessWidget {
   final Function onRefresh;
 
   MyErrorWidget({
-    this.errorMessage,
+   @required this.errorMessage,
    @required this.onRefresh,
   });
   @override
