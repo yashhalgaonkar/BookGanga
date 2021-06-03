@@ -1,6 +1,5 @@
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/models/models.dart';
-import 'package:book_ganga/services/blog_service.dart';
 import 'package:book_ganga/ui/screens/screens.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:book_ganga/viewmodels/home_screen.dart';

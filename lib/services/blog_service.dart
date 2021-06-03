@@ -39,7 +39,6 @@ class BlogService {
 
   Future<List<BlogToDisplay>> getHomeScreenBlogs(String userId) {
     return _dio.get(apiEndPoint).then((value) {
-      print('blog services: Status Code ${value.statusCode}');
       if (value.statusCode == 200) {
         final blogs = <BlogToDisplay>[];
         for (var item in value.data) blogs.add(BlogToDisplay.fromJson(item));

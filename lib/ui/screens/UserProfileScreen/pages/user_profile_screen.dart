@@ -1,6 +1,6 @@
 import 'package:book_ganga/models/models.dart';
-import 'package:book_ganga/services/user_service.dart';
 import 'package:book_ganga/ui/screens/UserProfileScreen/pages/user_detail_screen.dart';
+import 'package:book_ganga/viewmodels/user_profile_screen.dart';
 import 'package:get_it/get_it.dart';
 import '../widgets/profile_header.dart';
 import 'package:flutter/material.dart';
@@ -24,9 +24,12 @@ class _UserProfileScreenState extends State<UserProfileScreen>
     with SingleTickerProviderStateMixin {
   //UserToDisplay get user => widget.user;
 
+  final UserProfileVM _userProfileVM = GetIt.I<UserProfileVM>();
+  String get username => widget.username;
+
   void getUser() {
     setState(() {
-      _future = _userService.getUser(widget.username); 
+      _future = _userProfileVM.getUserProfile(username);
     });
   }
 
@@ -47,7 +50,6 @@ class _UserProfileScreenState extends State<UserProfileScreen>
   }
 
   Future<UserToDisplay> _future;
-  final UserService _userService = GetIt.I<UserService>();
 
   @override
   Widget build(BuildContext context) {
@@ -129,9 +131,11 @@ class _UserProfileScreenState extends State<UserProfileScreen>
                       Expanded(
                         child: TabBarView(
                           children: [
-                            BlogListWidget(),
-                            ReviewsListWidget(),
-                            ShareListWidget(),
+                            BlogListWidget(blogs: userSnapshot.data.blogs),
+                            BlogListWidget(blogs: userSnapshot.data.blogs),
+                            BlogListWidget(blogs: userSnapshot.data.blogs),
+                            // ReviewsListWidget(),
+                            // ShareListWidget(),
                           ],
                         ),
                       )

@@ -15,8 +15,6 @@ class ShareListWidget extends StatelessWidget {
   }
 }
 
-
-
 class ReviewsListWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -30,21 +28,18 @@ class ReviewsListWidget extends StatelessWidget {
 }
 
 class BlogListWidget extends StatelessWidget {
-  final BlogToDisplay blog = BlogToDisplay(
-      authorImageUrl: '',
-      authorName: 'Yash Halgaonkar',
-      title: 'Happyness or Happiness',
-      blogHeaderImageUrl:
-          'https://images.unsplash.com/photo-1604346782646-13dac014c258?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8Ym84alFLVGFFMFl8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60');
+  final List<BlogToDisplay> blogs;
+
+  const BlogListWidget({Key key, @required this.blogs}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Container(
       child: ListView.builder(
         padding: const EdgeInsets.only(top: 10.0),
         itemBuilder: (_, index) {
-          return PostContainer(blog: blog);
+          return PostContainer(blog: blogs[index]);
         },
-        itemCount: 25,
+        itemCount: blogs.length,
       ),
     );
   }

@@ -29,7 +29,6 @@ class UserService {
   ///Function to get the user suggestions
   Future<List<UserToDisplay>> getUserSuggetions(String username) {
     return _dio.get(apiEndPoint).then((value) {
-      print('sugesstions status code ${value.statusCode}');
       if (value.statusCode == 200) {
         final userSuggetions = <UserToDisplay>[];
         for (var item in value.data) {
