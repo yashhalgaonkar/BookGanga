@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 
 class BlogService {
-  static var APIEndpoint =
+  static var apiEndPoint =
       'https://my-json-server.typicode.com/yashhalgaonkar/homescreen/blogs';
 
   //final log = Logger('BlogAPIService');
@@ -38,7 +38,7 @@ class BlogService {
     );
 
   Future<List<BlogToDisplay>> getHomeScreenBlogs(String userId) {
-    return _dio.get(APIEndpoint).then((value) {
+    return _dio.get(apiEndPoint).then((value) {
       print('blog services: Status Code ${value.statusCode}');
       if (value.statusCode == 200) {
         final blogs = <BlogToDisplay>[];

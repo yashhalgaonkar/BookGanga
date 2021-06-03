@@ -8,7 +8,12 @@ class HomeScreenVM {
   final BlogService _blogService = GetIt.I<BlogService>();
 
   Future<HomeScreenModel> getHomeScreen(String username) async {
-    HomeScreenModel homeScreenModel;
-    //homeScreenModel.blogs = await _blogService.getHomeScreenBlogs(username);
+    final blogs = await _blogService.getHomeScreenBlogs(username);
+    final users = await _userService.getUserSuggetions(username);
+
+    print('Lenght of sugesstions: ${users.length}');
+    HomeScreenModel homeScreenModel =
+        HomeScreenModel(blogs: blogs, userSuggetions: users);
+    return homeScreenModel;
   }
 }

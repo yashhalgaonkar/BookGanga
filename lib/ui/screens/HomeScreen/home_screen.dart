@@ -3,6 +3,7 @@ import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/services/blog_service.dart';
 import 'package:book_ganga/ui/screens/screens.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
+import 'package:book_ganga/viewmodels/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ionicons/ionicons.dart';
@@ -18,8 +19,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final BlogService _blogService = GetIt.I<BlogService>();
-  Future<List<BlogToDisplay>> _futureHome;
+  final HomeScreenVM _homeScreenVM = GetIt.I<HomeScreenVM>();
+  Future<HomeScreenModel> _futureHome;
 
   String get username => widget.username;
 
@@ -36,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _refreshFuture() {
     setState(() {
-      _futureHome = _blogService.getHomeScreenBlogs(username);
+      _futureHome = _homeScreenVM.getHomeScreen(username);
     });
   }
 
@@ -74,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       body: SafeArea(
-        child: FutureBuilder<List<BlogToDisplay>>(
+        child: FutureBuilder<HomeScreenModel>(
           future: _futureHome,
           builder: (context, snapshot) {
             if (snapshot.hasError) {
@@ -85,17 +86,23 @@ class _HomeScreenState extends State<HomeScreen> {
             }
             if (snapshot.hasData) {
               //* Loaded Widget
-              final List<BlogToDisplay> blogs = snapshot.data;
+              final List<BlogToDisplay> blogs = snapshot.data.blogs;
+              final List<UserToDisplay> userSuggetions =
+                  snapshot.data.userSuggetions;
               return ListView.builder(
                   padding: const EdgeInsets.only(top: 10),
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   physics: BouncingScrollPhysics(),
                   itemBuilder: (_, index) {
+                    if (index == blogs.length)
+                      return FollowerSuggesstionWidget(
+                        userSuggetions: userSuggetions,
+                      );
                     final BlogToDisplay blog = blogs[index];
                     return PostContainer(blog: blog);
                   },
-                  itemCount: blogs.length);
+                  itemCount: blogs.length + 1);
             } else {
               //* Loading widget
               return LoadingWidget();
@@ -107,60 +114,121 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class FollowerSuggesstionWidget extends StatelessWidget {
-  const FollowerSuggesstionWidget({
-    Key key,
-  }) : super(key: key);
+class FollowerSuggesstionWidget extends StatefulWidget {
+  final List<UserToDisplay> userSuggetions;
+  const FollowerSuggesstionWidget({Key key, this.userSuggetions})
+      : super(key: key);
 
+  @override
+  _FollowerSuggesstionWidgetState createState() =>
+      _FollowerSuggesstionWidgetState();
+}
+
+class _FollowerSuggesstionWidgetState extends State<FollowerSuggesstionWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10.0),
-      height: 190,
-      child: ListView.builder(
-        itemBuilder: (context, index) {
-          return Container(
-            width: 150,
-            margin: const EdgeInsets.only(right: 10.0),
-            padding: const EdgeInsets.all(6.0),
-            decoration: BoxDecoration(
-              border: Border.all(color: BookGanga.kLightGreyColor),
-              borderRadius: BorderRadius.circular(12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Suggestions for you',
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyText1
+                    .copyWith(fontWeight: FontWeight.w600),
+              ),
+              Text(
+                'See All',
+                style: Theme.of(context).textTheme.bodyText2.copyWith(
+                    color: BookGanga.kAccentColor, fontWeight: FontWeight.w600),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Container(
+            height: 190,
+            child: ListView.builder(
+              itemBuilder: (context, index) {
+                final UserToDisplay user = widget.userSuggetions[index];
+                return Container(
+                  width: 150,
+                  margin: const EdgeInsets.only(right: 10.0),
+                  padding: const EdgeInsets.all(6.0),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: BookGanga.kLightGreyColor),
+                    borderRadius: BorderRadius.circular(12.0),
+                  ),
+                  child: Column(
+                    children: [
+                      ProfileAvatar(radius: 45, imageUrl: user.profileImageUrl),
+                      const Spacer(),
+                      Text(
+                        '${user.fname} ${user.lname}',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText1
+                            .copyWith(fontWeight: FontWeight.w600),
+                      ),
+                      Text(
+                        '@${user.username}',
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodyText2
+                            .copyWith(fontSize: 12.0),
+                      ),
+                      const Spacer(),
+                      // Container(
+                      //   width: double.maxFinite,
+                      //   height: 30.0,
+                      //   child: MyTextButton(
+                      //       label: 'Follow', onClick: () => print('Follows')),
+                      // ),
+
+                      Container(
+                        height: 35,
+                        width: 100,
+                        decoration: BoxDecoration(
+                            border: Border.all(
+                                color: user.isFollowing
+                                    ? BookGanga.kBlack
+                                    : Colors.transparent,
+                                width: 1.0),
+                            borderRadius: BorderRadius.circular(6)),
+                        child: TextButton(
+                          child:
+                              Text(user.isFollowing ? 'Following' : 'Follow'),
+                          onPressed: () {
+                            user.isFollowing = !user.isFollowing;
+                          },
+                          style: ButtonStyle(
+                            elevation: MaterialStateProperty.all(0.0),
+                            backgroundColor: MaterialStateProperty.all(
+                                user.isFollowing
+                                    ? Colors.white
+                                    : BookGanga.kAccentColor),
+                            foregroundColor: MaterialStateProperty.all(
+                                user.isFollowing
+                                    ? BookGanga.kDarkBlack
+                                    : Colors.white),
+                            overlayColor:
+                                MaterialStateProperty.all(Colors.transparent),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+              itemCount: widget.userSuggetions.length,
+              scrollDirection: Axis.horizontal,
             ),
-            child: Column(
-              children: [
-                ProfileAvatar(
-                    radius: 45,
-                    imageUrl:
-                        'https://media-exp1.licdn.com/dms/image/C4E03AQEpsk7Ff1GdFw/profile-displayphoto-shrink_800_800/0/1593516152439?e=1626912000&v=beta&t=Pwv1wZKgtxnEZge1GBucHNJXDexO6JkyZiqvVDHsa40'),
-                const Spacer(),
-                Text(
-                  'Yash Halgaonkar',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText1
-                      .copyWith(fontWeight: FontWeight.w600),
-                ),
-                Text(
-                  '@yash.halgaonkar',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyText2
-                      .copyWith(fontSize: 12.0),
-                ),
-                const Spacer(),
-                // Container(
-                //   width: double.maxFinite,
-                //   height: 30.0,
-                //   child: MyTextButton(
-                //       label: 'Follow', onClick: () => print('Follows')),
-                // ),
-              ],
-            ),
-          );
-        },
-        itemCount: 10,
-        scrollDirection: Axis.horizontal,
+          )
+        ],
       ),
     );
   }
