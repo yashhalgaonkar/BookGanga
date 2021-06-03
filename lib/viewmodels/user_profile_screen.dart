@@ -14,6 +14,11 @@ class UserProfileVM {
     user.sharedBlogs = blogs;
     user.reviews = blogs;
 
+    print('Lenght of blogs: ${blogs.length}');
     return user;
+  }
+
+  Future<List<UserToDisplay>> getFollowerForUser(String username) async {
+    return await _userService.getUserSuggetions(username);
   }
 }

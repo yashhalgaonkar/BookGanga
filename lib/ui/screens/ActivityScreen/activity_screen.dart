@@ -1,5 +1,5 @@
 import 'package:book_ganga/config/book_ganga.dart';
-import 'package:book_ganga/models/blog_model.dart';
+import 'package:book_ganga/models/blog_to_display.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/widgets/profile_avatar.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';

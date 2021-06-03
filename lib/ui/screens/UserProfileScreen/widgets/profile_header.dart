@@ -13,19 +13,10 @@ import 'follow_message_buttons.dart';
 class UserProfileHeader extends StatelessWidget {
   final UserToDisplay user;
   final bool isFollowing;
-  final Function onFollowTap,
-      onMessageTap,
-      onFollowersTap,
-      onBookShelfTap,
-      onWishListTap;
+  final Function onFollowTap, onMessageTap;
   UserProfileHeader({
     @required this.user,
-    @required this.isFollowing,
-    @required this.onFollowTap,
-    @required this.onMessageTap,
-    @required this.onFollowersTap,
-    @required this.onBookShelfTap,
-    @required this.onWishListTap,
+    @required this.isFollowing, this.onFollowTap, this.onMessageTap,
   });
   @override
   Widget build(BuildContext context) {

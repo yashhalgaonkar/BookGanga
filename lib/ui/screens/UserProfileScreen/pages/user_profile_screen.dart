@@ -1,5 +1,4 @@
 import 'package:book_ganga/models/models.dart';
-import 'package:book_ganga/ui/screens/UserProfileScreen/pages/user_detail_screen.dart';
 import 'package:book_ganga/viewmodels/user_profile_screen.dart';
 import 'package:get_it/get_it.dart';
 import '../widgets/profile_header.dart';
@@ -90,22 +89,7 @@ class _UserProfileScreenState extends State<UserProfileScreen>
                                   !userSnapshot.data.isFollowing;
                             });
                           },
-                          onMessageTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => UserDetailScreen()));
-                          },
-                          onBookShelfTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => UserDetailScreen()));
-                          },
-                          onWishListTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => UserDetailScreen()));
-                          },
-                          onFollowersTap: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => UserDetailScreen()));
-                          },
+                          onMessageTap: () {},
                         ),
                       ),
                     ];

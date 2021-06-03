@@ -20,6 +20,12 @@ class _BookClubListState extends State<BookClubList>
   }
 
   @override
+  void dispose() {
+    _tabController.dispose(); 
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

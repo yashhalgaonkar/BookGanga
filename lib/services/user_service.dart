@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import '../models/user_model.dart';
+import '../models/user_to_display.dart';
 
 class UserService {
   static final apiEndPoint =

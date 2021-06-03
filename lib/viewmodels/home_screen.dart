@@ -10,8 +10,6 @@ class HomeScreenVM {
   Future<HomeScreenModel> getHomeScreen(String username) async {
     final blogs = await _blogService.getHomeScreenBlogs(username);
     final users = await _userService.getUserSuggetions(username);
-
-    print('Lenght of sugesstions: ${users.length}');
     HomeScreenModel homeScreenModel =
         HomeScreenModel(blogs: blogs, userSuggetions: users);
     return homeScreenModel;

@@ -1,4 +1,5 @@
 import 'package:book_ganga/models/models.dart';
+import 'package:book_ganga/ui/screens/UserProfileScreen/pages/user_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 /// This widget tells that stats of the user
@@ -6,7 +7,9 @@ import 'package:flutter/material.dart';
 class StatsRow extends StatelessWidget {
   final UserToDisplay user;
 
-  StatsRow({@required this.user});
+  StatsRow({
+    @required this.user,
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,15 +21,18 @@ class StatsRow extends StatelessWidget {
           _StatsWidgetTile(
               label: 'Followers',
               count: '${user.numFollowers}',
-              onClick: () => print('Followers Clicked')),
+              onClick: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => UserDetailScreen(tabIndex: 0)))),
           _StatsWidgetTile(
               label: 'Book Shelf',
               count: '${user.numBookShelf}',
-              onClick: () => print('BookShelf Clicked')),
+              onClick: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => UserDetailScreen(tabIndex: 1)))),
           _StatsWidgetTile(
               label: 'Wish List',
               count: '${user.numWishList}',
-              onClick: () => print('WishList Clicked')),
+              onClick: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (_) => UserDetailScreen(tabIndex: 2)))),
         ],
       ),
     );
