@@ -6,8 +6,8 @@ import 'package:get_it/get_it.dart';
 class UserRepository{
   final UserService _userService = GetIt.I<UserService>();
 
-  Future<APIResponse<UserToDisplay>> getUser(String userId)
-  {
-    return _userService.getUser(userId);
-  }
+  // // Future<APIResponse<UserToDisplay>> getUser(String username)
+  // {
+  //   return _userService.getUser(username);
+  // }
 }

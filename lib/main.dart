@@ -2,7 +2,6 @@ import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/core/injector.dart';
 import 'package:book_ganga/ui/screens/DiscoverBooksScreen/cubit/discoverbooks_cubit.dart';
 import 'package:book_ganga/ui/screens/HomeScreen/cubit/home_screen_cubit.dart';
-import 'package:book_ganga/ui/screens/UserProfileScreen/cubit/user_profile_screen_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -46,8 +45,6 @@ class _MyAppState extends State<MyApp> {
       home: MultiBlocProvider(
         providers: [
           BlocProvider<HomeScreenCubit>(create: (_) => HomeScreenCubit()),
-          BlocProvider<UserProfileScreenCubit>(
-              create: (_) => UserProfileScreenCubit()),
           BlocProvider<DiscoverbooksCubit>(create: (_) => DiscoverbooksCubit()),
           //* add new cubits here to provide the thoughout the app
         ],

@@ -64,7 +64,6 @@ class BookService {
     if (response.statusCode == 200) {
       response.data['items'].forEach((data) {
         Book book = Book.fromJson(data);
-        print(book.title);
         books.add(book);
       });
     }

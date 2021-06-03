@@ -1,7 +1,6 @@
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/ui/screens/screens.dart';
 import 'package:flutter/material.dart';
-import '../../data/data.dart';
 import 'HomeScreen/home_screen.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
@@ -18,7 +17,7 @@ class _NavScreenState extends State<NavScreen> {
     Scaffold(),
     //Scaffold(),
     ActivityScreen(),
-    UserProfileScreen(user: currentUser),
+    UserProfileScreen(username: 'yash.halgaonkar'),
   ];
 
   final List<IconData> filledIcons = const [
@@ -91,33 +90,28 @@ class _NavScreenState extends State<NavScreen> {
                       vertical: 10, horizontal: 3), // navigation bar padding
                   tabs: [
                     GButton(
-                      icon: (pageNumber == 0)
-                          ? filledIcons[0]
-                          : outline_icons[0],
+                      icon:
+                          (pageNumber == 0) ? filledIcons[0] : outline_icons[0],
                       text: 'Home',
                     ),
                     GButton(
-                      icon: (pageNumber == 1)
-                          ? filledIcons[1]
-                          : outline_icons[1],
+                      icon:
+                          (pageNumber == 1) ? filledIcons[1] : outline_icons[1],
                       text: 'Books',
                     ),
                     GButton(
-                      icon: (pageNumber == 2)
-                          ? filledIcons[2]
-                          : outline_icons[2],
+                      icon:
+                          (pageNumber == 2) ? filledIcons[2] : outline_icons[2],
                       text: 'Write',
                     ),
                     GButton(
-                      icon: (pageNumber == 3)
-                          ? filledIcons[3]
-                          : outline_icons[3],
+                      icon:
+                          (pageNumber == 3) ? filledIcons[3] : outline_icons[3],
                       text: 'Activity',
                     ),
                     GButton(
-                      icon: (pageNumber == 4)
-                          ? filledIcons[4]
-                          : outline_icons[4],
+                      icon:
+                          (pageNumber == 4) ? filledIcons[4] : outline_icons[4],
                       text: 'Profile',
                     )
                   ]),
@@ -125,7 +119,6 @@ class _NavScreenState extends State<NavScreen> {
           );
         },
       ),
-
     );
   }
 }

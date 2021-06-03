@@ -5,7 +5,7 @@ import '../models/user_model.dart';
 
 class UserService {
   static final APIEndpoint =
-      'https://my-json-server.typicode.com/yashhalgaonkar/fake_data/user';
+      'https://my-json-server.typicode.com/yashhalgaonkar/userprofiles/users';
 
   Dio _dio = Dio();
   // ..interceptors.add(
@@ -34,18 +34,19 @@ class UserService {
 
   //final log = Logger('UserAPIService');
 
-  Future<APIResponse<UserToDisplay>> getUser(String userId) {
+  Future<UserToDisplay> getUser(String username) {
     return _dio.get(APIEndpoint).then((value) {
       if (value.statusCode == 200) {
         // final jsonData = json.decode(value.data);
-        final UserToDisplay user = UserToDisplay.fromJson(value.data);
-        return APIResponse<UserToDisplay>(data: user);
+        for (var item in value.data) {
+          UserToDisplay tempUser = UserToDisplay.fromJson(item);
+          if (tempUser.username == username) {
+            return tempUser;
+          }
+        }
+        //return APIResponse<UserToDisplay>(error: true,errorMessage: 'username not found');
       }
-      return APIResponse<UserToDisplay>(
-          error: true,
-          errorMessage: 'Request failed with status code ${value.statusCode}' +
-              value.statusMessage);
-    }).onError((error, stackTrace) => APIResponse<UserToDisplay>(
-        error: true, errorMessage: error.toString()));
+      return null;
+    });
   }
 }
