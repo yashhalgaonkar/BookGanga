@@ -1,4 +1,3 @@
-import 'package:book_ganga/core/api_response.dart';
 import 'package:book_ganga/models/blog_model.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
@@ -6,6 +5,7 @@ import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 class BlogService {
   static var APIEndpoint =
       'https://my-json-server.typicode.com/yashhalgaonkar/homescreen/blogs';
+
   //final log = Logger('BlogAPIService');
   // static const headers = {
   //   'apiKey': '724d32be-4988-4264-a371-030b458100e1',
@@ -37,19 +37,16 @@ class BlogService {
       ),
     );
 
-  Future<APIResponse<List<BlogToDisplay>>> getHomeScreenBlogs(String userId) {
+  Future<List<BlogToDisplay>> getHomeScreenBlogs(String userId) {
     return _dio.get(APIEndpoint).then((value) {
+      print('blog services: Status Code ${value.statusCode}');
       if (value.statusCode == 200) {
-        print('UserService: Status Code 200');
         final blogs = <BlogToDisplay>[];
         for (var item in value.data) blogs.add(BlogToDisplay.fromJson(item));
 
-        return APIResponse<List<BlogToDisplay>>(data: blogs);
+        return blogs;
       }
-      return APIResponse<List<BlogToDisplay>>(
-          error: true,
-          errorMessage: 'Request failed with status code ${value.statusCode}');
-    }).catchError((_) => APIResponse<List<BlogToDisplay>>(
-        error: true, errorMessage: 'An error occured'));
+      return [];
+    });
   }
 }
