@@ -12,7 +12,6 @@ class UserToDisplay {
   int numShares;
   int numBookShelf;
   int numWishList;
-  bool isFollowing;
 
   UserToDisplay({
     @required this.fname,
@@ -26,7 +25,6 @@ class UserToDisplay {
     this.numShares,
     this.numBookShelf,
     this.numWishList,
-    this.isFollowing
   });
 
   factory UserToDisplay.fromJson(Map<String, dynamic> mp) {
@@ -42,7 +40,6 @@ class UserToDisplay {
       numShares: mp['numShares'],
       numBookShelf: mp['numBookShelf'],
       numWishList: mp['numWishList'],
-      isFollowing: mp['isFollowing'],
     );
   }
 }
