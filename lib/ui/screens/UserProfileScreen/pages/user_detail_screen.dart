@@ -21,7 +21,6 @@ class _UserDetailScreenState extends State<UserDetailScreen>
     with SingleTickerProviderStateMixin {
   bool isFollowing = false;
   TabController _tabController;
-  final UserProfileVM _userProfileVM = GetIt.I<UserProfileVM>();
 
   @override
   void initState() {
