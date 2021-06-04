@@ -1,5 +1,4 @@
 import 'package:book_ganga/services/services.dart';
-import 'package:book_ganga/ui/screens/ActivityScreen/activity_screen.dart';
 import 'package:book_ganga/viewmodels/viewmodels.dart';
 import 'package:get_it/get_it.dart';
 
@@ -9,12 +8,10 @@ void initializeDependencies() {
   instance.registerLazySingleton(() => BlogService());
   instance.registerLazySingleton(() => UserService());
   instance.registerLazySingleton(() => BookService());
-  instance.registerLazySingleton(() => ActivityScreen());
-
+  instance.registerLazySingleton(() => ActivityService());
 
   //*View Models
   instance.registerLazySingleton(() => HomeScreenVM());
   instance.registerLazySingleton(() => UserProfileVM());
   instance.registerLazySingleton(() => ActivityScreenVM());
-
 }

@@ -21,12 +21,16 @@ class ActivityToDisplay {
 
   factory ActivityToDisplay.fromJson(Map<String, dynamic> mp) {
     return ActivityToDisplay(
-      type: mp['type'],
+      type: (mp['type'] == 'LIKE')
+          ? ActivityType.Like
+          : (mp['type'] == 'COMMENT')
+              ? ActivityType.Comment
+              : ActivityType.Share,
       username: mp['username'],
       fname: mp['fname'],
       lname: mp['lname'],
       userImgUrl: mp['userImgUrl'],
-      blogImgUrl: mp['blogUrl'],
+      blogImgUrl: mp['blogImgUrl'],
       blogTitle: mp['blogTitle'],
     );
   }

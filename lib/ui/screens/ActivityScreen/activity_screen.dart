@@ -35,7 +35,10 @@ class _ActivityScreenState extends State<ActivityScreen> {
         centerTitle: true,
         title: Text(
           'Activity',
-          style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 16),
+          style: Theme.of(context).textTheme.bodyText1.copyWith(
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
         ),
         backgroundColor: BookGanga.scaffold,
       ),
@@ -86,7 +89,8 @@ class _ActivityScreenState extends State<ActivityScreen> {
                   );
                 } else
                   return MyErrorWidget(
-                      errorMessage: snapshot.error, onRefresh: getActivities);
+                      errorMessage: snapshot.error.toString(),
+                      onRefresh: getActivities);
               } else
                 return LoadingWidget();
             }),

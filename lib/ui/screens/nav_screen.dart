@@ -15,7 +15,6 @@ class _NavScreenState extends State<NavScreen> {
     HomeScreen(),
     DiscoverBooksScreen(),
     Scaffold(),
-    //Scaffold(),
     ActivityScreen(),
     UserProfileScreen(username: 'yash.halgaonkar'),
   ];
