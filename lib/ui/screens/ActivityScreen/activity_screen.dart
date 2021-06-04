@@ -3,8 +3,10 @@ import 'package:book_ganga/models/blog_to_display.dart';
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/widgets/profile_avatar.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
+import 'package:book_ganga/viewmodels/activity_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class ActivityScreen extends StatefulWidget {
   @override
@@ -12,6 +14,19 @@ class ActivityScreen extends StatefulWidget {
 }
 
 class _ActivityScreenState extends State<ActivityScreen> {
+  final ActivityScreenVM _activityScreenVM = GetIt.I<ActivityScreenVM>();
+  Future<List<ActivityToDisplay>> _futureActivity;
+
+  @override
+  void initState() {
+    super.initState();
+    getActivities();
+  }
+
+  void getActivities() {
+    _futureActivity = _activityScreenVM.getActivityOfUser('dummy_username');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,54 +35,61 @@ class _ActivityScreenState extends State<ActivityScreen> {
         centerTitle: true,
         title: Text(
           'Activity',
-          style: BookGanga.titleStyle,
+          style: Theme.of(context).textTheme.bodyText1.copyWith(fontSize: 16),
         ),
         backgroundColor: BookGanga.scaffold,
       ),
       body: SafeArea(
-        child: ListView.builder(
-          itemCount: 25,
-          itemBuilder: (context, index) {
-            //TODO: Add fields to these variables
-            final user = UserToDisplay(
-                fname: 'Yash',
-                lname: 'Halgaonkar',
-                profileImageUrl:
-                    'https://media-exp1.licdn.com/dms/image/C4E03AQEpsk7Ff1GdFw/profile-displayphoto-shrink_800_800/0/1593516152439?e=1626912000&v=beta&t=Pwv1wZKgtxnEZge1GBucHNJXDexO6JkyZiqvVDHsa40');
-            final blog = BlogToDisplay();
-            //return _NotificationTile();
-            return ListTile(
-              contentPadding: const EdgeInsets.all(10.0),
-              dense: true,
-              onTap: () => print('Tapped'),
-              leading: ProfileAvatar(
-                imageUrl: user.profileImageUrl,
-                radius: 20,
-              ),
-              horizontalTitleGap: 10,
-              title: RichText(
-                text: TextSpan(children: [
-                  TextSpan(
-                      text: 'Yash Halgaonkar ',
-                      style: Theme.of(context).textTheme.bodyText1),
-                  TextSpan(
-                      text: 'has liked your blog - ',
-                      style: Theme.of(context).textTheme.bodyText2),
-                  TextSpan(
-                      text: 'Happiness or Hapyness',
-                      style: Theme.of(context).textTheme.bodyText1),
-                ]),
-              ),
-              trailing: CachedNetworkImage(
-                imageUrl:
-                    'https://images.unsplash.com/photo-1604346782646-13dac014c258?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDJ8Ym84alFLVGFFMFl8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60',
-                height: 50.0,
-                width: 50.0,
-                fit: BoxFit.cover,
-              ),
-            );
-          },
-        ),
+        child: FutureBuilder(
+            future: _futureActivity,
+            builder: (BuildContext context,
+                AsyncSnapshot<List<ActivityToDisplay>> snapshot) {
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasData) {
+                  final activities = snapshot.data;
+                  return ListView.builder(
+                    itemCount: activities.length * 10,
+                    itemBuilder: (context, index) {
+                      final activity = activities[index % activities.length];
+                      //TODO: Add fields to these variables
+                      //return _NotificationTile();
+                      return ListTile(
+                        contentPadding: const EdgeInsets.all(10.0),
+                        dense: true,
+                        onTap: () => print('Tapped'),
+                        leading: ProfileAvatar(
+                          imageUrl: activity.userImgUrl,
+                          radius: 20,
+                        ),
+                        horizontalTitleGap: 10,
+                        title: RichText(
+                          text: TextSpan(children: [
+                            TextSpan(
+                                text: '${activity.fname} ${activity.lname} ',
+                                style: Theme.of(context).textTheme.bodyText1),
+                            TextSpan(
+                                text: 'has liked your blog - ',
+                                style: Theme.of(context).textTheme.bodyText2),
+                            TextSpan(
+                                text: '${activity.blogTitle}',
+                                style: Theme.of(context).textTheme.bodyText1),
+                          ]),
+                        ),
+                        trailing: CachedNetworkImage(
+                          imageUrl: activity.blogImgUrl,
+                          height: 50.0,
+                          width: 50.0,
+                          fit: BoxFit.cover,
+                        ),
+                      );
+                    },
+                  );
+                } else
+                  return MyErrorWidget(
+                      errorMessage: snapshot.error, onRefresh: getActivities);
+              } else
+                return LoadingWidget();
+            }),
       ),
     );
   }
