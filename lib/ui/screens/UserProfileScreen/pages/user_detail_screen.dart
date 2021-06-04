@@ -19,22 +19,6 @@ class UserDetailScreen extends StatefulWidget {
 
 class _UserDetailScreenState extends State<UserDetailScreen>
     with SingleTickerProviderStateMixin {
-  bool isFollowing = false;
-  TabController _tabController;
-
-  @override
-  void initState() {
-    super.initState();
-    _tabController =
-        TabController(length: 3, vsync: this, initialIndex: widget.tabIndex);
-  }
-
-  @override
-  void dispose() {
-    _tabController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,28 +36,32 @@ class _UserDetailScreenState extends State<UserDetailScreen>
                 .bodyText1
                 .copyWith(fontSize: 16, fontWeight: FontWeight.w600)),
       ),
-      body: Column(
-        children: [
-          MyTabBar(
-            tabController: _tabController,
-            context: context,
-            tabs: [
-              Tab(text: 'Followers'),
-              Tab(text: 'BookShelf'),
-              Tab(text: 'Wish List'),
-            ],
-          ),
-          Expanded(
-            child: TabBarView(
-              controller: _tabController,
-              children: [
-                FollowerList(),
-                BookShelfList(),
-                WishListList(),
+      body: DefaultTabController(
+        length: 3,
+        initialIndex: widget.tabIndex,
+        child: Column(
+          children: [
+            MyTabBar(
+              tabController: DefaultTabController.of(context),
+              context: context,
+              tabs: [
+                Tab(text: 'Followers'),
+                Tab(text: 'BookShelf'),
+                Tab(text: 'Wish List'),
               ],
             ),
-          )
-        ],
+            Expanded(
+              child: TabBarView(
+                controller: DefaultTabController.of(context),
+                children: [
+                  FollowerList(),
+                  BookShelfList(),
+                  WishListList(),
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

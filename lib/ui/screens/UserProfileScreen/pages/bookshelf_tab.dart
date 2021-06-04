@@ -18,72 +18,78 @@ class _BookShelfListState extends State<BookShelfList> {
   Future<List<Book>> _futureBooks;
   final UserProfileVM _userProfileVM = GetIt.I<UserProfileVM>();
 
-  @override
-  void initState() {
-    super.initState();
+  void getBooks() {
     _futureBooks = _userProfileVM.getBookSelfForUser('dummy_username');
   }
 
   @override
+  void initState() {
+    super.initState();
+    getBooks();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: 60,
-          width: double.infinity,
-          alignment: Alignment.center,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(LineIcons.book),
-              const SizedBox(width: 5),
-              Text(
-                '${dummyUser.length}',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .copyWith(fontWeight: FontWeight.w600),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.all(10.0),
-          child: MyInputField(),
-        ),
-        Expanded(
-          child: FutureBuilder<List<Book>>(
-            future: _futureBooks,
-            builder:
-                (BuildContext context, AsyncSnapshot<List<Book>> snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasData) {
-                  final bookList = snapshot.data;
-                  return ListView.builder(
-                    itemCount: bookList.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final book = bookList[index];
-                      return ListTile(
-                        title: Text(book.title,
-                            maxLines: 2, overflow: TextOverflow.ellipsis),
-                        subtitle: Text(book.author),
-                        leading: CachedNetworkImage(
-                          imageUrl: book.imgUrl,
-                        ),
-                      );
-                    },
-                  );
-                } else {
-                  return MyErrorWidget(
-                      errorMessage: snapshot.error.toString(),
-                      onRefresh: () {});
-                }
-              } else
-                return LoadingWidget();
-            },
-          ),
-        )
-      ],
-    );
+    return FutureBuilder(
+        future: _futureBooks,
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasData) {
+              final bookList = snapshot.data;
+              return Container(
+                child: Column(
+                  children: [
+                    Container(
+                      height: 60,
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(LineIcons.book),
+                          const SizedBox(width: 5),
+                          Text(
+                            '${dummyUser.length}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1
+                                .copyWith(fontWeight: FontWeight.w600),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(10.0),
+                      child: MyInputField(),
+                    ),
+                    Expanded(
+                        child: ListView.builder(
+                      itemCount: bookList.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final book = bookList[index];
+                        return ListTile(
+                          title: Text(
+                            book.title,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                          subtitle: Text(book.author),
+                          leading: CachedNetworkImage(
+                            height: 80,
+                            width: 60,
+                            imageUrl: book.imgUrl,
+                          ),
+                        );
+                      },
+                    ))
+                  ],
+                ),
+              );
+            } else
+              return MyErrorWidget(
+                  errorMessage: snapshot.error, onRefresh: getBooks);
+          } else
+            return LoadingWidget();
+        });
   }
 }

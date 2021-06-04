@@ -37,25 +37,25 @@ class _WishListListState extends State<WishListList> {
                 final books = snapshot.data;
                 return Column(
                   children: [
-                    // Container(
-                    //   height: 60,
-                    //   width: double.infinity,
-                    //   alignment: Alignment.center,
-                    //   child: Row(
-                    //     mainAxisAlignment: MainAxisAlignment.center,
-                    //     children: [
-                    //       Icon(LineIcons.book),
-                    //       const SizedBox(width: 5),
-                    //       Text(
-                    //         '${books.length}',
-                    //         style: Theme.of(context)
-                    //             .textTheme
-                    //             .bodyText1
-                    //             .copyWith(fontWeight: FontWeight.w600),
-                    //       )
-                    //     ],
-                    //   ),
-                    // ),
+                    Container(
+                      height: 60,
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(LineIcons.book),
+                          const SizedBox(width: 5),
+                          Text(
+                            '${books.length}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1
+                                .copyWith(fontWeight: FontWeight.w600),
+                          )
+                        ],
+                      ),
+                    ),
                     Container(
                       margin: const EdgeInsets.all(10.0),
                       child: MyInputField(),
@@ -70,9 +70,15 @@ class _WishListListState extends State<WishListList> {
                           final book = books[index];
                           return ListTile(
                             onTap: () => print('Tapped'),
-                            title: Text(book.title),
+                            title: Text(
+                              book.title,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
                             subtitle: Text(book.author),
                             leading: CachedNetworkImage(
+                              height: 80,
+                              width: 60,
                               imageUrl: book.imgUrl,
                             ),
                           );

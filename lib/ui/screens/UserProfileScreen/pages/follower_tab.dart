@@ -49,73 +49,74 @@ class _FollowerListState extends State<FollowerList> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          height: 60,
-          width: double.infinity,
-          alignment: Alignment.center,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(LineIcons.userFriends),
-              const SizedBox(width: 5),
-              Text(
-                '${dummyUser.length}',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyText1
-                    .copyWith(fontWeight: FontWeight.w600),
-              )
-            ],
-          ),
-        ),
-        Container(
-          margin: const EdgeInsets.all(10.0),
-          child: MyInputField(
-            hintText: 'Search...',
-            textEditingController: _textEditingController,
-            onChange: onTextChange,
-          ),
-        ),
-        Expanded(
-          child: FutureBuilder<List<UserToDisplay>>(
-            future: _future,
-            builder: (BuildContext context,
-                AsyncSnapshot<List<UserToDisplay>> snapshot) {
-              if (snapshot.connectionState == ConnectionState.done) {
-                if (snapshot.hasData) {
-                  final followers = snapshot.data;
-                  return ListView.builder(
-                    itemCount: followers.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return HorizontalUserTile(
-                        isFollowing: false,
-                        showFollowButton: true,
-                        user: followers[index],
-                        onTap: () {
-                          // take them to userProfile screen
-                        },
-                        onButtonTap: () {
-                          // make a follow requrest
-                          // setState(() {
-                          //   isFollowing = !isFollowing;
-                          // });
-                        },
-                      );
-                    },
-                  );
-                } else
-                  return MyErrorWidget(
-                      errorMessage: snapshot.error.toString(),
-                      onRefresh: getFollowers);
-              } else
-                return LoadingWidget();
-            },
-          ),
-        )
-      ],
-    );
+    return FutureBuilder<List<UserToDisplay>>(
+        future: _future,
+        builder: (BuildContext context,
+            AsyncSnapshot<List<UserToDisplay>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.hasData) {
+              final followers = snapshot.data;
+              return Container(
+                child: Column(
+                  children: [
+                    Container(
+                      height: 60,
+                      width: double.infinity,
+                      alignment: Alignment.center,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(LineIcons.userFriends),
+                          const SizedBox(width: 5),
+                          Text(
+                            '${followers.length*10}',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyText1
+                                .copyWith(fontWeight: FontWeight.w600),
+                          )
+                        ],
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(10.0),
+                      child: MyInputField(
+                        hintText: 'Search...',
+                        textEditingController: _textEditingController,
+                        onChange: onTextChange,
+                      ),
+                    ),
+                    Expanded(
+                        child: ListView.builder(
+                      itemCount: followers.length * 10,
+                      itemBuilder: (BuildContext context, int index) {
+                        return HorizontalUserTile(
+                          isFollowing: false,
+                          showFollowButton: true,
+                          user: followers[index % followers.length],
+                          onTap: () {
+                            // take them to userProfile screen
+                          },
+                          onButtonTap: () {
+                            // make a follow requrest
+                            // setState(() {
+                            //   isFollowing = !isFollowing;
+                            // });
+                          },
+                        );
+                      },
+                    )),
+                  ],
+                ),
+              );
+            } else
+              return MyErrorWidget(
+                errorMessage: snapshot.error,
+                onRefresh: getFollowers,
+              );
+          } else
+            return LoadingWidget();
+        });
   }
 }
 
