@@ -83,33 +83,33 @@ class _FollowerListState extends State<FollowerList> {
             future: _future,
             builder: (BuildContext context,
                 AsyncSnapshot<List<UserToDisplay>> snapshot) {
-              if (snapshot.hasData) {
-                final followers = snapshot.data;
-                return ListView.builder(
-                  itemCount: followers.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return HorizontalUserTile(
-                      isFollowing: false,
-                      showFollowButton: true,
-                      user: followers[index],
-                      onTap: () {
-                        // take them to userProfile screen
-                      },
-                      onButtonTap: () {
-                        // make a follow requrest
-                        // setState(() {
-                        //   isFollowing = !isFollowing;
-                        // });
-                      },
-                    );
-                  },
-                );
-              }
-              if (snapshot.hasError)
-                return MyErrorWidget(
-                    errorMessage: snapshot.error.toString(),
-                    onRefresh: getFollowers);
-              else
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasData) {
+                  final followers = snapshot.data;
+                  return ListView.builder(
+                    itemCount: followers.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return HorizontalUserTile(
+                        isFollowing: false,
+                        showFollowButton: true,
+                        user: followers[index],
+                        onTap: () {
+                          // take them to userProfile screen
+                        },
+                        onButtonTap: () {
+                          // make a follow requrest
+                          // setState(() {
+                          //   isFollowing = !isFollowing;
+                          // });
+                        },
+                      );
+                    },
+                  );
+                } else
+                  return MyErrorWidget(
+                      errorMessage: snapshot.error.toString(),
+                      onRefresh: getFollowers);
+              } else
                 return LoadingWidget();
             },
           ),
@@ -139,7 +139,7 @@ class HorizontalUserTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       onTap: onTap,
-      leading: ProfileAvatar(imageUrl: currentUser.profileImageUrl),
+      leading: ProfileAvatar(imageUrl: user.profileImageUrl),
       title: Text(user.fname + ' ' + user.lname),
       subtitle: Text('@' + user.username),
       trailing: showFollowButton

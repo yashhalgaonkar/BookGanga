@@ -56,25 +56,28 @@ class _BookShelfListState extends State<BookShelfList> {
             future: _futureBooks,
             builder:
                 (BuildContext context, AsyncSnapshot<List<Book>> snapshot) {
-              if (snapshot.hasData) {
-                final books = snapshot.data;
-                return ListView.builder(
-                  itemCount: dummyUser.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ListTile(
-                      title: Text('Harry Potter and the Deathly Hallows'),
-                      subtitle: Text('J.K Rowling'),
-                      leading: CachedNetworkImage(
-                        imageUrl:
-                            'https://images-na.ssl-images-amazon.com/images/I/71xcuT33RpL._AC_SY879_.jpg',
-                      ),
-                    );
-                  },
-                );
-              }
-              if (snapshot.error) {
-                return MyErrorWidget(
-                    errorMessage: snapshot.error.toString(), onRefresh: () {});
+              if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.hasData) {
+                  final bookList = snapshot.data;
+                  return ListView.builder(
+                    itemCount: bookList.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final book = bookList[index];
+                      return ListTile(
+                        title: Text(book.title,
+                            maxLines: 2, overflow: TextOverflow.ellipsis),
+                        subtitle: Text(book.author),
+                        leading: CachedNetworkImage(
+                          imageUrl: book.imgUrl,
+                        ),
+                      );
+                    },
+                  );
+                } else {
+                  return MyErrorWidget(
+                      errorMessage: snapshot.error.toString(),
+                      onRefresh: () {});
+                }
               } else
                 return LoadingWidget();
             },
