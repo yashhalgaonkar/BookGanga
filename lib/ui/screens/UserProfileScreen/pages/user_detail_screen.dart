@@ -30,11 +30,11 @@ class _UserDetailScreenState extends State<UserDetailScreen>
           onPressed: () => Navigator.pop(context),
         ),
         backgroundColor: Colors.white,
-        title: Text('Yash\'s Books',
-            style: Theme.of(context)
-                .textTheme
-                .bodyText1
-                .copyWith(fontSize: 16, fontWeight: FontWeight.w600)),
+        // title: Text('Yash\'s Books',
+        //     style: Theme.of(context)
+        //         .textTheme
+        //         .bodyText1
+        //         .copyWith(fontSize: 16, fontWeight: FontWeight.w600)),
       ),
       body: DefaultTabController(
         length: 3,
