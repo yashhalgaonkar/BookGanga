@@ -14,4 +14,5 @@ void initializeDependencies() {
   instance.registerLazySingleton(() => HomeScreenVM());
   instance.registerLazySingleton(() => UserProfileVM());
   instance.registerLazySingleton(() => ActivityScreenVM());
+  instance.registerLazySingleton(() => CommunityVM());
 }

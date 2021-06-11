@@ -2,13 +2,21 @@ import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/core/injector.dart';
 import 'package:book_ganga/ui/screens/DiscoverBooksScreen/cubit/discoverbooks_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 
 import 'ui/screens/screens.dart';
 
 void main() {
   initializeDependencies();
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+        statusBarBrightness: Brightness.light,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarColor: Colors.transparent,
+        systemNavigationBarIconBrightness: Brightness.light,
+        statusBarColor: BookGanga.kLightGreyColor),
+  );
   runApp(MyApp());
 }
 
