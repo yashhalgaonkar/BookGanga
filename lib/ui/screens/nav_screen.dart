@@ -14,7 +14,8 @@ class _NavScreenState extends State<NavScreen> {
   final List<Widget> _screens = [
     HomeScreen(),
     DiscoverBooksScreen(),
-    Scaffold(),
+    //Scaffold(),
+    BlogWriteScreen(),
     ActivityScreen(),
     UserProfileScreen(username: 'yash.halgaonkar'),
   ];

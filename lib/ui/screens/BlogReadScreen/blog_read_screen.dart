@@ -1,10 +1,12 @@
 import 'dart:convert';
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/models/models.dart';
+import 'package:book_ganga/ui/screens/screens.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_quill/models/documents/document.dart';
+import 'package:flutter_quill/models/documents/style.dart';
 import 'package:flutter_quill/widgets/controller.dart';
 import 'package:flutter_quill/widgets/default_styles.dart';
 import 'package:flutter_quill/widgets/editor.dart';
@@ -31,7 +33,7 @@ class _BlogViewScreenState extends State<BlogViewScreen> {
   Future<void> _loadFromAssets() async {
     try {
       // this is the string that comes from API
-      final result = await rootBundle.loadString('assets/sample_data.json');
+      final result = await rootBundle.loadString('assets/sample_blog.json');
       // conver this dtring into Document object
       final doc = Document.fromJson(jsonDecode(result));
       setState(() {
@@ -69,97 +71,79 @@ class _BlogViewScreenState extends State<BlogViewScreen> {
     return quillEditor;
   }
 
+  BlogToDisplay get blog => widget.blog;
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold();
-    // return Scaffold(
-    //   body: ListView(
-    //     children: [
-    //       //* Header imgae with appbar on top
-    //       Stack(
-    //         children: [
-    //           Container(
-    //             width: double.infinity,
-    //             child: CachedNetworkImage(
-    //               imageUrl:
-    //                   "https://images.unsplash.com/photo-1614517409437-2e25e4f5dbed?ixid=MXwxMjA3fDB8MHx0b3BpYy1mZWVkfDEyfHJuU0tESHd3WVVrfHxlbnwwfHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
-    //               fit: BoxFit.cover,
-    //             ),
-    //           ),
-    //           // Container(
-    //           //   child: IconButton(
-    //           //     icon: Icon(Ionicons.arrow_back),
-    //           //     onPressed: () {},
-    //           //     alignment: Alignment.centerLeft,
-    //           //   ),
-    //           // ),
-    //         ],
-    //       ),
-    //       //* Title
-    //       Container(
-    //         padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
-    //         child: Text(
-    //           'Love in my generation',
-    //           style: GoogleFonts.notoSans(
-    //             color: BookGanga.kDarkBlack,
-    //             fontSize: 40,
-    //             fontWeight: FontWeight.w700,
-    //           ),
-    //         ),
-    //       ),
-    //       //* Description
-    //       Container(
-    //         padding: const EdgeInsets.symmetric(horizontal: 10.0),
-    //         child: Text(
-    //           'My views on how our generation loves and gets over it.',
-    //           style: GoogleFonts.notoSans(
-    //             fontSize: 14.0,
-    //             color: BookGanga.kDarkBlack.withOpacity(0.8),
-    //           ),
-    //         ),
-    //       ),
-    //       //* author name
-    //       Container(
-    //         padding:
-    //             const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-    //         child: RichText(
-    //           text: TextSpan(
-    //             children: [
-    //               TextSpan(
-    //                 text: 'Written by ',
-    //                 style: GoogleFonts.notoSans(
-    //                   color: BookGanga.kDarkBlack.withOpacity(0.8),
-    //                 ),
-    //               ),
-    //               TextSpan(
-    //                 text: 'Yash Halgaonkar',
-    //                 style: GoogleFonts.notoSans(
-    //                   color: BookGanga.kDarkBlack.withOpacity(0.8),
-    //                   fontWeight: FontWeight.w600,
-    //                 ),
-    //               ),
-    //             ],
-    //           ),
-    //         ),
-    //       ),
-    //       //* the divider
-    //       const Divider(
-    //         color: BookGanga.kDarkBlack,
-    //         thickness: 2,
-    //         endIndent: 10,
-    //         indent: 10,
-    //       ),
+    final textStyle = Theme.of(context).textTheme.bodyText1.copyWith(
+          fontFamily: 'Merriweather',
+        );
+    //return Scaffold();
+    return Scaffold(
+      body: ListView(
+        children: [
+          //* Header imgae with appbar on top
+          Container(
+            width: double.infinity,
+            height: 300,
+            child: CachedNetworkImage(
+              imageUrl: widget.blog.blogHeaderImageUrl,
+              fit: BoxFit.cover,
+            ),
+          ),
+          //* Title
+          Container(
+            padding: const EdgeInsets.fromLTRB(10.0, 10.0, 10.0, 10.0),
+            child: Text(
+              blog.title,
+              style: Theme.of(context).textTheme.bodyText1.copyWith(
+                    fontSize: 25,
+                  ),
+            ),
+          ),
+          //* Description
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: Text(
+              blog.description,
+              style: textStyle.copyWith(fontSize: 15),
+            ),
+          ),
+          //* author name
+          Container(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
+            child: GestureDetector(
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) =>
+                      UserProfileScreen(username: blog.authorUsername))),
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(text: 'Written by ', style: textStyle),
+                    TextSpan(
+                        text: '${blog.authorName}',
+                        style: textStyle.copyWith(
+                          fontWeight: FontWeight.bold,
+                        )),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          //* the divider
+          const Divider(color: BookGanga.kDarkBlack),
 
-    //       Container(
-    //         color: Colors.white,
-    //         padding: const EdgeInsets.all(10.0),
-    //         child: (_controller == null)
-    //             ? CircularProgressIndicator()
-    //             : _buildBlogContent(context),
-    //       ),
-    //     ],
-    //   ),
-    // );
+          Container(
+            color: Colors.white,
+            padding: const EdgeInsets.all(10.0),
+            child: (_controller == null)
+                ? CircularProgressIndicator()
+                : _buildBlogContent(context),
+          ),
+        ],
+      ),
+    );
   }
 }

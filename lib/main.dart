@@ -46,6 +46,7 @@ class _MyAppState extends State<MyApp> {
           //     GoogleFonts.openSans(color: BookGanga.kGrey, fontSize: 14.0),
           bodyText2: TextStyle(
               fontFamily: 'OpenSans', color: BookGanga.kGrey, fontSize: 14.0),
+          
         ),
         accentColor: BookGanga.kAccentColor,
       ),
