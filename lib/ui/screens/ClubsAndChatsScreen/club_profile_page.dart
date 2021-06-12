@@ -2,6 +2,7 @@ import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/ui/widgets/my_tabbar.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:line_icons/line_icons.dart';
 
 import 'widgets/club_book_tab.dart';
@@ -28,6 +29,11 @@ class _ClubProfileScreenState extends State<ClubProfileScreen> {
         //         fontWeight: FontWeight.w600,
         //       ),
         // ),
+        actions: [
+          IconButton(
+              icon: Icon(Icons.more_vert, color: BookGanga.kDarkBlack),
+              onPressed: () => Fluttertoast.showToast(msg: "More options"))
+        ],
         leading: IconButton(
           icon: Icon(
             LineIcons.arrowLeft,

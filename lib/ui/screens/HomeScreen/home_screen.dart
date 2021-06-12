@@ -4,6 +4,7 @@ import 'package:book_ganga/ui/screens/screens.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:book_ganga/viewmodels/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
 import 'package:ionicons/ionicons.dart';
 import 'package:line_icons/line_icons.dart';
@@ -48,7 +49,9 @@ class _HomeScreenState extends State<HomeScreen> {
         //   'Book Ganga',
         //   style: BookGanga.titleStyle,
         // ),
-        title: Text('Book Ganga', style: BookGanga.titleStyle),
+        title: GestureDetector(
+            onTap: () => Fluttertoast.showToast(msg: "Book Ganga"),
+            child: Text('Book Ganga', style: BookGanga.titleStyle)),
         centerTitle: true,
         leading: Icon(
           LineIcons.quoteRight,
@@ -60,7 +63,9 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             icon: Icon(LineIcons.search),
-            onPressed: () {},
+            onPressed: () {
+              Fluttertoast.showToast(msg: "Search");
+            },
             color: BookGanga.kDarkBlack,
           ),
           IconButton(

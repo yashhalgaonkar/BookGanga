@@ -4,6 +4,7 @@ import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:book_ganga/viewmodels/user_profile_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -69,7 +70,7 @@ class _FollowerListState extends State<FollowerList> {
                           Icon(LineIcons.userFriends),
                           const SizedBox(width: 5),
                           Text(
-                            '${followers.length*10}',
+                            '${followers.length * 10}',
                             style: Theme.of(context)
                                 .textTheme
                                 .bodyText1
@@ -98,10 +99,10 @@ class _FollowerListState extends State<FollowerList> {
                             // take them to userProfile screen
                           },
                           onButtonTap: () {
-                            // make a follow requrest
-                            // setState(() {
-                            //   isFollowing = !isFollowing;
-                            // });
+                            Fluttertoast.showToast(
+                                msg:
+                                    "Following ${followers[index % followers.length].fname}",
+                                toastLength: Toast.LENGTH_SHORT);
                           },
                         );
                       },

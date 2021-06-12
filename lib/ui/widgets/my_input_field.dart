@@ -1,6 +1,7 @@
 import 'package:book_ganga/config/book_ganga.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:line_icons/line_icons.dart';
 
 class MyInputField extends StatelessWidget {
@@ -50,15 +51,18 @@ class MyInputField extends StatelessWidget {
           ),
           Positioned(
               right: 0,
-              child: Container(
-                height: 45,
-                width: 45,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  color: BookGanga.kAccentColor.withOpacity(0.8),
+              child: GestureDetector(
+                onTap: () => Fluttertoast.showToast(msg: "Searching..."),
+                child: Container(
+                  height: 45,
+                  width: 45,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: BookGanga.kAccentColor.withOpacity(0.8),
+                  ),
+                  child: Icon(LineIcons.search, color: Colors.white),
+                  alignment: Alignment.center,
                 ),
-                child: Icon(LineIcons.search, color: Colors.white),
-                alignment: Alignment.center,
               )),
         ],
       ),

@@ -5,6 +5,7 @@ import 'package:book_ganga/ui/screens/DiscoverBooksScreen/pages/see_all_books_sc
 import 'package:book_ganga/ui/widgets/loading_widget.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:focused_menu/focused_menu.dart';
 import 'package:focused_menu/modals.dart';
 import 'package:line_icons/line_icons.dart';
@@ -98,6 +99,7 @@ class NewBooksBuilder extends StatelessWidget {
                             style: Theme.of(context).textTheme.bodyText1),
                         onPressed: () {
                           //todo : complete add to wishlist
+                          Fluttertoast.showToast(msg: "Added to the Wish List");
                           // _addToWishList(
                           //     index: index,
                           //     style: style,
@@ -110,11 +112,12 @@ class NewBooksBuilder extends StatelessWidget {
                         )),
                     FocusedMenuItem(
                         title: Text(
-                          'Add to read next',
+                          'Add to Book Shelf',
                           style: Theme.of(context).textTheme.bodyText1,
                         ),
                         onPressed: () {
                           //todo: complete add to book shelf
+                          Fluttertoast.showToast(msg: "Added to the Book Shelf");
                           // _addToReadingList(
                           //     index: index,
                           //     style: style,

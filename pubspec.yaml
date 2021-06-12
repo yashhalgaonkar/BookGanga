@@ -41,6 +41,7 @@ dependencies:
   path_provider: ^2.0.1
   tab_indicator_styler: ^1.0.0
   material_floating_search_bar: ^0.3.4
+  fluttertoast: ^8.0.7
 
 dev_dependencies:
   flutter_test:

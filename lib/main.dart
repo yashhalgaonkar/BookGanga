@@ -20,13 +20,7 @@ void main() {
   runApp(MyApp());
 }
 
-class MyApp extends StatefulWidget {
-  @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  @override
+class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -46,7 +40,6 @@ class _MyAppState extends State<MyApp> {
           //     GoogleFonts.openSans(color: BookGanga.kGrey, fontSize: 14.0),
           bodyText2: TextStyle(
               fontFamily: 'OpenSans', color: BookGanga.kGrey, fontSize: 14.0),
-          
         ),
         accentColor: BookGanga.kAccentColor,
       ),

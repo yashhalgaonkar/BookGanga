@@ -114,7 +114,11 @@ class _DiscoverBooksScreenState extends State<DiscoverBooksScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Text('Discover Books', style: BookGanga.titleStyle),
+        title: Text('Discover Books',
+            style: Theme.of(context).textTheme.bodyText1.copyWith(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                )),
         centerTitle: true,
       ),
       body: SafeArea(

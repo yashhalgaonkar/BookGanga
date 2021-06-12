@@ -1,5 +1,6 @@
 import 'package:book_ganga/models/models.dart';
 import 'package:book_ganga/viewmodels/user_profile_screen.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
 import '../widgets/profile_header.dart';
 import 'package:flutter/material.dart';
@@ -84,12 +85,17 @@ class _UserProfileScreenState extends State<UserProfileScreen>
                           user: userSnapshot.data,
                           isFollowing: userSnapshot.data.isFollowing,
                           onFollowTap: () {
+                            Fluttertoast.showToast(
+                                msg: "Followed ${userSnapshot.data.fname}");
                             setState(() {
                               userSnapshot.data.isFollowing =
                                   !userSnapshot.data.isFollowing;
                             });
                           },
-                          onMessageTap: () {},
+                          onMessageTap: () {
+                            Fluttertoast.showToast(
+                                msg: "Messaging ${userSnapshot.data.fname}");
+                          },
                         ),
                       ),
                     ];

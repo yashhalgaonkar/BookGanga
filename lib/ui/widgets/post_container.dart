@@ -5,6 +5,7 @@ import 'package:book_ganga/ui/screens/screens.dart';
 import 'package:book_ganga/ui/widgets/post_image.dart';
 import 'package:book_ganga/ui/widgets/profile_avatar.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:line_icons/line_icons.dart';
 
 class PostContainer extends StatefulWidget {
@@ -91,17 +92,17 @@ class _PostContainerState extends State<PostContainer> {
                                   ModalListTile(
                                     title: 'Share',
                                     iconData: LineIcons.share,
-                                    onTap: () => print('shared'),
+                                    onTap: () => Fluttertoast.showToast(msg: "Shared"),
                                   ),
                                   ModalListTile(
                                     title: 'Save for Later',
                                     iconData: LineIcons.bookmark,
-                                    onTap: () => print('Saved'),
+                                    onTap: () => Fluttertoast.showToast(msg: "Saved"),
                                   ),
                                   ModalListTile(
                                     title: 'Report',
                                     iconData: LineIcons.flag,
-                                    onTap: () => print('Reported'),
+                                    onTap: () => Fluttertoast.showToast(msg: "Reported"),
                                   ),
                                 ],
                               ),

@@ -1,9 +1,11 @@
+import 'package:book_ganga/config/book_ganga.dart';
 import 'package:book_ganga/data/data.dart';
 import 'package:book_ganga/models/book.dart';
 import 'package:book_ganga/ui/widgets/widgets.dart';
 import 'package:book_ganga/viewmodels/user_profile_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get_it/get_it.dart';
 import 'package:line_icons/line_icons.dart';
 
@@ -28,8 +30,14 @@ class _WishListListState extends State<WishListList> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: FutureBuilder<List<Book>>(
+    return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => Fluttertoast.showToast(msg: "Add book to Wish List"),
+        backgroundColor: BookGanga.kAccentColor,
+        foregroundColor: Colors.white,
+        child: Icon(Icons.add),
+      ),
+      body: FutureBuilder<List<Book>>(
           future: _futureBooks,
           builder: (BuildContext context, AsyncSnapshot<List<Book>> snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
