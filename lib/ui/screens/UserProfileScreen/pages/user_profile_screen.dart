@@ -84,9 +84,9 @@ class _UserProfileScreenState extends State<UserProfileScreen>
                         child: UserProfileHeader(
                           user: userSnapshot.data,
                           isFollowing: userSnapshot.data.isFollowing,
-                          onFollowTap: () {
-                            Fluttertoast.showToast(
-                                msg: "Followed ${userSnapshot.data.fname}");
+                          onFollowTap: () { 
+                            // Fluttertoast.showToast(
+                            //     msg: "Followed ${userSnapshot.data.fname}");
                             setState(() {
                               userSnapshot.data.isFollowing =
                                   !userSnapshot.data.isFollowing;

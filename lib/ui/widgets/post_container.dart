@@ -92,17 +92,20 @@ class _PostContainerState extends State<PostContainer> {
                                   ModalListTile(
                                     title: 'Share',
                                     iconData: LineIcons.share,
-                                    onTap: () => Fluttertoast.showToast(msg: "Shared"),
+                                    onTap: () =>
+                                        Fluttertoast.showToast(msg: "Shared"),
                                   ),
                                   ModalListTile(
                                     title: 'Save for Later',
                                     iconData: LineIcons.bookmark,
-                                    onTap: () => Fluttertoast.showToast(msg: "Saved"),
+                                    onTap: () =>
+                                        Fluttertoast.showToast(msg: "Saved"),
                                   ),
                                   ModalListTile(
                                     title: 'Report',
                                     iconData: LineIcons.flag,
-                                    onTap: () => Fluttertoast.showToast(msg: "Reported"),
+                                    onTap: () =>
+                                        Fluttertoast.showToast(msg: "Reported"),
                                   ),
                                 ],
                               ),
@@ -135,7 +138,7 @@ class _PostContainerState extends State<PostContainer> {
           //* Description
           Container(
             child: Text(
-              'This is a really long discription about what the blog is to attract the users to open and read it!',
+              widget.blog.description,
               style: Theme.of(context)
                   .textTheme
                   .bodyText1
